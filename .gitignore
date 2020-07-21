@@ -1,0 +1,8 @@
+.idea/
+SchematicGenerator.iml
+target
+.settings
+.classpath
+.project
+dependencies
+lib

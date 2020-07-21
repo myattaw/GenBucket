@@ -1,0 +1,9 @@
+name: GenBuckets
+main: com.reliableplugins.genbucket.GenBucket
+version: 1.0
+author: Rages
+commands:
+  genbucket:
+    description: "The most optimized GenBucket plugin."
+    usage: "/genbucket help"
+    aliases: [gen, gb]
