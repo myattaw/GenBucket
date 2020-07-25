@@ -1,0 +1,8 @@
+genbuckets:
+  CobbleVertical:
+    material: COBBLESTONE
+    bucket-name: "Vertical GenBucket"
+    bucket-type: Vertical
+    bucket-lore:
+      - "First line"
+      - "Second line"
