@@ -1,4 +1,4 @@
-package com.reliableplugins.genbucket.generator;
+package com.reliableplugins.genbucket.generator.data;
 
 public enum GeneratorType {
 

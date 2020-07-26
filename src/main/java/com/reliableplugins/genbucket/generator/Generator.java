@@ -1,11 +1,11 @@
 package com.reliableplugins.genbucket.generator;
 
+import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import com.reliableplugins.genbucket.generator.data.GeneratorType;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class Generator {
 
@@ -14,11 +14,13 @@ public abstract class Generator {
     private List<String> lore;
     private GeneratorType generatorType;
 
-    private Set<Location> locations = new HashSet<>();
+    private int maxBlocks;
 
-    public abstract void onPlace();
+    private Set<GeneratorData> locations = new HashSet<>();
 
-    public abstract void onTick();
+    public abstract void onPlace(Location location);
+
+    public abstract void onTick(GeneratorData generatorData);
 
     public void setMaterial(Material material) {
         this.material = material;
@@ -52,11 +54,15 @@ public abstract class Generator {
         return generatorType;
     }
 
-    public void addLocation(Location location) {
-        locations.add(location);
+    public void setMaxBlocks(int maxBlocks) {
+        this.maxBlocks = maxBlocks;
     }
 
-    public Set<Location> getLocations() {
+    public int getMaxBlocks() {
+        return maxBlocks;
+    }
+
+    public Set<GeneratorData> getLocations() {
         return locations;
     }
 }

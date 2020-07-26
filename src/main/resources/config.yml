@@ -1,8 +1,20 @@
 genbuckets:
   CobbleVertical:
     material: COBBLESTONE
-    bucket-name: "Vertical GenBucket"
+    bucket-item: LAVA_BUCKET
+    bucket-name: "[MATERIAL] GenBucket"
     bucket-type: Vertical
     bucket-lore:
-      - "First line"
-      - "Second line"
+      - "-----------------------------------"
+      - "Type: [TYPE]"
+      - "-----------------------------------"
+  CobbleHorizontal:
+    material: COBBLESTONE
+    bucket-item: LAVA_BUCKET
+    bucket-name: "[MATERIAL] GenBucket"
+    bucket-type: Horizontal
+    bucket-size: 16
+    bucket-lore:
+      - "-----------------------------------"
+      - "Type: [TYPE] ([SIZE])"
+      - "-----------------------------------"

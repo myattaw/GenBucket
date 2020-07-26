@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Util {
 
@@ -14,11 +14,7 @@ public class Util {
     }
 
     public static List<String> color(List<String> string) {
-        List<String> colored = new ArrayList<>();
-        for (String line : string) {
-            colored.add(color(line));
-        }
-        return colored;
+        return string.stream().map(Util::color).collect(Collectors.toList());
     }
 
     public static ItemStack setName(ItemStack itemStack, String name) {
