@@ -1,6 +1,7 @@
 package com.reliableplugins.genbucket;
 
 import com.reliableplugins.genbucket.command.impl.BaseCommand;
+import com.reliableplugins.genbucket.manager.HookManager;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
 import com.reliableplugins.genbucket.listener.PlayerListener;
 import com.reliableplugins.genbucket.manager.GenBucketManager;
@@ -13,6 +14,8 @@ public class GenBucket extends JavaPlugin {
     private BaseCommand baseCommand;
     private NMSHandler nmsHandler;
 
+    private HookManager hookManager;
+
     @Override
     public void onEnable() {
 
@@ -20,10 +23,12 @@ public class GenBucket extends JavaPlugin {
 
         this.nmsHandler = setupNMS();
         this.baseCommand = new BaseCommand(this);
+        this.hookManager = new HookManager(this);
 
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new GeneratorTask(), 20L, 20L);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-        GenBucketManager.loadGenBuckets(getConfig());
+        GenBucketManager.loadGenBuckets(getConfig(), this);
+
     }
 
     public NMSHandler setupNMS()
@@ -36,6 +41,10 @@ public class GenBucket extends JavaPlugin {
             default:
                 return null;
         }
+    }
+
+    public HookManager getHookManager() {
+        return hookManager;
     }
 
     public NMSHandler getNMSHandler() {

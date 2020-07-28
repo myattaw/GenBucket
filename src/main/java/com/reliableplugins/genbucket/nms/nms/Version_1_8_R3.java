@@ -1,13 +1,13 @@
 package com.reliableplugins.genbucket.nms.nms;
 
 import com.reliableplugins.genbucket.nms.NMSHandler;
-import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.ChunkSection;
-import net.minecraft.server.v1_8_R3.IBlockData;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.World;
+import org.bukkit.Chunk;
+import org.bukkit.craftbukkit.v1_8_R3.CraftChunk;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class Version_1_8_R3 implements NMSHandler {
@@ -28,8 +28,32 @@ public class Version_1_8_R3 implements NMSHandler {
         }
 
         chunksection.setType(bp.getX() & 15, bp.getY() & 15, bp.getZ() & 15, ibd);
+
         w.notify(bp);
+
     }
+
+//    public static PacketPlayOutMultiBlockChange test(Chunk chunk, Material material, Block... blocks) {
+//
+//        PacketPlayOutMultiBlockChange packet = new PacketPlayOutMultiBlockChange(blocks.length, new short[64], (net.minecraft.server.v1_8_R3.Chunk) chunk);
+//
+//        byte[] data = new byte[blocks.length * 4];
+//        for (int i = 0; i < blocks.length; i ++) {
+//            int j = i * 4;
+//            int blockX = blocks[i].getX() - (chunk.getX() * 16);
+//            int blockY = blocks[i].getY();
+//            int blockZ = blocks[i].getZ() - (chunk.getZ() * 16);
+//            int block = material.getId();
+//            int info = 0;
+//            data[j] = ?;
+//            data[j + 1] = ?;
+//            data[j + 2] = ?;
+//            data[j + 3] = ?;
+//        }
+//        packet.c = data;
+//        return packet;
+//    }
+
 
     @Override
     public ItemStack setGeneratorItem(ItemStack itemStack, String type) {

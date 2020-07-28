@@ -20,6 +20,7 @@ public class BaseCommand implements CommandExecutor {
         this.commandHelp = new CommandHelp(this);
         addCommand(new CommandGui(), plugin);
         addCommand(new CommandGive(), plugin);
+        addCommand(new CommandTest(), plugin);
         plugin.getCommand("genbucket").setExecutor(this);
 
     }

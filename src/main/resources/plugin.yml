@@ -2,6 +2,9 @@ name: GenBuckets
 main: com.reliableplugins.genbucket.GenBucket
 version: 1.0
 author: Rages
+softdepend:
+  - Factions
+  - WorldGuard
 commands:
   genbucket:
     description: "The most optimized GenBucket plugin."

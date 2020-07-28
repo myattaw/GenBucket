@@ -1,5 +1,6 @@
 package com.reliableplugins.genbucket.manager;
 
+import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorType;
 import com.reliableplugins.genbucket.generator.impl.Horizontal;
@@ -13,7 +14,7 @@ public class GenBucketManager {
 
     private static Map<String, Generator> generatorMap = new HashMap<>();
 
-    public static void loadGenBuckets(FileConfiguration config) {
+    public static void loadGenBuckets(FileConfiguration config, GenBucket plugin) {
 
         for (String section : config.getConfigurationSection("genbuckets").getKeys(false)) {
 
@@ -22,7 +23,7 @@ public class GenBucketManager {
             switch (GeneratorType.valueOf(config.getString(String.format("genbuckets.%s.bucket-type", section)).toUpperCase())) {
 
                 case VERTICAL:
-                    Vertical vertical = new Vertical();
+                    Vertical vertical = new Vertical(plugin);
                     vertical.setMaterial(Material.valueOf(config.getString(configPath + "material")));
                     vertical.setName(config.getString(configPath + "bucket-name"));
                     vertical.setLore(config.getStringList(configPath + "bucket-lore"));
@@ -32,7 +33,7 @@ public class GenBucketManager {
                     break;
 
                 case HORIZONTAL:
-                    Horizontal horizontal = new Horizontal();
+                    Horizontal horizontal = new Horizontal(plugin);
                     horizontal.setMaterial(Material.valueOf(config.getString(configPath + "material")));
                     horizontal.setName(config.getString(configPath + "bucket-name"));
                     horizontal.setLore(config.getStringList(configPath + "bucket-lore"));
