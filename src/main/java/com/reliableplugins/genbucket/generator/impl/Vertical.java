@@ -33,9 +33,12 @@ public class Vertical extends Generator {
     public void onTick(GeneratorData data) {
         // do checks here
         Block block = data.getWorld().getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
-//        block.setType(getMaterial());
 
-        if (data.getY() - data.getIndex() <= 0) return;
+        // Make a list of blocks it can pass through
+        if (block.getType() != Material.AIR || block.getY() <= 0) {
+            data.setIndex(getMaxBlocks());
+            return;
+        }
 
         getPlugin().getNMSHandler().setBlock(data.getWorld(), data.getX(), data.getY() - data.getIndex(), data.getZ(), getMaterial().getId(), (byte) 0);
     }

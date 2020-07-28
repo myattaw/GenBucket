@@ -28,12 +28,13 @@ public class CommandTest extends AbstractCommand {
 
         int amount = 0;
 
-        for (int x = loc.getBlockX() - 250; x < loc.getBlockX() + 250; x++) {
-            for (int z = loc.getBlockZ() - 250; z < loc.getBlockZ() + 250; z++) {
+        for (int x = loc.getBlockX() - 100; x < loc.getBlockX() + 100; x++) {
+            for (int z = loc.getBlockZ() - 100; z < loc.getBlockZ() + 100; z++) {
                 BlockFace blockFace = BlockFace.WEST;
                 Location location = loc.getWorld().getBlockAt(x, loc.getBlockY() - 5, z).getLocation();
-                generator.getLocations().add(new GeneratorData(location.getWorld(), blockFace, player, location.getBlockX(), location.getBlockY(), location.getBlockZ()));
-//                generator.onPlace(location);
+                GeneratorData generatorData = new GeneratorData(location.getWorld(), blockFace, player, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+                generator.getLocations().add(generatorData);
+                generator.onPlace(generatorData, player, location);
                 amount++;
             }
         }

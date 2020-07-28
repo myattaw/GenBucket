@@ -27,9 +27,6 @@ public class HookManager {
     }
 
     public BuildCheckHook getBuildChecks() {
-        if (pluginMap.containsKey("buildcheck")) {
-            return (BuildCheckHook) pluginMap.get("buildcheck");
-        }
         return (BuildCheckHook) pluginMap.get("buildcheck");
     }
 
