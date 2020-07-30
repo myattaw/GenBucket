@@ -14,11 +14,17 @@ public class GeneratorTask implements Runnable {
 
     private final int MAX_GENERATORS = 20000;
 
+    private GenBucket plugin;
+
+    public GeneratorTask(GenBucket plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void run() {
         int amount = 0;
         // Do multi block change
-        for (Generator generator : GenBucketManager.getGeneratorMap().values()) {
+        for (Generator generator : plugin.getGeneratorMap().values()) {
             for (Iterator<GeneratorData> iterator = generator.getLocations().iterator(); iterator.hasNext();) {
                 GeneratorData data = iterator.next();
 

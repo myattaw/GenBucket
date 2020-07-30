@@ -14,7 +14,7 @@ public class GenBucketManager {
 
     private static Map<String, Generator> generatorMap = new HashMap<>();
 
-    public static void loadGenBuckets(FileConfiguration config, GenBucket plugin) {
+    public static Map<String, Generator> loadGenBuckets(FileConfiguration config, GenBucket plugin) {
 
         for (String section : config.getConfigurationSection("genbuckets").getKeys(false)) {
 
@@ -29,6 +29,7 @@ public class GenBucketManager {
                     vertical.setLore(config.getStringList(configPath + "bucket-lore"));
                     vertical.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     vertical.setMaxBlocks(256);
+                    vertical.setSlot(plugin.getConfig().getInt(String.format("menu-design.items.%s.slot", section)));
                     generatorMap.put(section, vertical);
                     break;
 
@@ -39,6 +40,7 @@ public class GenBucketManager {
                     horizontal.setLore(config.getStringList(configPath + "bucket-lore"));
                     horizontal.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     horizontal.setMaxBlocks(config.getInt(configPath + "bucket-size"));
+                    horizontal.setSlot(plugin.getConfig().getInt(String.format("menu-design.items.%s.slot", section)));
                     generatorMap.put(section, horizontal);
                     break;
 //
@@ -53,12 +55,8 @@ public class GenBucketManager {
 
                     default: System.out.println(String.format("%s is not using a valid generator type!", section));
             }
-
-            System.out.println(section);
         }
-    }
-
-    public static Map<String, Generator> getGeneratorMap() {
         return generatorMap;
     }
+
 }

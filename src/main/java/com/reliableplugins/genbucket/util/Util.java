@@ -31,4 +31,9 @@ public class Util {
         return itemStack;
     }
 
+    public static ItemStack setNameAndLore(ItemStack itemStack, String name, List<String> lore) {
+        setName(itemStack, name);
+        return setLore(itemStack, lore);
+    }
+
 }

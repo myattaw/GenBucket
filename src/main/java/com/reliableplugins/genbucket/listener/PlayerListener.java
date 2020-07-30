@@ -28,7 +28,7 @@ public class PlayerListener implements Listener {
             Location location = event.getBlockClicked().getRelative(blockFace).getLocation();
             Player player = event.getPlayer();
 
-            Generator generator = GenBucketManager.getGeneratorMap().get(type);
+            Generator generator = plugin.getGeneratorMap().get(type);
 
             GeneratorData generatorData = new GeneratorData(location.getWorld(), blockFace, player, location.getBlockX(), location.getBlockY(), location.getBlockZ());
 

@@ -14,6 +14,7 @@ public abstract class Generator {
     private Material material;
     private String name;
     private List<String> lore;
+    private int slot;
     private GeneratorType generatorType;
 
     private int maxBlocks;
@@ -51,6 +52,14 @@ public abstract class Generator {
 
     public List<String> getLore() {
         return lore;
+    }
+
+    public void setSlot(int slot) {
+        this.slot = slot;
+    }
+
+    public int getSlot() {
+        return slot;
     }
 
     public void setGeneratorType(GeneratorType generatorType) {

@@ -1,6 +1,8 @@
 package com.reliableplugins.genbucket;
 
 import com.reliableplugins.genbucket.command.impl.BaseCommand;
+import com.reliableplugins.genbucket.generator.Generator;
+import com.reliableplugins.genbucket.listener.InventoryListener;
 import com.reliableplugins.genbucket.manager.HookManager;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
 import com.reliableplugins.genbucket.listener.PlayerListener;
@@ -9,12 +11,17 @@ import com.reliableplugins.genbucket.nms.NMSHandler;
 import com.reliableplugins.genbucket.nms.nms.Version_1_8_R3;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GenBucket extends JavaPlugin {
 
     private BaseCommand baseCommand;
     private NMSHandler nmsHandler;
 
     private HookManager hookManager;
+
+    private Map<String, Generator> generatorMap = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -25,9 +32,10 @@ public class GenBucket extends JavaPlugin {
         this.baseCommand = new BaseCommand(this);
         this.hookManager = new HookManager(this);
 
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new GeneratorTask(), 20L, 20L);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new GeneratorTask(this), 5L, 5L);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-        GenBucketManager.loadGenBuckets(getConfig(), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        generatorMap = GenBucketManager.loadGenBuckets(getConfig(), this);
 
     }
 
@@ -41,6 +49,10 @@ public class GenBucket extends JavaPlugin {
             default:
                 return null;
         }
+    }
+
+    public Map<String, Generator> getGeneratorMap() {
+        return generatorMap;
     }
 
     public HookManager getHookManager() {

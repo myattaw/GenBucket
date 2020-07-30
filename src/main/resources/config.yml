@@ -1,3 +1,15 @@
+
+menu-design:
+  title: "&8&LGENBUCKET MENU"
+  rows: 4
+  items:
+    CobbleVertical:
+      slot: 3
+    CobbleHorizontal:
+      slot: 5
+  background:
+    item: BLACK_STAINED_GLASS_PANE
+
 genbuckets:
   CobbleVertical:
     material: COBBLESTONE
