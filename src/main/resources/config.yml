@@ -1,12 +1,15 @@
+settings:
+  max-buckets: 25000
+  tick-speed: 5
 
 menu-design:
   title: "&8&LGENBUCKET MENU"
   rows: 4
   items:
     CobbleVertical:
-      slot: 3
+      slot: 12
     CobbleHorizontal:
-      slot: 5
+      slot: 14
   background:
     item: BLACK_STAINED_GLASS_PANE
 
@@ -14,19 +17,19 @@ genbuckets:
   CobbleVertical:
     material: COBBLESTONE
     bucket-item: LAVA_BUCKET
-    bucket-name: "[MATERIAL] GenBucket"
+    bucket-name: "&7&lCobblestone Vertical"
     bucket-type: Vertical
     bucket-lore:
-      - "-----------------------------------"
-      - "Type: [TYPE]"
-      - "-----------------------------------"
+      - "&8-----------------------------------"
+      - "&8Type: &a[TYPE]"
+      - "&8-----------------------------------"
   CobbleHorizontal:
     material: COBBLESTONE
     bucket-item: LAVA_BUCKET
-    bucket-name: "[MATERIAL] GenBucket"
+    bucket-name: "&7&lCobblestone Horizontal"
     bucket-type: Horizontal
     bucket-size: 16
     bucket-lore:
-      - "-----------------------------------"
-      - "Type: [TYPE] ([SIZE])"
-      - "-----------------------------------"
+      - "&8-----------------------------------"
+      - "&8Type: &a[TYPE] &8(&a[SIZE]&8)"
+      - "&8-----------------------------------"

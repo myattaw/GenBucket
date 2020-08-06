@@ -33,8 +33,8 @@ public class GeneratorTask implements Runnable {
                 if (data.getIndex() >= generator.getMaxBlocks()) {
                     iterator.remove();
                 } else {
-                    generator.onTick(data);
                     data.setIndex(data.getIndex() + 1);
+                    generator.onTick(data);
                 }
             }
         }

@@ -12,15 +12,18 @@ import java.util.*;
 public abstract class Generator {
 
     private Material material;
-    private String name;
-    private List<String> lore;
-    private int slot;
-    private GeneratorType generatorType;
+    private Material itemType;
 
+    private String key;
+    private String name;
+    private int slot;
     private int maxBlocks;
+
     private Set<GeneratorData> locations = new HashSet<>();
+    private List<String> lore;
 
     private GenBucket plugin;
+    private GeneratorType generatorType;
 
     public Generator(GenBucket plugin) {
         this.plugin = plugin;
@@ -36,6 +39,22 @@ public abstract class Generator {
 
     public Material getMaterial() {
         return material;
+    }
+
+    public void setItemType(Material itemType) {
+        this.itemType = itemType;
+    }
+
+    public Material getItemType() {
+        return itemType;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
     }
 
     public void setName(String name) {

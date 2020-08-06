@@ -26,7 +26,10 @@ public class Vertical extends Generator {
         }
 
 //        location.getBlock().setType(getMaterial());
-//        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
+
+
+//        location.getBlock().setType(getMaterial());
+        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
     }
 
     @Override

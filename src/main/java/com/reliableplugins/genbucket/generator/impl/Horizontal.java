@@ -3,8 +3,10 @@ package com.reliableplugins.genbucket.generator.impl;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -22,8 +24,8 @@ public class Horizontal extends Generator {
             return;
         }
 
+        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
 
-        location.getBlock().setType(getMaterial());
     }
 
     @Override
@@ -36,7 +38,12 @@ public class Horizontal extends Generator {
             return;
         }
 
-        block.setType(getMaterial());
+        if (block.getType() != Material.AIR) {
+            data.setIndex(getMaxBlocks());
+            return;
+        }
+
+        getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().getId(), (byte) 0);
     }
 
 }
