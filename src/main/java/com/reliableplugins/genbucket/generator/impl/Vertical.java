@@ -25,10 +25,11 @@ public class Vertical extends Generator {
             return;
         }
 
-//        location.getBlock().setType(getMaterial());
+        if (!getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
+            data.setIndex(getMaxBlocks());
+            return;
+        }
 
-
-//        location.getBlock().setType(getMaterial());
         getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
     }
 

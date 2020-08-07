@@ -3,7 +3,7 @@ settings:
   tick-speed: 5
 
 menu-design:
-  title: "&8&LGENBUCKET MENU"
+  title: "&a&LGENBUCKET MENU"
   rows: 4
   items:
     CobbleVertical:
@@ -16,20 +16,24 @@ menu-design:
 genbuckets:
   CobbleVertical:
     material: COBBLESTONE
+    bucket-cost: 200
     bucket-item: LAVA_BUCKET
     bucket-name: "&7&lCobblestone Vertical"
     bucket-type: Vertical
     bucket-lore:
-      - "&8-----------------------------------"
-      - "&8Type: &a[TYPE]"
-      - "&8-----------------------------------"
+      - "&7&o(Placing this bucket will generate a wall)"
+      - ""
+      - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
+      - "&2&l\u27A5 &a&lBUCKET COST: &7$5,000"
   CobbleHorizontal:
     material: COBBLESTONE
+    bucket-cost: 250
     bucket-item: LAVA_BUCKET
     bucket-name: "&7&lCobblestone Horizontal"
     bucket-type: Horizontal
     bucket-size: 16
     bucket-lore:
-      - "&8-----------------------------------"
-      - "&8Type: &a[TYPE] &8(&a[SIZE]&8)"
-      - "&8-----------------------------------"
+      - "&7&o(Placing this bucket will generate a wall)"
+      - ""
+      - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
+      - "&2&l\u27A5 &a&lBUCKET COST: &7$5,000"

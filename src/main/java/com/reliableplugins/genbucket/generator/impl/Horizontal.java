@@ -24,6 +24,8 @@ public class Horizontal extends Generator {
             return;
         }
 
+        if (!getPlugin().getHookManager().getVault().canAfford(player, getCost())) return;
+
         getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
 
     }

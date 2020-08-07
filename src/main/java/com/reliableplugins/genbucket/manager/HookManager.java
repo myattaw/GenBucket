@@ -3,6 +3,7 @@ package com.reliableplugins.genbucket.manager;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.hook.BuildCheckHook;
 import com.reliableplugins.genbucket.hook.PluginHook;
+import com.reliableplugins.genbucket.hook.VaultHook;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class HookManager {
     public HookManager(GenBucket plugin) {
         this.plugin = plugin;
         hookPlugin(new BuildCheckHook());
+        hookPlugin(new VaultHook());
     }
 
     private void hookPlugin(PluginHook pluginHook) {
@@ -28,6 +30,10 @@ public class HookManager {
 
     public BuildCheckHook getBuildChecks() {
         return (BuildCheckHook) pluginMap.get("buildcheck");
+    }
+
+    public VaultHook getVault() {
+        return (VaultHook) pluginMap.get("vault");
     }
 
 }

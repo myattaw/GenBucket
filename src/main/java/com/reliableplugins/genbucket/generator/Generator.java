@@ -18,6 +18,7 @@ public abstract class Generator {
     private String name;
     private int slot;
     private int maxBlocks;
+    private int cost;
 
     private Set<GeneratorData> locations = new HashSet<>();
     private List<String> lore;
@@ -95,6 +96,14 @@ public abstract class Generator {
 
     public int getMaxBlocks() {
         return maxBlocks;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     public Set<GeneratorData> getLocations() {
