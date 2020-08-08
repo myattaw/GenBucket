@@ -24,7 +24,10 @@ public class Horizontal extends Generator {
             return;
         }
 
-        if (!getPlugin().getHookManager().getVault().canAfford(player, getCost())) return;
+        if (!getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
+            data.setIndex(getMaxBlocks());
+            return;
+        }
 
         getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
 

@@ -12,12 +12,13 @@ import java.util.Iterator;
 
 public class GeneratorTask implements Runnable {
 
-    private final int MAX_GENERATORS = 20000;
+    private final int MAX_GENERATORS;
 
     private GenBucket plugin;
 
     public GeneratorTask(GenBucket plugin) {
         this.plugin = plugin;
+        this.MAX_GENERATORS = plugin.getConfig().getInt("settings.max-buckets");
     }
 
     @Override

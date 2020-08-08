@@ -34,7 +34,7 @@ public class CommandTest extends AbstractCommand {
                 Location location = loc.getWorld().getBlockAt(x, loc.getBlockY() - 5, z).getLocation();
                 GeneratorData generatorData = new GeneratorData(location.getWorld(), blockFace, player, location.getBlockX(), location.getBlockY(), location.getBlockZ());
                 generator.getLocations().add(generatorData);
-                generator.onPlace(generatorData, player, location);
+//                generator.onPlace(generatorData, player, location);
                 amount++;
             }
         }

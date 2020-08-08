@@ -69,6 +69,8 @@ public class Version_1_8_R3 implements NMSHandler {
     public String getGeneratorType(ItemStack itemStack) {
         net.minecraft.server.v1_8_R3.ItemStack nms = CraftItemStack.asNMSCopy(itemStack);
 
+        if (nms == null) return null;
+
         if (nms.getTag() != null && nms.getTag().hasKey(key)) {
             return nms.getTag().getString(key);
         }

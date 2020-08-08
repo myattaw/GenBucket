@@ -1,5 +1,7 @@
 settings:
   max-buckets: 25000
+  clear-drops: true
+  click-menu: true
   tick-speed: 5
 
 menu-design:
@@ -8,8 +10,12 @@ menu-design:
   items:
     CobbleVertical:
       slot: 12
+    ObsidianPatch:
+      slot: 13
     CobbleHorizontal:
       slot: 14
+    ObsidianPrintable:
+      slot: 22
   background:
     item: BLACK_STAINED_GLASS_PANE
 
@@ -24,7 +30,7 @@ genbuckets:
       - "&7&o(Placing this bucket will generate a wall)"
       - ""
       - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
-      - "&2&l\u27A5 &a&lBUCKET COST: &7$5,000"
+      - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
   CobbleHorizontal:
     material: COBBLESTONE
     bucket-cost: 250
@@ -36,4 +42,26 @@ genbuckets:
       - "&7&o(Placing this bucket will generate a wall)"
       - ""
       - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
-      - "&2&l\u27A5 &a&lBUCKET COST: &7$5,000"
+      - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
+  ObsidianPatch:
+    material: OBSIDIAN
+    bucket-cost: 250
+    bucket-item: LAVA_BUCKET
+    bucket-name: "&7&lObsidian Patch"
+    bucket-type: Patch
+    bucket-lore:
+      - "&7&o(Placing this bucket will generate a wall)"
+      - ""
+      - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
+      - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
+  ObsidianPrintable:
+    material: OBSIDIAN
+    bucket-cost: 250
+    bucket-item: OBSIDIAN
+    bucket-name: "&7&lObsidian Printable"
+    bucket-type: Vertical
+    bucket-lore:
+      - "&7&o(Placing this bucket will generate a wall)"
+      - ""
+      - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
+      - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"

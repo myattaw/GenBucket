@@ -13,8 +13,7 @@ public class CommandGui extends AbstractCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         sender.sendMessage("Opening gui");
-        MainMenu mainMenu = new MainMenu(getPlugin()).init();
         Player player = (Player) sender;
-        player.openInventory(mainMenu.getInventory());
+        player.openInventory(getPlugin().getMainMenu().getInventory());
     }
 }

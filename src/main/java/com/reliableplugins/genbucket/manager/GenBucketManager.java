@@ -5,6 +5,7 @@ import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorType;
 import com.reliableplugins.genbucket.generator.impl.Horizontal;
+import com.reliableplugins.genbucket.generator.impl.Patch;
 import com.reliableplugins.genbucket.generator.impl.Vertical;
 import com.reliableplugins.genbucket.util.Util;
 import org.bukkit.Material;
@@ -52,14 +53,19 @@ public class GenBucketManager {
                     generatorMap.put(section, horizontal);
                     break;
 //
-//                case PATCH:
-//                    Patch patch = new Patch();
-//                    patch.setMaterial(Material.valueOf(config.getString(String.format("genbuckets.%s.material"))));
-//                    patch.setName(config.getString(String.format("genbuckets.%s.name")));
-//                    patch.setLore(config.getStringList(String.format("genbuckets.%s.lore")));
-//                    patch.setGeneratorType(GeneratorType.valueOf(config.getString(String.format("genbuckets.%s.type"))));
-//                    generatorMap.put(section, patch);
-//                    break;
+                case PATCH:
+                    Patch patch = new Patch(plugin);
+                    patch.setKey(section);
+                    patch.setCost(plugin.getConfig().getInt(configPath + "bucket-cost"));
+                    patch.setMaterial(Material.valueOf(config.getString(configPath + "material")));
+                    patch.setItemType(Material.valueOf(config.getString(configPath + "bucket-item")));
+                    patch.setName(config.getString(configPath + "bucket-name"));
+                    patch.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
+                    patch.setMaxBlocks(256);
+                    patch.setSlot(plugin.getConfig().getInt(String.format("menu-design.items.%s.slot", section)));
+                    patch.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(patch.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(patch.getMaxBlocks())), new AbstractMap.SimpleEntry("type", patch.getGeneratorType().getName())));
+                    generatorMap.put(section, patch);
+                    break;
 
                     default: System.out.println(String.format("%s is not using a valid generator type!", section));
             }
