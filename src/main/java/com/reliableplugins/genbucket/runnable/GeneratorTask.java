@@ -3,12 +3,11 @@ package com.reliableplugins.genbucket.runnable;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
-import com.reliableplugins.genbucket.manager.GenBucketManager;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.Chunk;
 
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class GeneratorTask implements Runnable {
 
@@ -24,20 +23,27 @@ public class GeneratorTask implements Runnable {
     @Override
     public void run() {
         int amount = 0;
-        // Do multi block change
         for (Generator generator : plugin.getGeneratorMap().values()) {
-            for (Iterator<GeneratorData> iterator = generator.getLocations().iterator(); iterator.hasNext();) {
-                GeneratorData data = iterator.next();
 
-                if (++amount >= MAX_GENERATORS) break;
+            for (Map.Entry<Chunk, Set<GeneratorData>> generatorData : generator.getLocations().entrySet()) {
 
-                if (data.getIndex() >= generator.getMaxBlocks()) {
-                    iterator.remove();
-                } else {
-                    data.setIndex(data.getIndex() + 1);
-                    generator.onTick(data);
+                if (!generatorData.getKey().isLoaded()) continue;
+
+                for (Iterator<GeneratorData> iterator = generatorData.getValue().iterator(); iterator.hasNext(); ) {
+                    GeneratorData data = iterator.next();
+
+                    if (++amount >= MAX_GENERATORS) break;
+
+                    if (data.getIndex() >= generator.getMaxBlocks()) {
+                        iterator.remove();
+                    } else {
+                        data.setIndex(data.getIndex() + 1);
+                        generator.onTick(data);
+                    }
                 }
+
             }
+
         }
     }
 

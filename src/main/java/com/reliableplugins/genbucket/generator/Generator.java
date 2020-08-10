@@ -1,8 +1,10 @@
 package com.reliableplugins.genbucket.generator;
 
+import com.google.common.collect.Sets;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.generator.data.GeneratorType;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -20,7 +22,8 @@ public abstract class Generator {
     private int maxBlocks;
     private int cost;
 
-    private Set<GeneratorData> locations = new HashSet<>();
+    private Map<Chunk, Set<GeneratorData>> locations = new HashMap<>();
+    //    private Set<GeneratorData> locations = new HashSet<>();
     private List<String> lore;
 
     private GenBucket plugin;
@@ -106,8 +109,17 @@ public abstract class Generator {
         return cost;
     }
 
-    public Set<GeneratorData> getLocations() {
+    public Map<Chunk, Set<GeneratorData>> getLocations() {
         return locations;
+    }
+
+    public void addLocation(Chunk chunk, GeneratorData data) {
+        Set<GeneratorData> generatorData = locations.get(chunk);
+        if (generatorData != null) {
+            generatorData.add(data);
+        } else {
+            locations.put(chunk, Sets.newHashSet(data));
+        }
     }
 
     public GenBucket getPlugin() {

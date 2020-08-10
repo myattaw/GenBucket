@@ -3,6 +3,7 @@ package com.reliableplugins.genbucket.generator.impl;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

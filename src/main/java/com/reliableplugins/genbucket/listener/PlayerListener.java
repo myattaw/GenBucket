@@ -43,7 +43,7 @@ public class PlayerListener implements Listener {
                 Generator generator = plugin.getGeneratorMap().get(generatorType);
                 GeneratorData generatorData = new GeneratorData(location.getWorld(), blockFace, player, location.getBlockX(), location.getBlockY(), location.getBlockZ());
 
-                generator.getLocations().add(generatorData);
+                generator.addLocation(location.getChunk(), generatorData);
                 generator.onPlace(generatorData, player, location);
             } else {
                 player.openInventory(plugin.getMainMenu().getInventory());
