@@ -1,17 +1,27 @@
 package com.reliableplugins.genbucket.manager;
 
-import com.google.common.collect.Lists;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
+import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.generator.data.GeneratorType;
 import com.reliableplugins.genbucket.generator.impl.Horizontal;
 import com.reliableplugins.genbucket.generator.impl.Patch;
 import com.reliableplugins.genbucket.generator.impl.Vertical;
 import com.reliableplugins.genbucket.util.Util;
+import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.logging.Level;
 
 public class GenBucketManager {
 
@@ -34,7 +44,7 @@ public class GenBucketManager {
                     vertical.setName(config.getString(configPath + "bucket-name"));
                     vertical.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     vertical.setMaxBlocks(256);
-                    vertical.setSlot(plugin.getConfig().getInt(String.format("menu-design.items.%s.slot", section)));
+                    vertical.setSlot(config.getInt(configPath + "menu-slot"));
                     vertical.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(vertical.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(vertical.getMaxBlocks())), new AbstractMap.SimpleEntry("type", vertical.getGeneratorType().getName())));
                     generatorMap.put(section, vertical);
                     break;
@@ -48,11 +58,11 @@ public class GenBucketManager {
                     horizontal.setName(config.getString(configPath + "bucket-name"));
                     horizontal.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     horizontal.setMaxBlocks(config.getInt(configPath + "bucket-size"));
-                    horizontal.setSlot(plugin.getConfig().getInt(String.format("menu-design.items.%s.slot", section)));
+                    horizontal.setSlot(config.getInt(configPath + "menu-slot"));
                     horizontal.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(horizontal.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(horizontal.getMaxBlocks())), new AbstractMap.SimpleEntry("type", horizontal.getGeneratorType().getName())));
                     generatorMap.put(section, horizontal);
                     break;
-//
+
                 case PATCH:
                     Patch patch = new Patch(plugin);
                     patch.setKey(section);
@@ -62,14 +72,34 @@ public class GenBucketManager {
                     patch.setName(config.getString(configPath + "bucket-name"));
                     patch.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     patch.setMaxBlocks(256);
-                    patch.setSlot(plugin.getConfig().getInt(String.format("menu-design.items.%s.slot", section)));
+                    patch.setSlot(config.getInt(configPath + "menu-slot"));
                     patch.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(patch.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(patch.getMaxBlocks())), new AbstractMap.SimpleEntry("type", patch.getGeneratorType().getName())));
                     generatorMap.put(section, patch);
                     break;
 
-                    default: System.out.println(String.format("%s is not using a valid generator type!", section));
+                default:
+                    System.out.println(String.format("%s is not using a valid generator type!", section));
             }
         }
+
+        // load genbuckets from last reload or restart
+
+        Map<String, Set<GeneratorData>> locations = new HashMap<>();
+        if (Files.isReadable(Paths.get(plugin.getDataFolder() + File.separator + "genbucket-data.json"))) {
+            try (Reader reader = new FileReader(plugin.getDataFolder() + File.separator + "genbucket-data.json")) {
+                locations = new Gson().fromJson(reader, new TypeToken<Map<String, Set<GeneratorData>>>() {}.getType());
+            } catch (IOException e) {
+                plugin.getServer().getLogger().log(Level.SEVERE, "Failed to load genbucket data!");
+            }
+        }
+
+        for (Map.Entry<String, Set<GeneratorData>> entry : locations.entrySet()) {
+            Generator generator = generatorMap.get(entry.getKey());
+            for (GeneratorData generatorData : entry.getValue()) {
+                generator.addLocation(plugin.getServer().getWorld(generatorData.getWorld()).getChunkAt(generatorData.getX() >> 4, generatorData.getZ() >> 4), generatorData);
+            }
+        }
+
         return generatorMap;
     }
 

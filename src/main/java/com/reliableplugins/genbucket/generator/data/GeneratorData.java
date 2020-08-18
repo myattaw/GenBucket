@@ -1,21 +1,28 @@
 package com.reliableplugins.genbucket.generator.data;
 
+import com.google.gson.annotations.Expose;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
 public class GeneratorData {
 
-    private World world;
+    @Expose
+    private String world;
+    @Expose
     private BlockFace blockFace;
     private Player player;
 
+    @Expose
     private int index = 0;
+    @Expose
     private int x;
+    @Expose
     private int y;
+    @Expose
     private int z;
 
-    public GeneratorData(World world, BlockFace blockFace, Player player, int x, int y, int z) {
+    public GeneratorData(String world, BlockFace blockFace, Player player, int x, int y, int z) {
         this.world = world;
         this.blockFace = blockFace;
         this.player = player;
@@ -24,7 +31,7 @@ public class GeneratorData {
         this.z = z;
     }
 
-    public World getWorld() {
+    public String getWorld() {
         return world;
     }
 

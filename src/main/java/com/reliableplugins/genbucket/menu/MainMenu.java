@@ -24,7 +24,7 @@ public class MainMenu extends MenuBuilder {
     public MainMenu(GenBucket plugin) {
         super(plugin.getConfig().getString("menu-design.title"), plugin.getConfig().getInt("menu-design.rows"));
         this.plugin = plugin;
-        this.background = Util.setName(XMaterial.valueOf(plugin.getConfig().getString("menu-design.background.item").toUpperCase()).parseItem(), " ");
+        this.background = Util.setName(XMaterial.valueOf(plugin.getConfig().getString("menu-design.background").toUpperCase()).parseItem(), " ");
     }
 
     @Override

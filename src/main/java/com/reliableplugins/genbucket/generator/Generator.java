@@ -9,7 +9,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class Generator {
 
@@ -23,7 +26,6 @@ public abstract class Generator {
     private int cost;
 
     private Map<Chunk, Set<GeneratorData>> locations = new HashMap<>();
-    //    private Set<GeneratorData> locations = new HashSet<>();
     private List<String> lore;
 
     private GenBucket plugin;
@@ -111,6 +113,10 @@ public abstract class Generator {
 
     public Map<Chunk, Set<GeneratorData>> getLocations() {
         return locations;
+    }
+
+    public void setLocations(Map<Chunk, Set<GeneratorData>> locations) {
+        this.locations = locations;
     }
 
     public void addLocation(Chunk chunk, GeneratorData data) {

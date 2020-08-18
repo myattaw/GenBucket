@@ -1,12 +1,14 @@
 package com.reliableplugins.genbucket.nms.nms;
 
 import com.reliableplugins.genbucket.nms.NMSHandler;
+import com.reliableplugins.genbucket.util.XMaterial;
 import net.minecraft.server.v1_8_R3.*;
+import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.Chunk;
-import org.bukkit.craftbukkit.v1_8_R3.CraftChunk;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_8_R3.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -33,27 +35,16 @@ public class Version_1_8_R3 implements NMSHandler {
 
     }
 
-//    public static PacketPlayOutMultiBlockChange test(Chunk chunk, Material material, Block... blocks) {
-//
-//        PacketPlayOutMultiBlockChange packet = new PacketPlayOutMultiBlockChange(blocks.length, new short[64], (net.minecraft.server.v1_8_R3.Chunk) chunk);
-//
-//        byte[] data = new byte[blocks.length * 4];
-//        for (int i = 0; i < blocks.length; i ++) {
-//            int j = i * 4;
-//            int blockX = blocks[i].getX() - (chunk.getX() * 16);
-//            int blockY = blocks[i].getY();
-//            int blockZ = blocks[i].getZ() - (chunk.getZ() * 16);
-//            int block = material.getId();
-//            int info = 0;
-//            data[j] = ?;
-//            data[j + 1] = ?;
-//            data[j + 2] = ?;
-//            data[j + 3] = ?;
-//        }
-//        packet.c = data;
-//        return packet;
-//    }
-
+    @Override
+    public void sendBlockChange(Player player, Location loc, XMaterial xMaterial) {
+        EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
+        if (entityPlayer.playerConnection == null) {
+            return;
+        }
+        PacketPlayOutBlockChange packet = new PacketPlayOutBlockChange(((CraftWorld) loc.getWorld()).getHandle(), new BlockPosition(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()));
+        packet.block = CraftMagicNumbers.getBlock(xMaterial.parseMaterial()).fromLegacyData(xMaterial.getData());
+        entityPlayer.playerConnection.sendPacket(packet);
+    }
 
     @Override
     public ItemStack setGeneratorItem(ItemStack itemStack, String type) {

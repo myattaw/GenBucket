@@ -6,6 +6,7 @@ import com.reliableplugins.genbucket.hook.buildcheck.WorldGuardCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 
@@ -31,6 +32,13 @@ public class BuildCheckHook implements PluginHook {
     }
 
     public boolean canBuild(Player player, Location location) {
+
+        WorldBorder worldBorder = location.getWorld().getWorldBorder();
+        double size = worldBorder.getSize() / 2.0;
+        double x = location.getX() - worldBorder.getCenter().getX();
+        double z = location.getZ() - worldBorder.getCenter().getZ();
+        if (x >= size || -x > size || z >= size || -z > size) return false;
+
         for (BuildCheckHook check : plugins) {
             if (!check.canBuild(player, location)) {
                 return false;
@@ -42,7 +50,7 @@ public class BuildCheckHook implements PluginHook {
 
     @Override
     public String[] getPlugins() {
-        return new String[] {"WorldGuard", "Factions"};
+        return new String[]{"WorldGuard", "Factions"};
     }
 
     @Override

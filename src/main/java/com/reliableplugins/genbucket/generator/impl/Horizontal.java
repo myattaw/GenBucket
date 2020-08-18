@@ -3,10 +3,7 @@ package com.reliableplugins.genbucket.generator.impl;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -36,7 +33,8 @@ public class Horizontal extends Generator {
     @Override
     public void onTick(GeneratorData data) {
         // do checks here
-        Block block = data.getWorld().getBlockAt(data.getX() + data.getIndex() * data.getBlockFace().getModX(), data.getY(), data.getZ() + data.getIndex() * data.getBlockFace().getModZ());
+        World world = getPlugin().getServer().getWorld(data.getWorld());
+        Block block = world.getBlockAt(data.getX() + data.getIndex() * data.getBlockFace().getModX(), data.getY(), data.getZ() + data.getIndex() * data.getBlockFace().getModZ());
 
         if (!getPlugin().getHookManager().getBuildChecks().canBuild(data.getPlayer(), block.getLocation())) {
             data.setIndex(getMaxBlocks());

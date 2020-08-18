@@ -3,13 +3,10 @@ package com.reliableplugins.genbucket.generator.impl;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import com.reliableplugins.genbucket.util.XMaterial;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerBucketEmptyEvent;
 
 public class Vertical extends Generator {
 
@@ -37,7 +34,8 @@ public class Vertical extends Generator {
     @Override
     public void onTick(GeneratorData data) {
         // do checks here
-        Block block = data.getWorld().getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
+        World world = getPlugin().getServer().getWorld(data.getWorld());
+        Block block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
 
         // Make a list of blocks it can pass through
         if (block.getType() != Material.AIR || block.getY() <= 0) {
@@ -45,7 +43,8 @@ public class Vertical extends Generator {
             return;
         }
 
-        getPlugin().getNMSHandler().setBlock(data.getWorld(), data.getX(), data.getY() - data.getIndex(), data.getZ(), getMaterial().getId(), (byte) 0);
+        getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().getId(), (byte) 0);
     }
+
 
 }
