@@ -1,6 +1,7 @@
 package com.reliableplugins.genbucket.generator.impl;
 
 import com.reliableplugins.genbucket.GenBucket;
+import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import org.bukkit.ChatColor;
@@ -36,6 +37,14 @@ public class Patch extends Generator {
         }
 
         if (!getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
+            data.setIndex(getMaxBlocks());
+            return;
+        }
+
+        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial(), getGeneratorType());
+        getPlugin().getServer().getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
             data.setIndex(getMaxBlocks());
             return;
         }

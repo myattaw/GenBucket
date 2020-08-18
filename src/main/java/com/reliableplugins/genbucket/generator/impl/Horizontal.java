@@ -1,6 +1,8 @@
 package com.reliableplugins.genbucket.generator.impl;
 
 import com.reliableplugins.genbucket.GenBucket;
+import com.reliableplugins.genbucket.api.GenBucketGenerateEvent;
+import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import org.bukkit.*;
@@ -26,6 +28,14 @@ public class Horizontal extends Generator {
             return;
         }
 
+        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial(), getGeneratorType());
+        getPlugin().getServer().getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            data.setIndex(getMaxBlocks());
+            return;
+        }
+
         getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
 
     }
@@ -42,6 +52,14 @@ public class Horizontal extends Generator {
         }
 
         if (block.getType() != Material.AIR) {
+            data.setIndex(getMaxBlocks());
+            return;
+        }
+
+        GenBucketGenerateEvent event = new GenBucketGenerateEvent(data.getPlayer(), getMaterial(), data.getIndex(), getGeneratorType());
+        getPlugin().getServer().getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
             data.setIndex(getMaxBlocks());
             return;
         }
