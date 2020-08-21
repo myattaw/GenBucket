@@ -1,4 +1,5 @@
 settings:
+  replace-bucket: false
   max-buckets: 25000
   clear-drops: true
   click-menu: true

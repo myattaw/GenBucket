@@ -46,11 +46,19 @@ public class MainMenu extends MenuBuilder {
 
     @Override
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!event.getCurrentItem().equals(background)) {
+        ItemStack item = event.getCurrentItem();
+
+        if (item == null || item.equals(background)) return;
+
+        if (itemSlots.containsKey(event.getSlot())) {
             Player player = (Player) event.getWhoClicked();
             Generator generator = itemSlots.get(event.getSlot());
-            ItemStack itemStack = Util.setNameAndLore(new ItemStack(generator.getItemType()), generator.getName(), generator.getLore());
-            player.getInventory().addItem(plugin.getNMSHandler().setGeneratorItem(itemStack, generator.getKey()));
+            if (plugin.getConfig().getBoolean("settings.replace-bucket")) {
+                // make player cache and cache the bucket itemstack
+            } else {
+                ItemStack itemStack = Util.setNameAndLore(new ItemStack(generator.getItemType()), generator.getName(), generator.getLore());
+                player.getInventory().addItem(plugin.getNMSHandler().setGeneratorItem(itemStack, generator.getKey()));
+            }
         }
     }
 
