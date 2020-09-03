@@ -12,6 +12,7 @@ menu-design:
 
 genbuckets:
   CobbleVertical:
+    patch: false
     material: COBBLESTONE
     menu-slot: 12
     bucket-cost: 200
@@ -24,12 +25,13 @@ genbuckets:
       - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
       - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
   ObsidianPatch:
+    patch: true
     material: OBSIDIAN
     menu-slot: 13
     bucket-cost: 250
     bucket-item: LAVA_BUCKET
     bucket-name: "&7&lObsidian Patch"
-    bucket-type: Patch
+    bucket-type: Vertical
     bucket-lore:
       - "&7&o(Placing this bucket will generate a wall)"
       - ""
@@ -49,6 +51,7 @@ genbuckets:
       - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
       - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
   ObsidianPrintable:
+    patch: false
     material: OBSIDIAN
     menu-slot: 22
     bucket-cost: 250

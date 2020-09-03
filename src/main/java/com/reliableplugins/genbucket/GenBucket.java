@@ -31,7 +31,7 @@ public class GenBucket extends JavaPlugin {
     private Gson gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
 
     private Map<String, Generator> generatorMap = new HashMap<>();
-    private final int TICK_SPEED = getConfig().getInt("settings.tick-speed");
+    private final int tickSpeed = getConfig().getInt("settings.tick-speed");
 
     private MainMenu mainMenu;
 
@@ -44,7 +44,7 @@ public class GenBucket extends JavaPlugin {
         this.baseCommand = new BaseCommand(this);
         this.hookManager = new HookManager(this);
 
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new GeneratorTask(this), TICK_SPEED, TICK_SPEED);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new GeneratorTask(this), tickSpeed, tickSpeed);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
