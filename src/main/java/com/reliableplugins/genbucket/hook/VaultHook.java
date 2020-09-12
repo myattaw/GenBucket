@@ -1,13 +1,12 @@
 package com.reliableplugins.genbucket.hook;
 
-import com.massivecraft.factions.integration.Econ;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.util.Message;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-public class VaultHook implements PluginHook{
+public class VaultHook implements PluginHook {
 
     private Economy economy;
 
@@ -32,7 +31,7 @@ public class VaultHook implements PluginHook{
 
     @Override
     public String[] getPlugins() {
-        return new String[] {"Vault"};
+        return new String[]{"Vault"};
     }
 
     @Override

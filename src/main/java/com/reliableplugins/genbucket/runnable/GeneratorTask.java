@@ -41,10 +41,7 @@ public class GeneratorTask implements Runnable {
                         generator.onTick(data);
                     }
                 }
-
             }
-
         }
     }
-
 }

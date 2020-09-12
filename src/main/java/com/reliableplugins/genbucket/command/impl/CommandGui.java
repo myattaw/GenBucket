@@ -1,9 +1,7 @@
 package com.reliableplugins.genbucket.command.impl;
 
-import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.command.AbstractCommand;
 import com.reliableplugins.genbucket.command.CommandBuilder;
-import com.reliableplugins.genbucket.menu.MainMenu;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

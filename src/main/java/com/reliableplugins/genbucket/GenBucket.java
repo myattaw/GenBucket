@@ -19,20 +19,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class GenBucket extends JavaPlugin {
 
+    private final int tickSpeed = getConfig().getInt("settings.tick-speed");
     private BaseCommand baseCommand;
     private NMSHandler nmsHandler;
     private HookManager hookManager;
-
     private Gson gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
-
     private Map<String, Generator> generatorMap = new HashMap<>();
-    private final int tickSpeed = getConfig().getInt("settings.tick-speed");
-
     private MainMenu mainMenu;
 
     @Override
@@ -69,11 +69,9 @@ public class GenBucket extends JavaPlugin {
         }
     }
 
-    public NMSHandler setupNMS()
-    {
+    public NMSHandler setupNMS() {
         String version = getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-        switch (version)
-        {
+        switch (version) {
             case "v1_8_R3":
                 return new Version_1_8_R3();
             default:

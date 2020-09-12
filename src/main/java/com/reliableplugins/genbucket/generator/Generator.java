@@ -39,76 +39,76 @@ public abstract class Generator {
 
     public abstract void onTick(GeneratorData generatorData);
 
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
     public Material getMaterial() {
         return material;
     }
 
-    public void setItemType(Material itemType) {
-        this.itemType = itemType;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public Material getItemType() {
         return itemType;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setItemType(Material itemType) {
+        this.itemType = itemType;
     }
 
     public String getKey() {
         return key;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setLore(List<String> lore) {
-        this.lore = lore;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<String> getLore() {
         return lore;
     }
 
-    public void setSlot(int slot) {
-        this.slot = slot;
+    public void setLore(List<String> lore) {
+        this.lore = lore;
     }
 
     public int getSlot() {
         return slot;
     }
 
-    public void setGeneratorType(GeneratorType generatorType) {
-        this.generatorType = generatorType;
+    public void setSlot(int slot) {
+        this.slot = slot;
     }
 
     public GeneratorType getGeneratorType() {
         return generatorType;
     }
 
-    public void setMaxBlocks(int maxBlocks) {
-        this.maxBlocks = maxBlocks;
+    public void setGeneratorType(GeneratorType generatorType) {
+        this.generatorType = generatorType;
     }
 
     public int getMaxBlocks() {
         return maxBlocks;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setMaxBlocks(int maxBlocks) {
+        this.maxBlocks = maxBlocks;
     }
 
     public int getCost() {
         return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public Map<Chunk, Set<GeneratorData>> getLocations() {

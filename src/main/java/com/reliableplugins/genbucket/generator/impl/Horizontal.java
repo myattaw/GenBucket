@@ -5,7 +5,10 @@ import com.reliableplugins.genbucket.api.GenBucketGenerateEvent;
 import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -31,7 +34,7 @@ public class Horizontal extends Generator {
         GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial(), getGeneratorType());
         getPlugin().getServer().getPluginManager().callEvent(event);
 
-        if(event.isCancelled()){
+        if (event.isCancelled()) {
             data.setIndex(getMaxBlocks());
             return;
         }
@@ -59,7 +62,7 @@ public class Horizontal extends Generator {
         GenBucketGenerateEvent event = new GenBucketGenerateEvent(data.getPlayer(), getMaterial(), data.getIndex(), getGeneratorType());
         getPlugin().getServer().getPluginManager().callEvent(event);
 
-        if(event.isCancelled()){
+        if (event.isCancelled()) {
             data.setIndex(getMaxBlocks());
             return;
         }

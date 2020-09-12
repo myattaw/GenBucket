@@ -38,12 +38,11 @@ public class WorldGuardCheck extends BuildCheckHook {
             RegionQuery query = com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
             com.sk89q.worldedit.util.Location loc = BukkitAdapter.adapt(location);
             LocalPlayer localPlayer = worldGuardPlugin.wrapPlayer(player);
-            return com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(location.getWorld())) || query.testState(loc, localPlayer, new StateFlag[]{Flags.BUILD});
+            return com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(location.getWorld())) || query.testState(loc, localPlayer, Flags.BUILD);
         }
 
         return false;
     }
-
 
 
 }

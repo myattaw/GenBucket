@@ -43,50 +43,8 @@
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>1.8.8</version>
-            <systemPath>D:/API's/versions/1.8.8.jar</systemPath>
+            <systemPath>${project.basedir}/versions/1.8.8.jar</systemPath>
         </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc.</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>1.11</version>
-            <systemPath>D:/API's/versions/1.11.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc..</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>1.12</version>
-            <systemPath>D:/API's/versions/1.12.2.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc...</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>1.13</version>
-            <systemPath>D:/API's/versions/1.13.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc....</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>1.13.2</version>
-            <systemPath>D:/API's/versions/1.13.2.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc.....</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>1.14.4</version>
-            <systemPath>D:/API's/versions/1.14.2.jar</systemPath>
-        </dependency>
-
-
         <dependency>
             <groupId>com.sk89q.worldguard.</groupId>
             <artifactId>worldguard-legacy</artifactId>

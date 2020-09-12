@@ -52,6 +52,9 @@ public class Version_1_8_R3 implements NMSHandler {
         if (nms.getTag() == null) {
             nms.setTag(new NBTTagCompound());
         }
+
+        //Hook Plugins Can Check If The Item Has NBTTag: GENBUCKET
+        nms.getTag().setString("GENBUCKET", "GENBUCKET");
         nms.getTag().setString(key, type);
         return CraftItemStack.asBukkitCopy(nms);
     }

@@ -16,7 +16,7 @@ public interface NMSHandler {
 
     String getGeneratorType(ItemStack itemStack);
 
-    ItemStack setGeneratorItem(ItemStack itemStack, String name);
+    ItemStack setGeneratorItem(ItemStack itemStack, String type);
 
     String getVersion();
 }
