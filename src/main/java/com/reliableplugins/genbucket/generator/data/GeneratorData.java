@@ -1,7 +1,6 @@
 package com.reliableplugins.genbucket.generator.data;
 
 import com.google.gson.annotations.Expose;
-import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
@@ -43,14 +42,13 @@ public class GeneratorData {
         return player;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
     public int getIndex() {
         return index;
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     public int getX() {
         return x;

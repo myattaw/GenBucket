@@ -40,7 +40,6 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -1919,7 +1918,8 @@ public enum XMaterial {
      */
     @SuppressWarnings("deprecation")
     public int getId() {
-        if (this.data != 0 || (this.legacy.length != 0 && Integer.parseInt(this.legacy[0].substring(2)) >= 13)) return -1;
+        if (this.data != 0 || (this.legacy.length != 0 && Integer.parseInt(this.legacy[0].substring(2)) >= 13))
+            return -1;
         Material material = this.parseMaterial();
         return material.getId();
     }

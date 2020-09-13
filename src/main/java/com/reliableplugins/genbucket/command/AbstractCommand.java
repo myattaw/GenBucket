@@ -42,12 +42,12 @@ public abstract class AbstractCommand {
         return description;
     }
 
-    public void setPlugin(GenBucket plugin) {
-        this.plugin = plugin;
-    }
-
     public GenBucket getPlugin() {
         return plugin;
+    }
+
+    public void setPlugin(GenBucket plugin) {
+        this.plugin = plugin;
     }
 
     public boolean hasPermission() {

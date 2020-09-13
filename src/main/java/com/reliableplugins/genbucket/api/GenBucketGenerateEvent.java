@@ -9,14 +9,12 @@ import org.bukkit.event.HandlerList;
 
 public class GenBucketGenerateEvent extends Event implements Cancellable {
 
+    private static final HandlerList HANDLERS = new HandlerList();
     private boolean cancelled;
     private Material material;
     private int blockIndex;
-
     private GeneratorType generatorType;
     private Player player;
-
-    private static final HandlerList HANDLERS = new HandlerList();
 
     public GenBucketGenerateEvent(Player player, Material material, int blockIndex, GeneratorType generatorType) {
         this.player = player;

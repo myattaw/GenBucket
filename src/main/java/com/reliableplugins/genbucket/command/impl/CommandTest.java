@@ -4,7 +4,6 @@ import com.reliableplugins.genbucket.command.AbstractCommand;
 import com.reliableplugins.genbucket.command.CommandBuilder;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
-import com.reliableplugins.genbucket.manager.GenBucketManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -38,6 +37,6 @@ public class CommandTest extends AbstractCommand {
                 amount++;
             }
         }
-        Bukkit.broadcastMessage(ChatColor.YELLOW + String.format("You created %d GenBuckets in " + (System.currentTimeMillis() -start) + "ms!", amount));
+        Bukkit.broadcastMessage(ChatColor.YELLOW + String.format("You created %d GenBuckets in " + (System.currentTimeMillis() - start) + "ms!", amount));
     }
 }
