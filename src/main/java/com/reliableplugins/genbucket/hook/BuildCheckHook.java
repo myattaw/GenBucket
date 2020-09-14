@@ -35,14 +35,14 @@ public class BuildCheckHook implements PluginHook {
         double size = worldBorder.getSize() / 2.0;
         double x = location.getX() - worldBorder.getCenter().getX();
         double z = location.getZ() - worldBorder.getCenter().getZ();
-        if (x >= size || -x > size || z >= size || -z > size) return false;
+        if (x >= size || -x > size || z >= size || -z > size) return true;
 
         for (BuildCheckHook check : plugins) {
-            if (!check.canBuild(player, location)) {
-                return false;
+            if (check.canBuild(player, location)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 

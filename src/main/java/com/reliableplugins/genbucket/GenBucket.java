@@ -79,6 +79,10 @@ public class GenBucket extends JavaPlugin {
         }
     }
 
+    public BaseCommand getBaseCommand() {
+        return baseCommand;
+    }
+
     public MainMenu getMainMenu() {
         return mainMenu;
     }

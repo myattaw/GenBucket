@@ -31,7 +31,7 @@ public class Vertical extends Generator {
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
 
-        if (!getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
+        if (getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
             player.sendMessage(ChatColor.RED + "You cannot use a GenBucket here!");
             data.setIndex(getMaxBlocks());
             return;
@@ -70,7 +70,6 @@ public class Vertical extends Generator {
 
     public void setPatch(boolean patch) {
         if (patch) {
-            System.out.println("PATCH");
             validMaterials.add(getMaterial());
             this.patch = true;
         }

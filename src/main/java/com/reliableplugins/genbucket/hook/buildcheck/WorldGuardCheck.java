@@ -6,7 +6,6 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
-import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -31,17 +30,17 @@ public class WorldGuardCheck extends BuildCheckHook {
     public boolean canBuild(Player player, Location location) {
         if (method != null) {
             try {
-                return (boolean) this.method.invoke(WorldGuardPlugin.inst(), player, location);
+                return !((boolean) this.method.invoke(WorldGuardPlugin.inst(), player, location));
             } catch (Exception e) {
             }
         } else {
             RegionQuery query = com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
             com.sk89q.worldedit.util.Location loc = BukkitAdapter.adapt(location);
             LocalPlayer localPlayer = worldGuardPlugin.wrapPlayer(player);
-            return com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(location.getWorld())) || query.testState(loc, localPlayer, Flags.BUILD);
+            return !com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(location.getWorld())) && !query.testState(loc, localPlayer, Flags.BUILD);
         }
 
-        return false;
+        return true;
     }
 
 
