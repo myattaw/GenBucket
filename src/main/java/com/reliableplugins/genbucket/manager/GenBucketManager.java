@@ -28,6 +28,8 @@ public class GenBucketManager {
 
     private static Map<String, Generator> generatorMap = new HashMap<>();
 
+    public static boolean isPaused = false;
+
     public static Map<String, Generator> loadGenBuckets(FileConfiguration config, GenBucket plugin) {
 
         for (String section : config.getConfigurationSection("genbuckets").getKeys(false)) {

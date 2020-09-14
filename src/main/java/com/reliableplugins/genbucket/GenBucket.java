@@ -31,6 +31,7 @@ public class GenBucket extends JavaPlugin {
     private BaseCommand baseCommand;
     private NMSHandler nmsHandler;
     private HookManager hookManager;
+    private GenBucketManager genBucketManager;
     private Gson gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
     private Map<String, Generator> generatorMap = new HashMap<>();
     private MainMenu mainMenu;
@@ -43,6 +44,7 @@ public class GenBucket extends JavaPlugin {
         this.nmsHandler = setupNMS();
         this.baseCommand = new BaseCommand(this);
         this.hookManager = new HookManager(this);
+        this.genBucketManager = new GenBucketManager();
 
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new GeneratorTask(this), tickSpeed, tickSpeed);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
@@ -81,6 +83,10 @@ public class GenBucket extends JavaPlugin {
 
     public BaseCommand getBaseCommand() {
         return baseCommand;
+    }
+
+    public GenBucketManager getGenBucketManager() {
+        return genBucketManager;
     }
 
     public MainMenu getMainMenu() {

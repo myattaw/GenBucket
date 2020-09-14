@@ -3,6 +3,7 @@ package com.reliableplugins.genbucket.runnable;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import com.reliableplugins.genbucket.manager.GenBucketManager;
 import org.bukkit.Chunk;
 
 import java.util.Iterator;
@@ -36,7 +37,7 @@ public class GeneratorTask implements Runnable {
 
                     if (data.getIndex() >= generator.getMaxBlocks()) {
                         iterator.remove();
-                    } else {
+                    } else if (!GenBucketManager.isPaused) {
                         data.setIndex(data.getIndex() + 1);
                         generator.onTick(data);
                     }
