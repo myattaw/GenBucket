@@ -53,6 +53,7 @@ public class PlayerListener implements Listener {
 
                 generator.addLocation(location.getChunk(), generatorData);
                 generator.onPlace(generatorData, player, location);
+                player.updateInventory();
             } else {
                 player.openInventory(plugin.getMainMenu().getInventory());
             }
