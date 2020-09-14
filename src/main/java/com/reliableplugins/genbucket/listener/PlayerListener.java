@@ -39,7 +39,7 @@ public class PlayerListener implements Listener {
             Player player = event.getPlayer();
             event.setCancelled(true);
             if (action == Action.RIGHT_CLICK_BLOCK) {
-                if(GenBucketManager.isPaused){
+                if (GenBucketManager.isPaused) {
                     event.setCancelled(true);
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l[!] &7Genbuckets have been temporarily disabled at this time!"));
                     return;

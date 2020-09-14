@@ -19,6 +19,7 @@ public class Util {
         return string.stream().map(Util::color).collect(Collectors.toList());
     }
 
+    @SafeVarargs
     public static List<String> updateLore(List<String> lore, Map.Entry<String, String>... placeholders) {
         List<String> newLore = new ArrayList<>();
         for (String line : lore) {
@@ -39,16 +40,15 @@ public class Util {
         return itemStack;
     }
 
-    public static ItemStack setLore(ItemStack itemStack, List<String> lore) {
+    public static void setLore(ItemStack itemStack, List<String> lore) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setLore(color(lore));
         itemStack.setItemMeta(itemMeta);
-        return itemStack;
     }
 
     public static ItemStack setNameAndLore(ItemStack itemStack, String name, List<String> lore) {
-        itemStack = setName(itemStack, name);
-        itemStack = setLore(itemStack, lore);
+        setName(itemStack, name);
+        setLore(itemStack, lore);
         return itemStack;
     }
 
