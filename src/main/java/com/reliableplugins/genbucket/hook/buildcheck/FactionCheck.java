@@ -9,7 +9,7 @@ public class FactionCheck extends BuildCheckHook {
 
     @Override
     public boolean canBuild(Player player, Location location) {
-        return FactionsBlockListener.playerCanBuildDestroyBlock(player, location, "build", true);
+        return !FactionsBlockListener.playerCanBuildDestroyBlock(player, location, "build", true);
     }
 
 }

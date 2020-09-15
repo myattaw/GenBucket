@@ -26,6 +26,7 @@ import java.util.logging.Level;
 
 public class GenBucketManager {
 
+    public static boolean isPaused = false;
     private static Map<String, Generator> generatorMap = new HashMap<>();
 
     public static Map<String, Generator> loadGenBuckets(FileConfiguration config, GenBucket plugin) {

@@ -3,6 +3,8 @@ package com.reliableplugins.genbucket.listener;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import com.reliableplugins.genbucket.manager.GenBucketManager;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -37,6 +39,12 @@ public class PlayerListener implements Listener {
             Player player = event.getPlayer();
             event.setCancelled(true);
             if (action == Action.RIGHT_CLICK_BLOCK) {
+                if (GenBucketManager.isPaused) {
+                    event.setCancelled(true);
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l[!] &7Genbuckets have been temporarily disabled at this time!"));
+                    return;
+                }
+
                 BlockFace blockFace = event.getBlockFace();
                 Location location = event.getClickedBlock().getRelative(blockFace).getLocation();
 
@@ -45,6 +53,7 @@ public class PlayerListener implements Listener {
 
                 generator.addLocation(location.getChunk(), generatorData);
                 generator.onPlace(generatorData, player, location);
+                player.updateInventory();
             } else {
                 player.openInventory(plugin.getMainMenu().getInventory());
             }
@@ -57,5 +66,4 @@ public class PlayerListener implements Listener {
             event.getItemDrop().remove();
         }
     }
-
 }

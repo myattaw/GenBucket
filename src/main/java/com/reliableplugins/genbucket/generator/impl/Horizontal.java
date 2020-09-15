@@ -20,7 +20,7 @@ public class Horizontal extends Generator {
 
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
-        if (!getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
+        if (getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
             player.sendMessage(ChatColor.RED + "You cannot use a GenBucket here!");
             data.setIndex(getMaxBlocks());
             return;
@@ -49,7 +49,7 @@ public class Horizontal extends Generator {
         World world = getPlugin().getServer().getWorld(data.getWorld());
         Block block = world.getBlockAt(data.getX() + data.getIndex() * data.getBlockFace().getModX(), data.getY(), data.getZ() + data.getIndex() * data.getBlockFace().getModZ());
 
-        if (!getPlugin().getHookManager().getBuildChecks().canBuild(data.getPlayer(), block.getLocation())) {
+        if (getPlugin().getHookManager().getBuildChecks().canBuild(data.getPlayer(), block.getLocation())) {
             data.setIndex(getMaxBlocks());
             return;
         }
