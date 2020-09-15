@@ -1,9 +1,7 @@
 name: GenBuckets
 main: com.reliableplugins.genbucket.GenBucket
 version: ${project.version}
-authors:
-  - Rages
-  - Driftay
+authors: [Rages, Driftay]
 softdepend:
   - Factions
   - WorldGuard
