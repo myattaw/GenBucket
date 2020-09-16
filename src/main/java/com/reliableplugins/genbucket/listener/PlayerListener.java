@@ -1,8 +1,10 @@
 package com.reliableplugins.genbucket.listener;
 
+import com.massivecraft.factions.zcore.nbtapi.NBTItem;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import com.reliableplugins.genbucket.generator.data.GeneratorType;
 import com.reliableplugins.genbucket.manager.GenBucketManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

@@ -57,7 +57,13 @@ public class Vertical extends Generator {
     public void onTick(GeneratorData data) {
         // do checks here
         World world = getPlugin().getServer().getWorld(data.getWorld());
-        Block block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
+        Block block;
+
+        if (data.getY() >= getPlugin().verticalGenSwitchY) {
+            block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
+        } else {
+            block = world.getBlockAt(data.getX(), data.getY() + data.getIndex(), data.getZ());
+        }
 
         // Make a list of blocks it can pass through
         if (!validMaterials.contains(block.getType()) || block.getY() <= 0) {

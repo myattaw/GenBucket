@@ -23,7 +23,6 @@ public class BaseCommand implements CommandExecutor {
         addCommand(new CommandTest(), plugin);
         addCommand(new CommandPause(), plugin);
         plugin.getCommand("genbucket").setExecutor(this);
-
     }
 
     @Override

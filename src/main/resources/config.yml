@@ -4,6 +4,7 @@ settings:
   clear-drops: true #If Someone Drops a Genbucket Item We Remove It
   click-menu: true
   tick-speed: 5 #Speed Of Genbucket, 5 = 5 ticks = 0.25 seconds
+  vertical-switch: 60 #If a genbucket is placed at Y:60 or above, the vertical genbucket will gen downward. If below Y:60 It will gen upwards.
 
 menu-design:
   title: "&a&LGENBUCKET MENU"
