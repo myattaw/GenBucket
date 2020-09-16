@@ -27,8 +27,8 @@ import java.util.logging.Level;
 
 public class GenBucket extends JavaPlugin {
 
-    private final int tickSpeed = getConfig().getInt("settings.tick-speed");
     public final int verticalGenSwitchY = getConfig().getInt("settings.vertical-switch");
+    private final int tickSpeed = getConfig().getInt("settings.tick-speed");
     private BaseCommand baseCommand;
     private NMSHandler nmsHandler;
     private HookManager hookManager;
