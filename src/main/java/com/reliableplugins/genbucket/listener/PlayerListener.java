@@ -66,7 +66,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e){
-        if(e.getMessage().startsWith("/gb") && !e.getPlayer().isOp() && plugin.getConfig().getBoolean("settings.use-replace-command")){
+        if(e.getMessage().startsWith("/gb") || e.getMessage().startsWith("/genbucket") && !e.getPlayer().isOp() && plugin.getConfig().getBoolean("settings.use-replace-command")){
             e.setCancelled(true);
             e.getPlayer().openInventory(plugin.getMainMenu().getInventory());
         }
