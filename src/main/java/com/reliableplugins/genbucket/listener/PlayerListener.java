@@ -29,7 +29,7 @@ public class PlayerListener implements Listener {
 
         Action action = event.getAction();
 
-        if (action == Action.PHYSICAL || action == Action.RIGHT_CLICK_AIR) return;
+        if (action == Action.PHYSICAL) return;
 
         if (!plugin.getConfig().getBoolean("settings.click-menu") && (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK))
             return;
@@ -38,6 +38,9 @@ public class PlayerListener implements Listener {
         if (generatorType != null) {
             Player player = event.getPlayer();
             event.setCancelled(true);
+            if (action == Action.RIGHT_CLICK_AIR) {
+                player.updateInventory();
+            }
             if (action == Action.RIGHT_CLICK_BLOCK) {
                 if (GenBucketManager.isPaused) {
                     event.setCancelled(true);
@@ -59,6 +62,7 @@ public class PlayerListener implements Listener {
             }
         }
     }
+
 
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
