@@ -27,6 +27,7 @@ import java.util.logging.Level;
 
 public class GenBucket extends JavaPlugin {
 
+    public final int verticalGenSwitchY = getConfig().getInt("settings.vertical-switch");
     private final int tickSpeed = getConfig().getInt("settings.tick-speed");
     private BaseCommand baseCommand;
     private NMSHandler nmsHandler;
@@ -38,8 +39,9 @@ public class GenBucket extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        
         saveDefaultConfig();
+        reloadConfig();
 
         this.nmsHandler = setupNMS();
         this.baseCommand = new BaseCommand(this);
