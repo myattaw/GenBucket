@@ -39,8 +39,9 @@ public class GenBucket extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        
         saveDefaultConfig();
+        reloadConfig();
 
         this.nmsHandler = setupNMS();
         this.baseCommand = new BaseCommand(this);
