@@ -4,6 +4,7 @@ import com.reliableplugins.genbucket.command.AbstractCommand;
 import com.reliableplugins.genbucket.command.CommandBuilder;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import com.reliableplugins.genbucket.util.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -20,6 +21,12 @@ public class CommandTest extends AbstractCommand {
         Player player = (Player) sender;
 
         Location loc = player.getLocation();
+
+        if(getPlugin().worldWhitelist.contains(loc.getWorld().getName())){
+            player.sendMessage(Message.WORLD_NOT_WHITELISTED.getMessage());
+            return;
+        }
+
 
         Generator generator = getPlugin().getGeneratorMap().get("CobbleVertical");
 

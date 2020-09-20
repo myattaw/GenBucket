@@ -19,17 +19,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 
 public class GenBucket extends JavaPlugin {
 
     public final int verticalGenSwitchY = getConfig().getInt("settings.vertical-switch");
     private final int tickSpeed = getConfig().getInt("settings.tick-speed");
+    public final List<String> worldWhitelist = getConfig().getStringList("settings.test-command.whitelisted-worlds");
     private BaseCommand baseCommand;
+    public static GenBucket instance;
     private NMSHandler nmsHandler;
     private HookManager hookManager;
     private GenBucketManager genBucketManager;
@@ -39,6 +38,7 @@ public class GenBucket extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
 
         saveDefaultConfig();
         reloadConfig();
@@ -81,6 +81,10 @@ public class GenBucket extends JavaPlugin {
             default:
                 return null;
         }
+    }
+
+    public static GenBucket getInstance() {
+        return instance;
     }
 
     public BaseCommand getBaseCommand() {

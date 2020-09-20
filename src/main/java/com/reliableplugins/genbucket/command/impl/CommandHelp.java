@@ -16,12 +16,6 @@ public class CommandHelp extends AbstractCommand {
 
     private BaseCommand baseCommand;
 
-    private String header = "&7&m----------&7[ &2GenBucket &a%s&7/&a%s &7]&m----------";
-
-    private String line = "&2/genbucket %s &a%s";
-
-    private String footer = "&7&oHover to view permissions";
-
     public CommandHelp(BaseCommand baseCommand) {
         this.baseCommand = baseCommand;
     }
@@ -29,7 +23,7 @@ public class CommandHelp extends AbstractCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
 
-        AbstractCommand[] commands = baseCommand.getCommands().toArray(new AbstractCommand[baseCommand.getCommands().size()]);
+        AbstractCommand[] commands = baseCommand.getCommands().toArray(new AbstractCommand[0]);
         Player player = Bukkit.getPlayer(sender.getName());
 
         int page = 0;
@@ -41,6 +35,7 @@ public class CommandHelp extends AbstractCommand {
 
         int maxPage = (int) Math.floor(commands.length / 5) + 1;
 
+        String header = "&7&m----------&7[ &2GenBucket &a%s&7/&a%s &7]&m----------";
         sender.sendMessage(Util.color(String.format(header, (page + 1), maxPage)));
 
         for (int i = (page * 5); i < (page * 5) + 5; i++) {
@@ -49,6 +44,7 @@ public class CommandHelp extends AbstractCommand {
 
             AbstractCommand command = commands[i];
 
+            String line = "&2/genbucket %s &a%s";
             TextComponent message = new TextComponent(Util.color(String.format(line, command.getLabel(), command.getDescription())));
             message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + command.getPermission()).create()));
 
@@ -59,6 +55,7 @@ public class CommandHelp extends AbstractCommand {
             }
         }
 
+        String footer = "&7&oHover to view permissions";
         sender.sendMessage(Util.color(footer));
     }
 }
