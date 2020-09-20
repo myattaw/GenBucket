@@ -28,6 +28,7 @@ public class GenBucket extends JavaPlugin {
     private final int tickSpeed = getConfig().getInt("settings.tick-speed");
     public final List<String> worldWhitelist = getConfig().getStringList("settings.test-command.whitelisted-worlds");
     private BaseCommand baseCommand;
+    public static GenBucket instance;
     private NMSHandler nmsHandler;
     private HookManager hookManager;
     private GenBucketManager genBucketManager;
@@ -37,6 +38,7 @@ public class GenBucket extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
 
         saveDefaultConfig();
         reloadConfig();
@@ -79,6 +81,10 @@ public class GenBucket extends JavaPlugin {
             default:
                 return null;
         }
+    }
+
+    public static GenBucket getInstance() {
+        return instance;
     }
 
     public BaseCommand getBaseCommand() {
