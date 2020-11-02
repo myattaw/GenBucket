@@ -5,6 +5,7 @@ authors: [Rages, Driftay]
 softdepend:
   - Factions
   - WorldGuard
+  - MassiveCore
 commands:
   genbucket:
     description: "The most optimized GenBucket plugin."

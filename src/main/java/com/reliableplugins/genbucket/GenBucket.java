@@ -12,7 +12,7 @@ import com.reliableplugins.genbucket.manager.GenBucketManager;
 import com.reliableplugins.genbucket.manager.HookManager;
 import com.reliableplugins.genbucket.menu.MainMenu;
 import com.reliableplugins.genbucket.nms.NMSHandler;
-import com.reliableplugins.genbucket.nms.nms.Version_1_8_R3;
+import com.reliableplugins.genbucket.nms.impl.*;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -74,12 +74,19 @@ public class GenBucket extends JavaPlugin {
     }
 
     public NMSHandler setupNMS() {
-        String version = getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-        switch (version) {
-            case "v1_8_R3":
-                return new Version_1_8_R3();
-            default:
-                return null;
+        switch (getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3]) {
+            case "v1_8_R3": return new Version_1_8_R3();
+            case "v1_9_R1": return new Version_1_9_R1();
+            case "v1_9_R2": return new Version_1_9_R2();
+            case "v1_10_R1": return new Version_1_10_R1();
+            case "v1_11_R1": return new Version_1_11_R1();
+            case "v1_12_R1": return new Version_1_12_R1();
+            case "v1_13_R1": return new Version_1_13_R1();
+            case "v1_13_R2": return new Version_1_13_R2();
+            case "v1_14_R1": return new Version_1_14_R1();
+            case "v1_15_R1": return new Version_1_15_R1();
+            case "v1_16_R1": return new Version_1_16_R1();
+            default: return null;
         }
     }
 

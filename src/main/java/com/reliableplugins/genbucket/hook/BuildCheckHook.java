@@ -1,7 +1,8 @@
 package com.reliableplugins.genbucket.hook;
 
 import com.reliableplugins.genbucket.GenBucket;
-import com.reliableplugins.genbucket.hook.buildcheck.FactionCheck;
+import com.reliableplugins.genbucket.hook.buildcheck.FactionMCCheck;
+import com.reliableplugins.genbucket.hook.buildcheck.FactionUUIDCheck;
 import com.reliableplugins.genbucket.hook.buildcheck.WorldGuardCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class BuildCheckHook implements PluginHook {
 
@@ -23,7 +25,20 @@ public class BuildCheckHook implements PluginHook {
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) {
-            plugins.add(new FactionCheck());
+
+            List authors = plugin.getServer().getPluginManager().getPlugin("Factions").getDescription().getAuthors();
+            if (authors.contains("drtshock")) {
+                plugins.add(new FactionUUIDCheck());
+            } else {
+                if (!Bukkit.getPluginManager().isPluginEnabled("MassiveCore")) {
+                    plugin.getLogger().log(Level.SEVERE, "=============================================");
+                    plugin.getLogger().log(Level.SEVERE, "Could not find Factions, please tell the developer to add drkshock to plugin.yml!");
+                    plugin.getLogger().log(Level.SEVERE, "This plugin will not work properly without original author credits!");
+                    plugin.getLogger().log(Level.SEVERE, "=============================================");
+                }
+                plugins.add(new FactionMCCheck());
+            }
+
         }
 
         return this;
