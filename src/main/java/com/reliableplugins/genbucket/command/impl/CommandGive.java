@@ -2,6 +2,9 @@ package com.reliableplugins.genbucket.command.impl;
 
 import com.reliableplugins.genbucket.command.AbstractCommand;
 import com.reliableplugins.genbucket.command.CommandBuilder;
+import com.reliableplugins.genbucket.generator.Generator;
+import com.reliableplugins.genbucket.util.Util;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -14,12 +17,33 @@ public class CommandGive extends AbstractCommand {
     public void execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
-        ItemStack itemStack = new ItemStack(Material.LAVA_BUCKET);
-        player.getInventory().addItem(getPlugin().getNMSHandler().setGeneratorItem(itemStack, "CobbleVertical"));
+        // [player] [type] [amount]
 
-        ItemStack itemStack2 = new ItemStack(Material.WATER_BUCKET);
-        player.getInventory().addItem(getPlugin().getNMSHandler().setGeneratorItem(itemStack2, "CobbleHorizontal"));
-        System.out.println(itemStack2.toString());
+        if (args.length < 2) {
+            player.sendMessage(ChatColor.RED + "/genbucket give [player] [type] [amount]");
+        } else {
+
+            int amount = 1;
+            try {
+                amount = Integer.parseInt(args[2]);
+            } catch (NumberFormatException e) {}
+
+            Player target = plugin.getServer().getPlayer(args[0]);
+            if (target != null) {
+                Generator generator = plugin.getGeneratorMap().get(args[1].toLowerCase());
+                if (generator != null) {
+                    ItemStack itemStack = new ItemStack(generator.getItemType(), amount);
+                    Util.setNameAndLore(itemStack, generator.getName(), generator.getLore());
+                    target.getInventory().addItem(getPlugin().getNMSHandler().setGeneratorItem(itemStack, generator.getKey()));
+                } else {
+                    player.sendMessage(String.format(ChatColor.RED + "Could not find GenBucket type '%s' ", args[1]));
+                }
+            } else {
+                player.sendMessage(String.format(ChatColor.RED + "Could not find the player '%s'", args[0]));
+            }
+
+        }
+
     }
 
 }

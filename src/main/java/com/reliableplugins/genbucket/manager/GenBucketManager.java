@@ -37,6 +37,7 @@ public class GenBucketManager {
 
             switch (GeneratorType.valueOf(config.getString(String.format("genbuckets.%s.bucket-type", section)).toUpperCase())) {
 
+
                 case VERTICAL:
                     Vertical vertical = new Vertical(plugin);
                     vertical.setKey(section);
@@ -49,7 +50,7 @@ public class GenBucketManager {
                     vertical.setSlot(config.getInt(configPath + "menu-slot"));
                     vertical.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(vertical.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(vertical.getMaxBlocks())), new AbstractMap.SimpleEntry("type", vertical.getGeneratorType().getName())));
                     vertical.setPatch(plugin.getConfig().getBoolean(configPath + "patch"));
-                    generatorMap.put(section, vertical);
+                    generatorMap.put(section.toLowerCase(), vertical);
                     break;
 
                 case HORIZONTAL:
@@ -63,7 +64,7 @@ public class GenBucketManager {
                     horizontal.setMaxBlocks(config.getInt(configPath + "bucket-size"));
                     horizontal.setSlot(config.getInt(configPath + "menu-slot"));
                     horizontal.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(horizontal.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(horizontal.getMaxBlocks())), new AbstractMap.SimpleEntry("type", horizontal.getGeneratorType().getName())));
-                    generatorMap.put(section, horizontal);
+                    generatorMap.put(section.toLowerCase(), horizontal);
                     break;
 
                 default:
