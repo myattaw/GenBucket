@@ -8,6 +8,7 @@ import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.generator.data.GeneratorType;
 import com.reliableplugins.genbucket.generator.impl.Horizontal;
 import com.reliableplugins.genbucket.generator.impl.Vertical;
+import com.reliableplugins.genbucket.util.Message;
 import com.reliableplugins.genbucket.util.Util;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -92,6 +93,12 @@ public class GenBucketManager {
         }
 
         return generatorMap;
+    }
+
+    public static void loadMessages(FileConfiguration config) {
+        for (Message message : Message.values()) {
+            message.setMessage(config.getString(String.format("messages.%s", message.getConfig())));
+        }
     }
 
 }

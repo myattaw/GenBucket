@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -23,7 +24,7 @@ public class PlayerListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onInteract(PlayerInteractEvent event) {
 
         if (event.getPlayer().getItemInHand() == null) return;
@@ -32,7 +33,9 @@ public class PlayerListener implements Listener {
 
         if (action == Action.PHYSICAL) return;
 
-        if (!plugin.getConfig().getBoolean("settings.click-menu") && (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK))
+        if (!plugin.getConfig().getBoolean("settings.click-menu")) return;
+
+        if (action == Action.LEFT_CLICK_BLOCK)
             return;
 
         String generatorType = plugin.getNMSHandler().getGeneratorType(event.getPlayer().getItemInHand());
@@ -65,13 +68,12 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent e){
-        if(e.getMessage().startsWith("/gb") || e.getMessage().startsWith("/genbucket") && !e.getPlayer().isOp() && plugin.getConfig().getBoolean("settings.use-replace-command")){
+    public void onCommand(PlayerCommandPreprocessEvent e) {
+        if (e.getMessage().startsWith("/gb") || e.getMessage().startsWith("/genbucket") && !e.getPlayer().isOp() && plugin.getConfig().getBoolean("settings.use-replace-command")) {
             e.setCancelled(true);
             e.getPlayer().openInventory(plugin.getMainMenu().getInventory());
         }
     }
-
 
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
@@ -79,4 +81,5 @@ public class PlayerListener implements Listener {
             event.getItemDrop().remove();
         }
     }
+
 }

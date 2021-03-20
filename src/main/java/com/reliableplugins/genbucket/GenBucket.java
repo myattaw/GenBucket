@@ -53,6 +53,7 @@ public class GenBucket extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
         generatorMap = GenBucketManager.loadGenBuckets(getConfig(), this);
+        GenBucketManager.loadMessages(getConfig());
 
         this.mainMenu = new MainMenu(this).init();
     }
