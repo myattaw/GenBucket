@@ -31,7 +31,7 @@ public class MainMenu extends MenuBuilder {
 
         for (Generator generator : plugin.getGeneratorMap().values()) {
             itemSlots.put(generator.getSlot(), generator);
-            getInventory().setItem(generator.getSlot(), Util.setNameAndLore(new ItemStack(generator.getMaterial()), generator.getName(), generator.getLore()));
+            getInventory().setItem(generator.getSlot(), Util.setNameAndLore(generator.getMaterial().parseItem(), generator.getName(), generator.getLore()));
         }
 
         for (int i = 0; i < getInventory().getSize(); i++) {
@@ -55,7 +55,7 @@ public class MainMenu extends MenuBuilder {
             if (plugin.getConfig().getBoolean("settings.replace-bucket")) {
                 // make player cache and cache the bucket itemstack
             } else {
-                ItemStack itemStack = Util.setNameAndLore(new ItemStack(generator.getItemType()), generator.getName(), generator.getLore());
+                ItemStack itemStack = Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore());
                 player.getInventory().addItem(plugin.getNMSHandler().setGeneratorItem(itemStack, generator.getKey()));
             }
         }

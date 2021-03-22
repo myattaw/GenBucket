@@ -31,7 +31,7 @@ public class Horizontal extends Generator {
             return;
         }
 
-        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial(), getGeneratorType());
+        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial().parseMaterial(), getGeneratorType());
         getPlugin().getServer().getPluginManager().callEvent(event);
 
         if (event.isCancelled()) {
@@ -59,7 +59,7 @@ public class Horizontal extends Generator {
             return;
         }
 
-        GenBucketGenerateEvent event = new GenBucketGenerateEvent(data.getPlayer(), getMaterial(), data.getIndex(), getGeneratorType());
+        GenBucketGenerateEvent event = new GenBucketGenerateEvent(data.getPlayer(), getMaterial().parseMaterial(), data.getIndex(), getGeneratorType());
         getPlugin().getServer().getPluginManager().callEvent(event);
 
         if (event.isCancelled()) {

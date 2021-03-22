@@ -32,7 +32,7 @@ public class CommandGive extends AbstractCommand {
             if (target != null) {
                 Generator generator = plugin.getGeneratorMap().get(args[1].toLowerCase());
                 if (generator != null) {
-                    ItemStack itemStack = new ItemStack(generator.getItemType(), amount);
+                    ItemStack itemStack = generator.getItemType().parseItem();
                     Util.setNameAndLore(itemStack, generator.getName(), generator.getLore());
                     target.getInventory().addItem(getPlugin().getNMSHandler().setGeneratorItem(itemStack, generator.getKey()));
                 } else {

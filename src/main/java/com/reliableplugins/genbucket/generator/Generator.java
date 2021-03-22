@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.generator.data.GeneratorType;
+import com.reliableplugins.genbucket.util.XMaterial;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,8 +17,8 @@ import java.util.Set;
 
 public abstract class Generator {
 
-    private Material material;
-    private Material itemType;
+    private XMaterial xMaterial;
+    private XMaterial itemType;
 
     private String key;
     private String name;
@@ -39,19 +40,19 @@ public abstract class Generator {
 
     public abstract void onTick(GeneratorData generatorData);
 
-    public Material getMaterial() {
-        return material;
+    public XMaterial getMaterial() {
+        return xMaterial;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
+    public void setMaterial(XMaterial material) {
+        this.xMaterial = material;
     }
 
-    public Material getItemType() {
+    public XMaterial getItemType() {
         return itemType;
     }
 
-    public void setItemType(Material itemType) {
+    public void setItemType(XMaterial itemType) {
         this.itemType = itemType;
     }
 

@@ -10,6 +10,7 @@ import com.reliableplugins.genbucket.generator.impl.Horizontal;
 import com.reliableplugins.genbucket.generator.impl.Vertical;
 import com.reliableplugins.genbucket.util.Message;
 import com.reliableplugins.genbucket.util.Util;
+import com.reliableplugins.genbucket.util.XMaterial;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -43,8 +44,8 @@ public class GenBucketManager {
                     Vertical vertical = new Vertical(plugin);
                     vertical.setKey(section);
                     vertical.setCost(plugin.getConfig().getInt(configPath + "bucket-cost"));
-                    vertical.setMaterial(Material.valueOf(config.getString(configPath + "material")));
-                    vertical.setItemType(Material.valueOf(config.getString(configPath + "bucket-item")));
+                    vertical.setMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
+                    vertical.setItemType(XMaterial.valueOf(config.getString(configPath + "bucket-item")));
                     vertical.setName(config.getString(configPath + "bucket-name"));
                     vertical.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     vertical.setMaxBlocks(256);
@@ -58,8 +59,8 @@ public class GenBucketManager {
                     Horizontal horizontal = new Horizontal(plugin);
                     horizontal.setKey(section);
                     horizontal.setCost(plugin.getConfig().getInt(configPath + "bucket-cost"));
-                    horizontal.setMaterial(Material.valueOf(config.getString(configPath + "material")));
-                    horizontal.setItemType(Material.valueOf(config.getString(configPath + "bucket-item")));
+                    horizontal.setMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
+                    horizontal.setItemType(XMaterial.valueOf(config.getString(configPath + "bucket-item")));
                     horizontal.setName(config.getString(configPath + "bucket-name"));
                     horizontal.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     horizontal.setMaxBlocks(config.getInt(configPath + "bucket-size"));

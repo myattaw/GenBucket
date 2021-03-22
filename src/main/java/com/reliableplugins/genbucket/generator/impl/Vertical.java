@@ -31,6 +31,7 @@ public class Vertical extends Generator {
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
 
+
         if (getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
             player.sendMessage(ChatColor.RED + "You cannot use a GenBucket here!");
             data.setIndex(getMaxBlocks());
@@ -42,7 +43,7 @@ public class Vertical extends Generator {
             return;
         }
 
-        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial(), getGeneratorType());
+        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial().parseMaterial(), getGeneratorType());
         getPlugin().getServer().getPluginManager().callEvent(event);
 
         if (event.isCancelled()) {
@@ -50,7 +51,9 @@ public class Vertical extends Generator {
             return;
         }
 
-        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
+
+
+        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
     }
 
     @Override
@@ -58,6 +61,7 @@ public class Vertical extends Generator {
         // do checks here
         World world = getPlugin().getServer().getWorld(data.getWorld());
         Block block;
+
 
         if (data.getY() >= getPlugin().verticalGenSwitchY) {
             block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
@@ -71,12 +75,12 @@ public class Vertical extends Generator {
             return;
         }
 
-        getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().getId(), (byte) 0);
+        getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial().getId(), getMaterial().getData());
     }
 
     public void setPatch(boolean patch) {
         if (patch) {
-            validMaterials.add(getMaterial());
+            validMaterials.add(getMaterial().parseMaterial());
             this.patch = true;
         }
     }
