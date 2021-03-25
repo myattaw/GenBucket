@@ -142,8 +142,16 @@
             <groupId>spigot1_16_R1</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
-            <version>spigot1_16_R1</version>
+            <version>spigot1_16_R3</version>
             <systemPath>${project.basedir}/libs/spigot1_16_R1.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>spigot1_16_R3</groupId>
+            <artifactId>spigot</artifactId>
+            <scope>system</scope>
+            <version>spigot1_16_R3</version>
+            <systemPath>${project.basedir}/libs/spigot1_16_R3.jar</systemPath>
         </dependency>
 
         <dependency>

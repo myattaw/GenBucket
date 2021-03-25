@@ -87,6 +87,7 @@ public class GenBucket extends JavaPlugin {
             case "v1_14_R1": return new Version_1_14_R1();
             case "v1_15_R1": return new Version_1_15_R1();
             case "v1_16_R1": return new Version_1_16_R1();
+            case "v1_16_R3": return new Version_1_16_R3();
             default: return null;
         }
     }
