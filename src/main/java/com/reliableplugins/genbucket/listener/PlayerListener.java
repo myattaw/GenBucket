@@ -6,12 +6,14 @@ import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.manager.GenBucketManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -38,7 +40,10 @@ public class PlayerListener implements Listener {
         if (action == Action.LEFT_CLICK_BLOCK)
             return;
 
-        String generatorType = plugin.getNMSHandler().getGeneratorType(event.getPlayer().getItemInHand());
+        if (event.hasItem() && (event.getItem().getType() == Material.LAVA_BUCKET || event.getItem().getType() == Material.WATER_BUCKET))
+            return;
+
+        String generatorType = plugin.getNMSHandler().getGeneratorType(event.getItem());
         if (generatorType != null) {
             Player player = event.getPlayer();
             event.setCancelled(true);
@@ -60,10 +65,38 @@ public class PlayerListener implements Listener {
 
                 generator.addLocation(location.getChunk(), generatorData);
                 generator.onPlace(generatorData, player, location);
+
                 player.updateInventory();
             } else {
                 player.openInventory(plugin.getMainMenu().getInventory());
             }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onBucketEmpty(PlayerBucketEmptyEvent event) {
+
+        if (event.getPlayer().getItemInHand() == null) return;
+
+        String generatorType = plugin.getNMSHandler().getGeneratorType(event.getPlayer().getItemInHand());
+        if (generatorType != null) {
+            Player player = event.getPlayer();
+            event.setCancelled(true);
+            if (GenBucketManager.isPaused) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l[!] &7Genbuckets have been temporarily disabled at this time!"));
+                return;
+            }
+
+            BlockFace blockFace = event.getBlockFace();
+            Location location = event.getBlockClicked().getRelative(blockFace).getLocation();
+
+            Generator generator = plugin.getGeneratorMap().get(generatorType);
+            GeneratorData generatorData = new GeneratorData(location.getWorld().getName(), blockFace, player, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+
+            generator.addLocation(location.getChunk(), generatorData);
+            generator.onPlace(generatorData, player, location);
+            player.updateInventory();
         }
     }
 

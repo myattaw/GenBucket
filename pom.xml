@@ -47,120 +47,120 @@
             <groupId>com.massivecraft</groupId>
             <artifactId>FactionsMassiveCraft</artifactId>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/FactionsMassiveCraft.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/FactionsMassiveCraft.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>MassiveCore</artifactId>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/MassiveCore.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/MassiveCore.jar</systemPath>
         </dependency>
 
         <!-- Spigot Jars -->
 
         <dependency>
-            <groupId>spigot1_17_R1</groupId>
+            <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
-            <version>spigot1_16_R3</version>
-            <systemPath>${project.basedir}/libs/spigot1_17_R1.jar</systemPath>
+            <version>spigot1_17_R1</version>
+            <systemPath>${pom.basedir}/libs/spigot1_17_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_8_R3</groupId>
+            <groupId>org.spigotmc.</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_8_R3</version>
-            <systemPath>${project.basedir}/libs/spigot1_8_R3.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_8_R3.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_9_R1</groupId>
+            <groupId>org.spigotmc..</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_9_R1</version>
-            <systemPath>${project.basedir}/libs/spigot1_9_R1.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_9_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_9_R2</groupId>
+            <groupId>org.spigotmc...</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_9_R2</version>
-            <systemPath>${project.basedir}/libs/spigot1_9_R2.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_9_R2.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_10_R1</groupId>
+            <groupId>org.spigotmc....</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_10_R1</version>
-            <systemPath>${project.basedir}/libs/spigot1_10_R1.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_10_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_11_R1</groupId>
+            <groupId>org.spigotmc.....</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_11_R1</version>
-            <systemPath>${project.basedir}/libs/spigot1_11_R1.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_11_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_12_R1</groupId>
+            <groupId>org.spigotmc......</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_12_R1</version>
-            <systemPath>${project.basedir}/libs/spigot1_12_R1.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_12_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_13_R1</groupId>
+            <groupId>org.spigotmc.......</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_13_R1</version>
-            <systemPath>${project.basedir}/libs/spigot1_13_R1.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_13_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_13_R2</groupId>
+            <groupId>org.spigotmc........</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_13_R2</version>
-            <systemPath>${project.basedir}/libs/spigot1_13_R2.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_13_R2.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_14_R1</groupId>
+            <groupId>org.spigotmc.........</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_14_R1</version>
-            <systemPath>${project.basedir}/libs/spigot1_14_R1.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_14_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_15_R1</groupId>
+            <groupId>org.spigotmc..........</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_15_R1</version>
-            <systemPath>${project.basedir}/libs/spigot1_15_R1.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_15_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_16_R1</groupId>
+            <groupId>org.spigotmc...........</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_16_R3</version>
-            <systemPath>${project.basedir}/libs/spigot1_16_R1.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_16_R1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>spigot1_16_R3</groupId>
+            <groupId>org.spigotmc............</groupId>
             <artifactId>spigot</artifactId>
             <scope>system</scope>
             <version>spigot1_16_R3</version>
-            <systemPath>${project.basedir}/libs/spigot1_16_R3.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/spigot1_16_R3.jar</systemPath>
         </dependency>
 
         <dependency>

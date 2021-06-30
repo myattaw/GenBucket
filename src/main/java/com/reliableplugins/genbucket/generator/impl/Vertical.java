@@ -32,13 +32,13 @@ public class Vertical extends Generator {
     public void onPlace(GeneratorData data, Player player, Location location) {
 
 
-        if (getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
+        if (getPlugin().getHookManager().getBuildChecks() != null && getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
             player.sendMessage(ChatColor.RED + "You cannot use a GenBucket here!");
             data.setIndex(getMaxBlocks());
             return;
         }
 
-        if (!getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
+        if (getPlugin().getHookManager().getVault() != null && !getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
             data.setIndex(getMaxBlocks());
             return;
         }
