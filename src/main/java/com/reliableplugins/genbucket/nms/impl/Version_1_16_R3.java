@@ -49,8 +49,4 @@ public class Version_1_16_R3 implements NMSHandler {
         return null;
     }
 
-    @Override
-    public String getVersion() {
-        return "v1_16_R1";
-    }
 }
