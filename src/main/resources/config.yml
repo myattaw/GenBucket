@@ -1,6 +1,12 @@
 settings:
   replace-bucket: false
   click-menu: true
+  #storm0chaser addons
+  default-faction-name: 'wilderness'
+
+  #No Gen in wilderness
+  allow-wilderness-gen: false
+  #end
 
   # The max amount of GenBucket iterations allowed at once
   # This will only pause the generation process and not cancel placement.
@@ -36,6 +42,9 @@ messages:
 
 genbuckets:
   CobbleVertical:
+    #Will this be able to continue through water and lava?
+    bypass-lava-water: true
+
     # Will this material be pseudo? Will it go through it's own material?
     patch: false
 
@@ -65,6 +74,7 @@ genbuckets:
       - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
 
   ObsidianPatch:
+    bypass-lava-water: true
     patch: true
     material: OBSIDIAN
     menu-slot: 13
@@ -78,6 +88,7 @@ genbuckets:
       - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
       - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
   CobbleHorizontal:
+    bypass-lava-water: false
     material: COBBLESTONE
     menu-slot: 14
     bucket-cost: 250

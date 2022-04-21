@@ -17,6 +17,8 @@ import java.util.Set;
 
 public abstract class Generator {
 
+    private boolean bypassLavaWater;
+
     private XMaterial xMaterial;
     private XMaterial itemType;
 
@@ -25,6 +27,7 @@ public abstract class Generator {
     private int slot;
     private int maxBlocks;
     private int cost;
+
 
     private Map<Chunk, Set<GeneratorData>> locations = new HashMap<>();
     private List<String> lore;
@@ -39,6 +42,14 @@ public abstract class Generator {
     public abstract void onPlace(GeneratorData data, Player player, Location location);
 
     public abstract void onTick(GeneratorData generatorData);
+
+    public boolean isBypassLavaWater() {
+        return bypassLavaWater;
+    }
+
+    public void setBypassLavaWater(boolean bypassLavaWater) {
+        this.bypassLavaWater = bypassLavaWater;
+    }
 
     public XMaterial getMaterial() {
         return xMaterial;

@@ -6,7 +6,7 @@
 
     <groupId>com.reliableplugins</groupId>
     <artifactId>GenBucket</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
 
     <build>
         <resources>
@@ -22,6 +22,8 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <!-- Disable annotation processing for ourselves. -->
+                    <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
             </plugin>
         </plugins>
@@ -32,20 +34,34 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-    </repositories>
 
+        <repository>
+            <id>enginehub-maven</id>
+            <url>https://maven.enginehub.org/repo/</url>
+        </repository>
+    </repositories>
+    <!-- IDFK lombok isn't that where they kill peoples brain to make them more simple  ohhh no thats lobotomy -->
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Factions -->
         <dependency>
             <groupId>com.github.SaberLLC</groupId>
             <artifactId>Saber-Factions</artifactId>
             <version>2.3.7-STABLE</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/libs/SaberFactions.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>FactionsMassiveCraft</artifactId>
+            <version>Latest</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/FactionsMassiveCraft.jar</systemPath>
         </dependency>
@@ -53,9 +69,12 @@
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>MassiveCore</artifactId>
+            <version>Latest</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/MassiveCore.jar</systemPath>
         </dependency>
+
+
 
         <!-- Spigot Jars -->
 
@@ -168,6 +187,7 @@
             <artifactId>worldguard-legacy</artifactId>
             <version>7.0.0-SNAPSHOT</version>
             <scope>provided</scope>
+
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>

@@ -42,6 +42,7 @@ public class GenBucketManager {
 
                 case VERTICAL:
                     Vertical vertical = new Vertical(plugin);
+                    vertical.setBypassLavaWater(plugin.getConfig().getBoolean(configPath + "bypass-lava-water"));
                     vertical.setKey(section);
                     vertical.setCost(plugin.getConfig().getInt(configPath + "bucket-cost"));
                     vertical.setMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
@@ -57,6 +58,7 @@ public class GenBucketManager {
 
                 case HORIZONTAL:
                     Horizontal horizontal = new Horizontal(plugin);
+                    horizontal.setBypassLavaWater(plugin.getConfig().getBoolean(configPath+"bypass-lava-water"));
                     horizontal.setKey(section);
                     horizontal.setCost(plugin.getConfig().getInt(configPath + "bucket-cost"));
                     horizontal.setMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
