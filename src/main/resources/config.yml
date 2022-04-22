@@ -1,12 +1,10 @@
 settings:
   replace-bucket: false
   click-menu: true
-  #storm0chaser addons
   default-faction-name: 'wilderness'
 
   #No Gen in wilderness
   allow-wilderness-gen: false
-  #end
 
   # The max amount of GenBucket iterations allowed at once
   # This will only pause the generation process and not cancel placement.
@@ -39,6 +37,8 @@ messages:
   error-no-money: "&cYou do not have enough money to place a GenBucket!"
   error-whitelist: "&cThis world is currently not whitelisted for the /gen test command!"
   error-not-player: "&cOnly players may execute this command"
+  gen-wilderness: "&c You cannot use a GenBucket in Wilderness!"
+  player-cant-gen-here: "&c You cannot use a GenBucket here!"
 
 genbuckets:
   CobbleVertical:

@@ -6,6 +6,8 @@ import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.hook.BuildCheckHook;
+import com.reliableplugins.genbucket.util.Message;
+import com.sun.jna.platform.win32.OaIdl;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -26,13 +28,13 @@ public class Horizontal extends Generator {
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
         if (getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
-            player.sendMessage(ChatColor.RED + "You cannot use a GenBucket here!");
+            player.sendMessage(Message.PLAYER_CANT_GEN_HERE.getMessage());
             data.setIndex(getMaxBlocks());
             return;
         }
 
         if(!getPlugin().getHookManager().getBuildChecks().chunkCheck(data.getPlayer(), location.getChunk(), location)){
-            player.sendMessage(ChatColor.RED + "You cannot use a GenBucket in Wilderness!");
+            player.sendMessage(Message.GEN_WILDERNESS.getMessage());
             data.setIndex(getMaxBlocks());
             return;
         }
@@ -52,9 +54,10 @@ public class Horizontal extends Generator {
             return;
         }
         Location loc = new Location(Bukkit.getWorld(data.getWorld()), data.getX(), data.getY(), data.getZ());
+
         Chunk chunk = loc.getChunk();
         currentChunk = chunk;
-        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().getId(), (byte) 0);
+        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
 
     }
 
@@ -99,7 +102,7 @@ public class Horizontal extends Generator {
             return;
         }
 
-        getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().getId(), (byte) 0);
+        getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
     }
 
 

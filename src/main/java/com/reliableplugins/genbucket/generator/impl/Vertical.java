@@ -4,6 +4,7 @@ import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import com.reliableplugins.genbucket.util.Message;
 import com.reliableplugins.genbucket.util.XMaterial;
 import org.bukkit.*;
 
@@ -29,12 +30,12 @@ public class Vertical extends Generator {
     public void onPlace(GeneratorData data, Player player, Location location) {
 
         if (getPlugin().getHookManager().getBuildChecks() != null && getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
-            player.sendMessage(ChatColor.RED + "You cannot use a GenBucket here!");
+            player.sendMessage(Message.PLAYER_CANT_GEN_HERE.getMessage());
             data.setIndex(getMaxBlocks());
             return;
         }
         if(!getPlugin().getHookManager().getBuildChecks().chunkCheck(data.getPlayer(), location.getChunk(), location)){
-            player.sendMessage(ChatColor.RED + "You cannot use a GenBucket in Wilderness!");
+            player.sendMessage(Message.GEN_WILDERNESS.getMessage());
             data.setIndex(getMaxBlocks());
             return;
         }
