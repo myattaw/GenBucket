@@ -86,15 +86,6 @@ public class Horizontal extends Generator {
             return;
         }
 
-
-
-
-
-        if (block.getType() != Material.AIR) {
-            data.setIndex(getMaxBlocks());
-            return;
-        }
-
         if (!validMaterials.contains(block.getType().name())) {
             data.setIndex(getMaxBlocks());
             return;
