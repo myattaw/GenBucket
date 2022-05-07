@@ -1,6 +1,10 @@
 settings:
   replace-bucket: false
   click-menu: true
+  default-faction-name: 'wilderness'
+
+  #No Gen in wilderness
+  allow-wilderness-gen: false
 
   # The max amount of GenBucket iterations allowed at once
   # This will only pause the generation process and not cancel placement.
@@ -33,9 +37,14 @@ messages:
   error-no-money: "&cYou do not have enough money to place a GenBucket!"
   error-whitelist: "&cThis world is currently not whitelisted for the /gen test command!"
   error-not-player: "&cOnly players may execute this command"
+  gen-wilderness: "&c You cannot use a GenBucket in Wilderness!"
+  player-cant-gen-here: "&c You cannot use a GenBucket here!"
 
 genbuckets:
   CobbleVertical:
+    #Will this be able to continue through water and lava?
+    bypass-lava-water: true
+
     # Will this material be pseudo? Will it go through it's own material?
     patch: false
 
@@ -65,6 +74,7 @@ genbuckets:
       - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
 
   ObsidianPatch:
+    bypass-lava-water: true
     patch: true
     material: OBSIDIAN
     menu-slot: 13
@@ -78,6 +88,7 @@ genbuckets:
       - "&2&l\u27A5 &a&lBUCKET TYPE: &7[TYPE]"
       - "&2&l\u27A5 &a&lBUCKET COST: &7$[COST]"
   CobbleHorizontal:
+    bypass-lava-water: false
     material: COBBLESTONE
     menu-slot: 14
     bucket-cost: 250

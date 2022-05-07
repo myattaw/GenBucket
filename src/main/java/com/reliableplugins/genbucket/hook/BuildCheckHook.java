@@ -1,10 +1,17 @@
 package com.reliableplugins.genbucket.hook;
 
+import com.massivecraft.factions.FLocation;
+import com.massivecraft.factions.entity.Board;
+import com.massivecraft.factions.entity.BoardColl;
+import com.massivecraft.factions.entity.Faction;
+import com.massivecraft.factions.entity.MPlayer;
+import com.massivecraft.massivecore.ps.PS;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.hook.buildcheck.FactionMCCheck;
 import com.reliableplugins.genbucket.hook.buildcheck.FactionUUIDCheck;
 import com.reliableplugins.genbucket.hook.buildcheck.WorldGuardCheck;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
@@ -42,6 +49,16 @@ public class BuildCheckHook implements PluginHook {
         }
 
         return this;
+    }
+
+    public boolean chunkCheck(Player player, Chunk chunk, Location location){
+        for (BuildCheckHook check : plugins) {
+            if (check.chunkCheck(player, chunk, location)) {
+                return true;
+            }
+        }
+        return false;
+
     }
 
     public boolean canBuild(Player player, Location location) {

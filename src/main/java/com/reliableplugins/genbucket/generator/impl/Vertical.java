@@ -4,10 +4,10 @@ import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import com.reliableplugins.genbucket.util.Message;
+import com.reliableplugins.genbucket.util.XMaterial;
+import org.bukkit.*;
+
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -17,26 +17,29 @@ import java.util.Set;
 public class Vertical extends Generator {
 
     private boolean patch = false;
-    private Set<Material> validMaterials = new HashSet<>();
+    private boolean bypassLavaWater = false;
+    private Set<String> validMaterials = new HashSet<>();
+    private Chunk currentChunk;
 
     public Vertical(GenBucket plugin) {
         super(plugin);
-        validMaterials.add(Material.AIR);
-        validMaterials.add(Material.WATER);
-        validMaterials.add(Material.STATIONARY_WATER);
-        validMaterials.add(Material.LAVA);
-        validMaterials.add(Material.STATIONARY_LAVA);
+        validMaterials.add("AIR");
     }
 
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
 
-
         if (getPlugin().getHookManager().getBuildChecks() != null && getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
-            player.sendMessage(ChatColor.RED + "You cannot use a GenBucket here!");
+            player.sendMessage(Message.PLAYER_CANT_GEN_HERE.getMessage());
             data.setIndex(getMaxBlocks());
             return;
         }
+        if(!getPlugin().getHookManager().getBuildChecks().chunkCheck(data.getPlayer(), location.getChunk(), location)){
+            player.sendMessage(Message.GEN_WILDERNESS.getMessage());
+            data.setIndex(getMaxBlocks());
+            return;
+        }
+
 
         if (getPlugin().getHookManager().getVault() != null && !getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
             data.setIndex(getMaxBlocks());
@@ -50,6 +53,9 @@ public class Vertical extends Generator {
             data.setIndex(getMaxBlocks());
             return;
         }
+        Location loc = new Location(Bukkit.getWorld(data.getWorld()), data.getX(), data.getY(), data.getZ());
+        Chunk chunk = loc.getChunk();
+        currentChunk = chunk;
 
 
 
@@ -70,7 +76,7 @@ public class Vertical extends Generator {
         }
 
         // Make a list of blocks it can pass through
-        if (!validMaterials.contains(block.getType()) || block.getY() <= 0) {
+        if (!validMaterials.contains(block.getType().name()) || block.getY() <= 0) {
             data.setIndex(getMaxBlocks());
             return;
         }
@@ -80,9 +86,20 @@ public class Vertical extends Generator {
 
     public void setPatch(boolean patch) {
         if (patch) {
-            validMaterials.add(getMaterial().parseMaterial());
+            validMaterials.add(getMaterial().parseMaterial().name());
             this.patch = true;
         }
+    }
+
+    public void setBypassLavaWater(boolean bypass){
+        if(bypass){
+            validMaterials.add("WATER");
+            validMaterials.add("LAVA");
+            validMaterials.add("STATIONARY_WATER");
+            validMaterials.add("STATIONARY_LAVA");
+            this.bypassLavaWater = true;
+        }
+
     }
 
 

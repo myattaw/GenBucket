@@ -31,7 +31,10 @@ public class MainMenu extends MenuBuilder {
 
         for (Generator generator : plugin.getGeneratorMap().values()) {
             itemSlots.put(generator.getSlot(), generator);
-            getInventory().setItem(generator.getSlot(), Util.setNameAndLore(generator.getMaterial().parseItem(), generator.getName(), generator.getLore()));
+
+
+
+            getInventory().setItem(generator.getSlot(), Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore()));
         }
 
         for (int i = 0; i < getInventory().getSize(); i++) {
