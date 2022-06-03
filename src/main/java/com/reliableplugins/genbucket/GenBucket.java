@@ -26,6 +26,8 @@ public class GenBucket extends JavaPlugin {
 
     public final int verticalGenSwitchY = getConfig().getInt("settings.vertical-switch");
     private final int tickSpeed = getConfig().getInt("settings.tick-speed");
+    private final int minimumHeight = getConfig().getInt("settings.minimum-height");
+
     public final List<String> worldWhitelist = getConfig().getStringList("settings.test-command.whitelisted-worlds");
     private BaseCommand baseCommand;
     public static GenBucket instance;
@@ -43,7 +45,10 @@ public class GenBucket extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
 
-        this.nmsHandler = setupNMS();
+        if (getConfig().getBoolean("settings.optimize-block-place")) {
+            this.nmsHandler = setupNMS();
+        }
+
         this.baseCommand = new BaseCommand(this);
         this.hookManager = new HookManager(this);
         this.genBucketManager = new GenBucketManager();
@@ -90,6 +95,10 @@ public class GenBucket extends JavaPlugin {
             case "v1_16_R3": return new Version_1_16_R3();
             default: return new UnknownVersion();
         }
+    }
+
+    public int getMinimumHeight() {
+        return minimumHeight;
     }
 
     public static GenBucket getInstance() {

@@ -21,7 +21,7 @@ public class VaultHook implements PluginHook {
     }
 
     public boolean canAfford(Player player, int cost) {
-        if (economy.withdrawPlayer(player, cost).transactionSuccess()) {
+        if (economy.withdrawPlayer(player, cost).transactionSuccess() && economy.has(player, cost)) {
             return true;
         }
         player.sendMessage(Message.NOT_ENOUGH_MONEY.getMessage());

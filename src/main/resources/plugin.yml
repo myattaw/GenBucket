@@ -2,6 +2,7 @@ name: GenBuckets
 main: com.reliableplugins.genbucket.GenBucket
 version: ${project.version}
 authors: [Rages, Driftay]
+api-version: 1.13
 softdepend:
   - Factions
   - WorldGuard

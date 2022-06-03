@@ -11,7 +11,7 @@ import com.reliableplugins.genbucket.generator.impl.Vertical;
 import com.reliableplugins.genbucket.util.Message;
 import com.reliableplugins.genbucket.util.Util;
 import com.reliableplugins.genbucket.util.XMaterial;
-import org.bukkit.Material;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -30,12 +30,14 @@ public class GenBucketManager {
 
     public static boolean isPaused = false;
     private static Map<String, Generator> generatorMap = new HashMap<>();
+    private static Map<String, Generator> generatorItemMap = new HashMap<>();
 
     public static Map<String, Generator> loadGenBuckets(FileConfiguration config, GenBucket plugin) {
 
         for (String section : config.getConfigurationSection("genbuckets").getKeys(false)) {
 
             String configPath = String.format("genbuckets.%s.", section);
+
 
             switch (GeneratorType.valueOf(config.getString(String.format("genbuckets.%s.bucket-type", section)).toUpperCase())) {
 
@@ -54,11 +56,12 @@ public class GenBucketManager {
                     vertical.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(vertical.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(vertical.getMaxBlocks())), new AbstractMap.SimpleEntry("type", vertical.getGeneratorType().getName())));
                     vertical.setPatch(plugin.getConfig().getBoolean(configPath + "patch"));
                     generatorMap.put(section.toLowerCase(), vertical);
+                    generatorItemMap.put(Util.color(config.getString(configPath + "bucket-name")), vertical);
                     break;
 
                 case HORIZONTAL:
                     Horizontal horizontal = new Horizontal(plugin);
-                    horizontal.setBypassLavaWater(plugin.getConfig().getBoolean(configPath+"bypass-lava-water"));
+                    horizontal.setBypassLavaWater(plugin.getConfig().getBoolean(configPath + "bypass-lava-water"));
                     horizontal.setKey(section);
                     horizontal.setCost(plugin.getConfig().getInt(configPath + "bucket-cost"));
                     horizontal.setMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
@@ -69,6 +72,7 @@ public class GenBucketManager {
                     horizontal.setSlot(config.getInt(configPath + "menu-slot"));
                     horizontal.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(horizontal.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(horizontal.getMaxBlocks())), new AbstractMap.SimpleEntry("type", horizontal.getGeneratorType().getName())));
                     generatorMap.put(section.toLowerCase(), horizontal);
+                    generatorItemMap.put(Util.color(config.getString(configPath + "bucket-name")), horizontal);
                     break;
 
                 default:
@@ -102,6 +106,10 @@ public class GenBucketManager {
         for (Message message : Message.values()) {
             message.setMessage(config.getString(String.format("messages.%s", message.getConfig())));
         }
+    }
+
+    public static Generator getGeneratorByItemName(String itemName) {
+        return generatorItemMap.get(itemName);
     }
 
 }

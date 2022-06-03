@@ -24,7 +24,7 @@ public class FactionMCCheck extends BuildCheckHook {
     }
 
     @Override
-    public boolean chunkCheck(Player player, Chunk chunk, Location location) {
+    public boolean cannotBuildInChunk(Player player, Chunk chunk, Location location) {
         Faction otherFaction = BoardColl.get().getFactionAt(PS.valueOf(chunk));
         MPlayer me = MPlayer.get(player);
         Faction myFaction = me.getFaction();

@@ -34,7 +34,6 @@ public class CommandGive extends AbstractCommand {
                 if (generator != null) {
                     ItemStack itemStack = generator.getItemType().parseItem();
                     Util.setNameAndLore(itemStack, generator.getName(), generator.getLore());
-                    target.getInventory().addItem(getPlugin().getNMSHandler().setGeneratorItem(itemStack, generator.getKey()));
                 } else {
                     player.sendMessage(String.format(ChatColor.RED + "Could not find GenBucket type '%s' ", args[1]));
                 }

@@ -33,7 +33,6 @@ public class MainMenu extends MenuBuilder {
             itemSlots.put(generator.getSlot(), generator);
 
 
-
             getInventory().setItem(generator.getSlot(), Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore()));
         }
 
@@ -55,12 +54,8 @@ public class MainMenu extends MenuBuilder {
         if (itemSlots.containsKey(event.getSlot())) {
             Player player = (Player) event.getWhoClicked();
             Generator generator = itemSlots.get(event.getSlot());
-            if (plugin.getConfig().getBoolean("settings.replace-bucket")) {
-                // make player cache and cache the bucket itemstack
-            } else {
-                ItemStack itemStack = Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore());
-                player.getInventory().addItem(plugin.getNMSHandler().setGeneratorItem(itemStack, generator.getKey()));
-            }
+            ItemStack itemStack = Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore());
+            player.getInventory().addItem(itemStack);
         }
     }
 

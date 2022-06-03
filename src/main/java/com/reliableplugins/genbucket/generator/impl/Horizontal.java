@@ -5,9 +5,7 @@ import com.reliableplugins.genbucket.api.GenBucketGenerateEvent;
 import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
-import com.reliableplugins.genbucket.hook.BuildCheckHook;
 import com.reliableplugins.genbucket.util.Message;
-import com.sun.jna.platform.win32.OaIdl;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -33,12 +31,11 @@ public class Horizontal extends Generator {
             return;
         }
 
-        if(!getPlugin().getHookManager().getBuildChecks().chunkCheck(data.getPlayer(), location.getChunk(), location)){
+        if(getPlugin().getHookManager().getBuildChecks().cannotBuildInChunk(data.getPlayer(), location.getChunk(), location)){
             player.sendMessage(Message.GEN_WILDERNESS.getMessage());
             data.setIndex(getMaxBlocks());
             return;
         }
-
 
 
         if (!getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
@@ -57,7 +54,13 @@ public class Horizontal extends Generator {
 
         Chunk chunk = loc.getChunk();
         currentChunk = chunk;
-        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
+
+
+        if (getPlugin().getNMSHandler() != null) {
+            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
+        } else {
+            location.getBlock().setType(getMaterial().parseMaterial());
+        }
 
     }
 
@@ -75,11 +78,10 @@ public class Horizontal extends Generator {
         if(!currentChunk.equals(chunk)){
             //check if we can build in this chunk
             currentChunk = chunk;
-           if(!getPlugin().getHookManager().getBuildChecks().chunkCheck(data.getPlayer(), currentChunk, loc)){
+           if(getPlugin().getHookManager().getBuildChecks().cannotBuildInChunk(data.getPlayer(), currentChunk, loc)){
                data.setIndex(getMaxBlocks());
                return;
            }
-
 
         }
 
@@ -102,7 +104,12 @@ public class Horizontal extends Generator {
             return;
         }
 
-        getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
+
+        if (getPlugin().getNMSHandler() != null) {
+            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
+        } else {
+            block.setType(getMaterial().parseMaterial());
+        }
     }
 
 

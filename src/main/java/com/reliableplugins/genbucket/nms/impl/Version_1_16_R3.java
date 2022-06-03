@@ -4,12 +4,9 @@ import com.reliableplugins.genbucket.nms.NMSHandler;
 import net.minecraft.server.v1_16_R3.BlockPosition;
 import net.minecraft.server.v1_16_R3.Chunk;
 import net.minecraft.server.v1_16_R3.IBlockData;
-import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_16_R3.util.CraftMagicNumbers;
-import org.bukkit.inventory.ItemStack;
 
 public class Version_1_16_R3 implements NMSHandler {
 
@@ -22,31 +19,6 @@ public class Version_1_16_R3 implements NMSHandler {
         IBlockData ibd = CraftMagicNumbers.getBlock(org.bukkit.Material.values()[id], data);
         w.setTypeAndData(bp, ibd, 3);
         chunk.setType(bp, ibd, false);
-    }
-
-    @Override
-    public ItemStack setGeneratorItem(ItemStack itemStack, String type) {
-        net.minecraft.server.v1_16_R3.ItemStack nms = CraftItemStack.asNMSCopy(itemStack);
-        if (nms.getTag() == null) {
-            nms.setTag(new NBTTagCompound());
-        }
-
-        //Hook Plugins Can Check If The Item Has NBTTag: GENBUCKET
-        nms.getTag().setString("GENBUCKET", "GENBUCKET");
-        nms.getTag().setString(key, type.toLowerCase());
-        return CraftItemStack.asBukkitCopy(nms);
-    }
-
-    @Override
-    public String getGeneratorType(ItemStack itemStack) {
-        net.minecraft.server.v1_16_R3.ItemStack nms = CraftItemStack.asNMSCopy(itemStack);
-
-        if (nms == null) return null;
-
-        if (nms.getTag() != null && nms.getTag().hasKey(key)) {
-            return nms.getTag().getString(key).toLowerCase();
-        }
-        return null;
     }
 
 }

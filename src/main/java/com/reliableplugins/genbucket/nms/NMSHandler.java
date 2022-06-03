@@ -9,8 +9,4 @@ public interface NMSHandler {
 
     void setBlock(World world, int x, int y, int z, int id, byte data);
 
-    String getGeneratorType(ItemStack itemStack);
-
-    ItemStack setGeneratorItem(ItemStack itemStack, String type);
-
 }

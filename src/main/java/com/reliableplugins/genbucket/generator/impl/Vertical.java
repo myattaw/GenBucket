@@ -5,7 +5,6 @@ import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.util.Message;
-import com.reliableplugins.genbucket.util.XMaterial;
 import org.bukkit.*;
 
 import org.bukkit.block.Block;
@@ -34,7 +33,8 @@ public class Vertical extends Generator {
             data.setIndex(getMaxBlocks());
             return;
         }
-        if(!getPlugin().getHookManager().getBuildChecks().chunkCheck(data.getPlayer(), location.getChunk(), location)){
+
+        if(getPlugin().getHookManager().getBuildChecks().cannotBuildInChunk(data.getPlayer(), location.getChunk(), location)){
             player.sendMessage(Message.GEN_WILDERNESS.getMessage());
             data.setIndex(getMaxBlocks());
             return;
@@ -57,9 +57,11 @@ public class Vertical extends Generator {
         Chunk chunk = loc.getChunk();
         currentChunk = chunk;
 
-
-
-        getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
+        if (getPlugin().getNMSHandler() != null) {
+            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial().getId(), getMaterial().getData());
+        } else {
+            location.getBlock().setType(getMaterial().parseMaterial());
+        }
     }
 
     @Override
@@ -68,7 +70,6 @@ public class Vertical extends Generator {
         World world = getPlugin().getServer().getWorld(data.getWorld());
         Block block;
 
-
         if (data.getY() >= getPlugin().verticalGenSwitchY) {
             block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
         } else {
@@ -76,12 +77,16 @@ public class Vertical extends Generator {
         }
 
         // Make a list of blocks it can pass through
-        if (!validMaterials.contains(block.getType().name()) || block.getY() <= 0) {
+        if (!validMaterials.contains(block.getType().name()) || block.getY() <= getPlugin().getMinimumHeight()) {
             data.setIndex(getMaxBlocks());
             return;
         }
 
-        getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial().getId(), getMaterial().getData());
+        if (getPlugin().getNMSHandler() != null) {
+            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial().getId(), getMaterial().getData());
+        } else {
+            block.setType(getMaterial().parseMaterial());
+        }
     }
 
     public void setPatch(boolean patch) {

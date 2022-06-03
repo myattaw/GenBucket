@@ -23,29 +23,4 @@ public class Version_1_12_R1 implements NMSHandler {
         chunk.a(bp, ibd);
     }
 
-    @Override
-    public ItemStack setGeneratorItem(ItemStack itemStack, String type) {
-        net.minecraft.server.v1_12_R1.ItemStack nms = CraftItemStack.asNMSCopy(itemStack);
-        if (nms.getTag() == null) {
-            nms.setTag(new NBTTagCompound());
-        }
-
-        //Hook Plugins Can Check If The Item Has NBTTag: GENBUCKET
-        nms.getTag().setString("GENBUCKET", "GENBUCKET");
-        nms.getTag().setString(key, type.toLowerCase());
-        return CraftItemStack.asBukkitCopy(nms);
-    }
-
-    @Override
-    public String getGeneratorType(ItemStack itemStack) {
-        net.minecraft.server.v1_12_R1.ItemStack nms = CraftItemStack.asNMSCopy(itemStack);
-
-        if (nms == null) return null;
-
-        if (nms.getTag() != null && nms.getTag().hasKey(key)) {
-            return nms.getTag().getString(key).toLowerCase();
-        }
-        return null;
-    }
-
 }

@@ -19,7 +19,7 @@ public class FactionUUIDCheck extends BuildCheckHook {
 
 
     @Override
-    public boolean chunkCheck(Player player, Chunk chunk, Location location) {
+    public boolean cannotBuildInChunk(Player player, Chunk chunk, Location location) {
 
         FLocation loc = new FLocation(location);
         Faction otherFaction = Board.getInstance().getFactionAt(loc);
