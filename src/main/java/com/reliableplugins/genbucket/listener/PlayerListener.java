@@ -34,13 +34,13 @@ public class PlayerListener implements Listener {
         Action action = event.getAction();
         Player player = event.getPlayer();
 
-        if (plugin.getConfig().getBoolean("settings.click-menu") && (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK)) {
-            player.openInventory(plugin.getMainMenu().getInventory());
-        }
-
         Generator generator = GenBucketManager.getGeneratorByItemName(event.getItem().getItemMeta().getDisplayName());
 
-        if (generator != null && !event.isCancelled()) {
+        if (generator != null) {
+
+            if (plugin.getConfig().getBoolean("settings.click-menu") && (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK)) {
+                player.openInventory(plugin.getMainMenu().getInventory());
+            }
 
             if (action == Action.RIGHT_CLICK_BLOCK) {
 
