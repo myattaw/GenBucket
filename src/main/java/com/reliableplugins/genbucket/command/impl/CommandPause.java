@@ -20,4 +20,5 @@ public class CommandPause extends AbstractCommand {
         GenBucketManager.isPaused = !GenBucketManager.isPaused;
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l[GENBUCKET] &7You have {action} &7genbucket iterations!").replace("{action}", GenBucketManager.isPaused ? Util.color("&c&lPAUSED") : Util.color("&a&lUNPAUSED")));
     }
+
 }

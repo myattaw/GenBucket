@@ -22,8 +22,13 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <!-- Disable annotation processing for ourselves. -->
-                    <compilerArgument>-proc:none</compilerArgument>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.24</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
@@ -43,8 +48,16 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
     </repositories>
-    <!-- IDFK lombok isn't that where they kill peoples brain to make them more simple  ohhh no thats lobotomy -->
+
     <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

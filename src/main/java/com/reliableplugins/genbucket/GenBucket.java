@@ -14,6 +14,7 @@ import com.reliableplugins.genbucket.menu.MainMenu;
 import com.reliableplugins.genbucket.nms.NMSHandler;
 import com.reliableplugins.genbucket.nms.impl.*;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
+import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -26,16 +27,23 @@ public class GenBucket extends JavaPlugin {
 
     public final int verticalGenSwitchY = getConfig().getInt("settings.vertical-switch");
     private final int tickSpeed = getConfig().getInt("settings.tick-speed");
+    @Getter
     private final int minimumHeight = getConfig().getInt("settings.minimum-height");
 
     public final List<String> worldWhitelist = getConfig().getStringList("settings.test-command.whitelisted-worlds");
+    @Getter
     private BaseCommand baseCommand;
+    @Getter
     public static GenBucket instance;
     private NMSHandler nmsHandler;
+    @Getter
     private HookManager hookManager;
+    @Getter
     private GenBucketManager genBucketManager;
     private Gson gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
+    @Getter
     private Map<String, Generator> generatorMap = new HashMap<>();
+    @Getter
     private MainMenu mainMenu;
 
     @Override
@@ -94,34 +102,6 @@ public class GenBucket extends JavaPlugin {
 //            case "v1_20_R1": return new Version_1_16_R3();
             default: return new UnknownVersion();
         }
-    }
-
-    public int getMinimumHeight() {
-        return minimumHeight;
-    }
-
-    public static GenBucket getInstance() {
-        return instance;
-    }
-
-    public BaseCommand getBaseCommand() {
-        return baseCommand;
-    }
-
-    public GenBucketManager getGenBucketManager() {
-        return genBucketManager;
-    }
-
-    public MainMenu getMainMenu() {
-        return mainMenu;
-    }
-
-    public Map<String, Generator> getGeneratorMap() {
-        return generatorMap;
-    }
-
-    public HookManager getHookManager() {
-        return hookManager;
     }
 
     public NMSHandler getNMSHandler() {

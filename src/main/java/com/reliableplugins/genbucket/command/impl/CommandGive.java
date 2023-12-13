@@ -25,15 +25,17 @@ public class CommandGive extends AbstractCommand {
 
             int amount = 1;
             try {
-                amount = Integer.parseInt(args[2]);
+                if (args.length > 3) {
+                    amount = Integer.parseInt(args[2]);
+                }
             } catch (NumberFormatException e) {}
 
             Player target = plugin.getServer().getPlayer(args[0]);
             if (target != null) {
                 Generator generator = plugin.getGeneratorMap().get(args[1].toLowerCase());
                 if (generator != null) {
-                    ItemStack itemStack = generator.getItemType().parseItem();
-                    Util.setNameAndLore(itemStack, generator.getName(), generator.getLore());
+                    ItemStack itemStack = Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore());
+                    player.getInventory().addItem(itemStack);
                 } else {
                     player.sendMessage(String.format(ChatColor.RED + "Could not find GenBucket type '%s' ", args[1]));
                 }

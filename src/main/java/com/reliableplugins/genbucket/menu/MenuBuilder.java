@@ -19,11 +19,6 @@ public abstract class MenuBuilder<T> implements InventoryHolder {
         this.inventory = Bukkit.createInventory(this, 9 * rows, getTitle());
     }
 
-    public MenuBuilder(String title) {
-        this.title = title;
-        this.inventory = Bukkit.createInventory(this, InventoryType.HOPPER, getTitle());
-    }
-
     public String getTitle() {
         return ChatColor.translateAlternateColorCodes('&', title);
     }

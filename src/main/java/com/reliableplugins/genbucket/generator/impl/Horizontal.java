@@ -25,6 +25,7 @@ public class Horizontal extends Generator {
 
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
+
         if (getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
             player.sendMessage(Message.PLAYER_CANT_GEN_HERE.getMessage());
             data.setIndex(getMaxBlocks());
