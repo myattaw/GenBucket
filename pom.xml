@@ -34,10 +34,13 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-
         <repository>
             <id>enginehub-maven</id>
             <url>https://maven.enginehub.org/repo/</url>
+        </repository>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
     </repositories>
     <!-- IDFK lombok isn't that where they kill peoples brain to make them more simple  ohhh no thats lobotomy -->
@@ -58,128 +61,12 @@
             <systemPath>${pom.basedir}/libs/SaberFactions.jar</systemPath>
         </dependency>
 
-        <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>FactionsMassiveCraft</artifactId>
-            <version>Latest</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/libs/FactionsMassiveCraft.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>MassiveCore</artifactId>
-            <version>Latest</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/libs/MassiveCore.jar</systemPath>
-        </dependency>
-
-
-
         <!-- Spigot Jars -->
-
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_17_R1</version>
-            <systemPath>${pom.basedir}/libs/spigot1_17_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc.</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_8_R3</version>
-            <systemPath>${pom.basedir}/libs/spigot1_8_R3.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc..</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_9_R1</version>
-            <systemPath>${pom.basedir}/libs/spigot1_9_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc...</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_9_R2</version>
-            <systemPath>${pom.basedir}/libs/spigot1_9_R2.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc....</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_10_R1</version>
-            <systemPath>${pom.basedir}/libs/spigot1_10_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc.....</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_11_R1</version>
-            <systemPath>${pom.basedir}/libs/spigot1_11_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc......</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_12_R1</version>
-            <systemPath>${pom.basedir}/libs/spigot1_12_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc.......</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_13_R1</version>
-            <systemPath>${pom.basedir}/libs/spigot1_13_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc........</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_13_R2</version>
-            <systemPath>${pom.basedir}/libs/spigot1_13_R2.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc.........</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_14_R1</version>
-            <systemPath>${pom.basedir}/libs/spigot1_14_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc..........</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_15_R1</version>
-            <systemPath>${pom.basedir}/libs/spigot1_15_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc...........</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_16_R3</version>
-            <systemPath>${pom.basedir}/libs/spigot1_16_R1.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc............</groupId>
-            <artifactId>spigot</artifactId>
-            <scope>system</scope>
-            <version>spigot1_16_R3</version>
-            <systemPath>${pom.basedir}/libs/spigot1_16_R3.jar</systemPath>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

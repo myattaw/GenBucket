@@ -57,7 +57,7 @@ public class Horizontal extends Generator {
 
 
         if (getPlugin().getNMSHandler() != null) {
-            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
+            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial(),  getMaterial().getData());
         } else {
             location.getBlock().setType(getMaterial().parseMaterial());
         }
@@ -106,7 +106,7 @@ public class Horizontal extends Generator {
 
 
         if (getPlugin().getNMSHandler() != null) {
-            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial().getId(),  getMaterial().getData());
+            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial(),  getMaterial().getData());
         } else {
             block.setType(getMaterial().parseMaterial());
         }

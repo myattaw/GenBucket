@@ -1,7 +1,6 @@
 package com.reliableplugins.genbucket.hook;
 
 import com.reliableplugins.genbucket.GenBucket;
-import com.reliableplugins.genbucket.hook.buildcheck.FactionMCCheck;
 import com.reliableplugins.genbucket.hook.buildcheck.FactionUUIDCheck;
 import com.reliableplugins.genbucket.hook.buildcheck.WorldGuardCheck;
 import org.bukkit.Bukkit;
@@ -37,7 +36,7 @@ public class BuildCheckHook implements PluginHook {
                     plugin.getLogger().log(Level.SEVERE, "This plugin will not work properly without original author credits!");
                     plugin.getLogger().log(Level.SEVERE, "=============================================");
                 }
-                plugins.add(new FactionMCCheck());
+//                plugins.add(new FactionMCCheck());
             }
 
         }

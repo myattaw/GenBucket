@@ -91,6 +91,5 @@ public class PlayerListener implements Listener {
             if (GenBucketManager.getGeneratorByItemName(itemStack.getItemMeta().getDisplayName()) != null)
                 event.setCancelled(true);
         }
-
     }
 }
