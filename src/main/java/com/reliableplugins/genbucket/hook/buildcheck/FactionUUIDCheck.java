@@ -17,37 +17,4 @@ public class FactionUUIDCheck extends BuildCheckHook {
         return !FactionsBlockListener.playerCanBuildDestroyBlock(player, location, "build", true);
     }
 
-
-    @Override
-    public boolean cannotBuildInChunk(Player player, Chunk chunk, Location location) {
-
-        FLocation loc = new FLocation(location);
-        Faction otherFaction = Board.getInstance().getFactionAt(loc);
-        FPlayer me = FPlayers.getInstance().getById(player.getUniqueId().toString());
-        Faction myFaction = me.getFaction();
-
-
-
-
-
-//check to see if the faction genning is the same faction the player is in
-        if(myFaction.getId().equals(otherFaction.getId())){
-            if(!GenBucket.getInstance().getConfig().getBoolean("allow-wilderness-gen")){
-                if(myFaction.isWilderness()){
-                    return false;
-                }
-            }
-
-            return true;
-        }else{
-            //check to see if the faction is genning in wilderness
-            if(!GenBucket.getInstance().getConfig().getBoolean("allow-wilderness-gen")){
-
-                return !otherFaction.isWilderness();
-            }
-        }
-
-
-        return false;
-    }
 }

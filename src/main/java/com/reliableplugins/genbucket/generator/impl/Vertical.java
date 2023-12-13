@@ -34,13 +34,6 @@ public class Vertical extends Generator {
             return;
         }
 
-        if(getPlugin().getHookManager().getBuildChecks().cannotBuildInChunk(data.getPlayer(), location.getChunk(), location)){
-            player.sendMessage(Message.GEN_WILDERNESS.getMessage());
-            data.setIndex(getMaxBlocks());
-            return;
-        }
-
-
         if (getPlugin().getHookManager().getVault() != null && !getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
             data.setIndex(getMaxBlocks());
             return;

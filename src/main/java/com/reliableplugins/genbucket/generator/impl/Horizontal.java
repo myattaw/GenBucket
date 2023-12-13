@@ -32,13 +32,6 @@ public class Horizontal extends Generator {
             return;
         }
 
-        if(getPlugin().getHookManager().getBuildChecks().cannotBuildInChunk(data.getPlayer(), location.getChunk(), location)){
-            player.sendMessage(Message.GEN_WILDERNESS.getMessage());
-            data.setIndex(getMaxBlocks());
-            return;
-        }
-
-
         if (!getPlugin().getHookManager().getVault().canAfford(player, getCost())) {
             data.setIndex(getMaxBlocks());
             return;
@@ -79,11 +72,6 @@ public class Horizontal extends Generator {
         if(!currentChunk.equals(chunk)){
             //check if we can build in this chunk
             currentChunk = chunk;
-           if(getPlugin().getHookManager().getBuildChecks().cannotBuildInChunk(data.getPlayer(), currentChunk, loc)){
-               data.setIndex(getMaxBlocks());
-               return;
-           }
-
         }
 
 

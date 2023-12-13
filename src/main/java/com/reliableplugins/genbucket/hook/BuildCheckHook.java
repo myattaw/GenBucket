@@ -44,17 +44,6 @@ public class BuildCheckHook implements PluginHook {
         return this;
     }
 
-    public boolean cannotBuildInChunk(Player player, Chunk chunk, Location location) {
-
-        for (BuildCheckHook check : plugins) {
-            if (check.cannotBuildInChunk(player, chunk, location)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public boolean canBuild(Player player, Location location) {
 
         WorldBorder worldBorder = location.getWorld().getWorldBorder();
