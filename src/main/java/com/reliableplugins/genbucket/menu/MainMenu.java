@@ -2,6 +2,7 @@ package com.reliableplugins.genbucket.menu;
 
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
+import com.reliableplugins.genbucket.manager.GenBucketManager;
 import com.reliableplugins.genbucket.util.Util;
 import com.reliableplugins.genbucket.util.XMaterial;
 import org.bukkit.entity.Player;
@@ -54,18 +55,22 @@ public class MainMenu extends MenuBuilder {
         if (itemSlots.containsKey(event.getSlot())) {
             Player player = (Player) event.getWhoClicked();
             Generator generator = itemSlots.get(event.getSlot());
+
+            ItemStack itemInHand = player.getInventory().getItemInMainHand();
+
             ItemStack itemStack = Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore());
-            player.getInventory().addItem(itemStack);
+
+            if (itemInHand.hasItemMeta() && GenBucketManager.getGeneratorByItemName(itemInHand.getItemMeta().getDisplayName()) != null) {
+                player.getInventory().setItemInMainHand(item);
+            } else {
+                player.getInventory().addItem(itemStack);
+            }
         }
     }
 
     @Override
-    public void onInventoryClose(InventoryCloseEvent event) {
-
-    }
+    public void onInventoryClose(InventoryCloseEvent event) {}
 
     @Override
-    public void onInventoryOpen(InventoryOpenEvent event) {
-
-    }
+    public void onInventoryOpen(InventoryOpenEvent event) {}
 }

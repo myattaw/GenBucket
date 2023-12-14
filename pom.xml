@@ -6,7 +6,7 @@
 
     <groupId>com.reliableplugins</groupId>
     <artifactId>GenBucket</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
 
     <build>
         <resources>
