@@ -25,7 +25,7 @@ public class BuildCheckHook implements PluginHook {
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) {
 
-            List authors = plugin.getServer().getPluginManager().getPlugin("Factions").getDescription().getAuthors();
+            List<String> authors = plugin.getServer().getPluginManager().getPlugin("Factions").getDescription().getAuthors();
             if (authors.contains("drtshock")) {
                 plugins.add(new FactionUUIDCheck(plugin));
             } else {

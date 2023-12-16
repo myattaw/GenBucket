@@ -51,7 +51,7 @@ public class GenBucketManager {
                     vertical.setItemType(XMaterial.valueOf(config.getString(configPath + "bucket-item")));
                     vertical.setName(config.getString(configPath + "bucket-name"));
                     vertical.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
-                    vertical.setMaxBlocks(256);
+                    vertical.setMaxBlocks(500);
                     vertical.setSlot(config.getInt(configPath + "menu-slot"));
                     vertical.setLore(Util.updateLore(config.getStringList(configPath + "bucket-lore"), new AbstractMap.SimpleEntry("cost", String.valueOf(vertical.getCost())), new AbstractMap.SimpleEntry("size", String.valueOf(vertical.getMaxBlocks())), new AbstractMap.SimpleEntry("type", vertical.getGeneratorType().getName())));
                     vertical.setPatch(plugin.getConfig().getBoolean(configPath + "patch"));

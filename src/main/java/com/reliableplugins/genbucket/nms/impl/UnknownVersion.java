@@ -17,7 +17,7 @@ public class UnknownVersion implements NMSHandler {
 
     @Override
     public void setBlock(World world, int x, int y, int z, Material material, byte data) {
-        if (y > 255) return;
+        if (y > world.getMaxHeight()) return;
         net.minecraft.server.level.WorldServer w = ((CraftWorld) world).getHandle();
         Chunk chunk = w.d(x >> 4, z >> 4);
         BlockPosition bp = new BlockPosition(x, y, z);
