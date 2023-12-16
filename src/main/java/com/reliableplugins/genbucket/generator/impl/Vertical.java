@@ -46,6 +46,7 @@ public class Vertical extends Generator {
             data.setIndex(getMaxBlocks());
             return;
         }
+
         Location loc = new Location(Bukkit.getWorld(data.getWorld()), data.getX(), data.getY(), data.getZ());
         Chunk chunk = loc.getChunk();
         currentChunk = chunk;
@@ -63,14 +64,18 @@ public class Vertical extends Generator {
         World world = getPlugin().getServer().getWorld(data.getWorld());
         Block block;
 
-        if (data.getY() >= getPlugin().verticalGenSwitchY) {
-            block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
-        } else {
-            block = world.getBlockAt(data.getX(), data.getY() + data.getIndex(), data.getZ());
-        }
+        // add boolean for verticalGenSwitch
+//        if (data.getY() >= getPlugin().verticalGenSwitchY) {
+//            block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
+//        } else {
+//            block = world.getBlockAt(data.getX(), data.getY() + data.getIndex(), data.getZ());
+//        }
+
+        block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
+
 
         // Make a list of blocks it can pass through
-        if (!validMaterials.contains(block.getType().name()) || block.getY() <= getPlugin().getMinimumHeight()) {
+        if (!validMaterials.contains(block.getType().name()) || block.getY() <= block.getWorld().getMinHeight()) {
             data.setIndex(getMaxBlocks());
             return;
         }

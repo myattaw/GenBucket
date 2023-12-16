@@ -36,11 +36,7 @@ public class PlayerListener implements Listener {
 
         Generator generator = GenBucketManager.getGeneratorByItemName(event.getItem().getItemMeta().getDisplayName());
 
-        if (generator != null) {
-
-            if (plugin.getConfig().getBoolean("settings.click-menu") && (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK)) {
-                player.openInventory(plugin.getMainMenu().getInventory());
-            }
+        if (generator != null && !event.isCancelled()) {
 
             if (action == Action.RIGHT_CLICK_BLOCK) {
 
@@ -57,9 +53,9 @@ public class PlayerListener implements Listener {
 
                 generator.addLocation(location.getChunk(), generatorData);
                 generator.onPlace(generatorData, player, location);
-
-                player.updateInventory();
                 event.setCancelled(true);
+            } else if (plugin.getConfig().getBoolean("settings.click-menu") && (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK)) {
+                player.openInventory(plugin.getMainMenu().getInventory());
             }
         }
     }
@@ -88,8 +84,9 @@ public class PlayerListener implements Listener {
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
         ItemStack itemStack = event.getPlayer().getItemInHand();
         if (itemStack != null && itemStack.hasItemMeta()) {
-            if (GenBucketManager.getGeneratorByItemName(itemStack.getItemMeta().getDisplayName()) != null)
+            if (GenBucketManager.getGeneratorByItemName(itemStack.getItemMeta().getDisplayName()) != null) {
                 event.setCancelled(true);
+            }
         }
     }
 }
