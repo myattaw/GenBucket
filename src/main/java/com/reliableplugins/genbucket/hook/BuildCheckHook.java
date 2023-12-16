@@ -4,7 +4,6 @@ import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.hook.buildcheck.FactionUUIDCheck;
 import com.reliableplugins.genbucket.hook.buildcheck.WorldGuardCheck;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
@@ -28,7 +27,7 @@ public class BuildCheckHook implements PluginHook {
 
             List authors = plugin.getServer().getPluginManager().getPlugin("Factions").getDescription().getAuthors();
             if (authors.contains("drtshock")) {
-                plugins.add(new FactionUUIDCheck());
+                plugins.add(new FactionUUIDCheck(plugin));
             } else {
                 if (!Bukkit.getPluginManager().isPluginEnabled("MassiveCore")) {
                     plugin.getLogger().log(Level.SEVERE, "=============================================");
@@ -44,7 +43,7 @@ public class BuildCheckHook implements PluginHook {
         return this;
     }
 
-    public boolean canBuild(Player player, Location location) {
+    public boolean buildFailed(Player player, Location location) {
 
         WorldBorder worldBorder = location.getWorld().getWorldBorder();
         double size = worldBorder.getSize() / 2.0;
@@ -53,7 +52,7 @@ public class BuildCheckHook implements PluginHook {
         if (x >= size || -x > size || z >= size || -z > size) return true;
 
         for (BuildCheckHook check : plugins) {
-            if (check.canBuild(player, location)) {
+            if (check.buildFailed(player, location)) {
                 return true;
             }
         }

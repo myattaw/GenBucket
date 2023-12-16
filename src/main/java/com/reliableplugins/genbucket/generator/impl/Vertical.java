@@ -28,7 +28,7 @@ public class Vertical extends Generator {
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
 
-        if (getPlugin().getHookManager().getBuildChecks() != null && getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
+        if (getPlugin().getHookManager().getBuildChecks() != null && getPlugin().getHookManager().getBuildChecks().buildFailed(player, location)) {
             player.sendMessage(Message.PLAYER_CANT_GEN_HERE.getMessage());
             data.setIndex(getMaxBlocks());
             return;

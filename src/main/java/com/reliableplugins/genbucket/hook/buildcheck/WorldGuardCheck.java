@@ -27,7 +27,7 @@ public class WorldGuardCheck extends BuildCheckHook {
     }
 
     @Override
-    public boolean canBuild(Player player, Location location) {
+    public boolean buildFailed(Player player, Location location) {
         if (method != null) {
             try {
                 return !((boolean) this.method.invoke(WorldGuardPlugin.inst(), player, location));

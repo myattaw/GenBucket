@@ -1,4 +1,5 @@
 settings:
+
   # Set this to 'false' if you are receiving errors while using GenBuckets!
   optimize-block-place: false
   # Change to lower if you are using newer versions
@@ -26,6 +27,9 @@ settings:
 
   # Allow use of /gb to open the main menu for non-op'd players
   use-replace-command: true
+
+  blocked-factions:
+    - "Warzone"
 
   test-command:
     # Only these worlds can run the /gen test Command

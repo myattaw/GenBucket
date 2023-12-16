@@ -26,7 +26,7 @@ public class Horizontal extends Generator {
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
 
-        if (getPlugin().getHookManager().getBuildChecks().canBuild(player, location)) {
+        if (getPlugin().getHookManager().getBuildChecks().buildFailed(player, location)) {
             player.sendMessage(Message.PLAYER_CANT_GEN_HERE.getMessage());
             data.setIndex(getMaxBlocks());
             return;
@@ -75,7 +75,7 @@ public class Horizontal extends Generator {
         }
 
 
-        if (getPlugin().getHookManager().getBuildChecks().canBuild(data.getPlayer(), block.getLocation())) {
+        if (getPlugin().getHookManager().getBuildChecks().buildFailed(data.getPlayer(), block.getLocation())) {
             data.setIndex(getMaxBlocks());
             return;
         }
