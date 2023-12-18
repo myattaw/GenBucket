@@ -36,9 +36,14 @@ public class PlayerListener implements Listener {
 
         Generator generator = GenBucketManager.getGeneratorByItemName(event.getItem().getItemMeta().getDisplayName());
 
-        if (generator != null && !event.isCancelled()) {
+        if (generator != null) {
 
-            if (action == Action.RIGHT_CLICK_BLOCK) {
+            if ((action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) &&
+                    plugin.getConfig().getBoolean("settings.click-menu")) {
+                player.openInventory(plugin.getMainMenu().getInventory());
+            }
+
+            if (action == Action.RIGHT_CLICK_BLOCK && !event.isCancelled()) {
 
                 if (GenBucketManager.isPaused) {
                     event.setCancelled(true);
@@ -54,8 +59,6 @@ public class PlayerListener implements Listener {
                 generator.addLocation(location.getChunk(), generatorData);
                 generator.onPlace(generatorData, player, location);
                 event.setCancelled(true);
-            } else if (plugin.getConfig().getBoolean("settings.click-menu") && (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK)) {
-                player.openInventory(plugin.getMainMenu().getInventory());
             }
         }
     }
