@@ -15,6 +15,7 @@ import com.reliableplugins.genbucket.nms.NMSHandler;
 import com.reliableplugins.genbucket.nms.impl.*;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -88,7 +89,14 @@ public class GenBucket extends JavaPlugin {
     }
 
     public NMSHandler setupNMS() {
-        switch (getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3]) {
+
+        String version = "";
+        try {
+            version = getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+        } catch (Exception e) {
+            return new UnknownVersion();
+        }
+        switch (version) {
 //            case "v1_9_R1": return new Version_1_9_R1();
 //            case "v1_9_R2": return new Version_1_9_R2();
 //            case "v1_10_R1": return new Version_1_10_R1();
