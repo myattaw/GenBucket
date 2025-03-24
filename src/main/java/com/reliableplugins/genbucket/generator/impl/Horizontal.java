@@ -5,6 +5,7 @@ import com.reliableplugins.genbucket.api.GenBucketGenerateEvent;
 import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
+import com.reliableplugins.genbucket.hook.combat.CombatLogXHook;
 import com.reliableplugins.genbucket.util.Message;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -25,6 +26,12 @@ public class Horizontal extends Generator {
 
     @Override
     public void onPlace(GeneratorData data, Player player, Location location) {
+
+        CombatLogXHook combatLogHook = getPlugin().getHookManager().getCombat();
+        if (combatLogHook != null && !combatLogHook.canBuildInCombat(player)) {
+            player.sendMessage(Message.PLAYER_CANT_GEN_IN_COMBAT.getMessage());
+            return;
+        }
 
         if (getPlugin().getHookManager().getBuildChecks().buildFailed(player, location)) {
             player.sendMessage(Message.PLAYER_CANT_GEN_HERE.getMessage());

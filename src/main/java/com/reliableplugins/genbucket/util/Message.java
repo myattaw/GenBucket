@@ -7,7 +7,9 @@ public enum Message {
     WORLD_NOT_WHITELISTED("error-whitelist", "&cThis world is currently not whitelisted for the /gen test command!"),
     ERROR_NOT_PLAYER("error-not-player", "&cOnly players may execute this command"),
     GEN_WILDERNESS("gen-wilderness", "&c You cannot use a GenBucket in Wilderness!"),
-    PLAYER_CANT_GEN_HERE("player-cant-gen-here", "&c You cannot use a GenBucket here!");
+    PLAYER_CANT_GEN_HERE("player-cant-gen-here", "&c You cannot use a GenBucket here!"),
+    PLAYER_CANT_GEN_IN_COMBAT("player-cant-gen-in-combat", "&c You cannot use a GenBucket while in combat!");
+    ;
 
     private final String config;
     private String text;

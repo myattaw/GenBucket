@@ -4,6 +4,7 @@ import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.hook.BuildCheckHook;
 import com.reliableplugins.genbucket.hook.PluginHook;
 import com.reliableplugins.genbucket.hook.VaultHook;
+import com.reliableplugins.genbucket.hook.combat.CombatLogXHook;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ public class HookManager {
         this.plugin = plugin;
         hookPlugin(new BuildCheckHook());
         hookPlugin(new VaultHook());
+        hookPlugin(new CombatLogXHook());
     }
 
     private void hookPlugin(PluginHook pluginHook) {
@@ -35,5 +37,7 @@ public class HookManager {
     public VaultHook getVault() {
         return (VaultHook) pluginMap.get("vault");
     }
+
+    public CombatLogXHook getCombat() { return (CombatLogXHook) pluginMap.get("combat"); }
 
 }

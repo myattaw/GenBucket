@@ -4,6 +4,7 @@ settings:
   optimize-block-place: false
   # Change to lower if you are using newer versions
   minimum-height: 0
+  disable-in-combat: true
 
   replace-bucket: false
   click-menu: true

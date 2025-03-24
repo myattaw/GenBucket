@@ -7,6 +7,7 @@ softdepend:
   - Factions
   - WorldGuard
   - MassiveCore
+  - CombatLogX
 commands:
   genbucket:
     description: "The most optimized GenBucket plugin."
