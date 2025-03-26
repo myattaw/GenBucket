@@ -30,7 +30,7 @@ public class Vertical extends Generator {
     public void onPlace(GeneratorData data, Player player, Location location) {
 
         CombatLogXHook combatLogHook = getPlugin().getHookManager().getCombat();
-        if (combatLogHook != null && !combatLogHook.canBuildInCombat(player)) {
+        if (combatLogHook != null && combatLogHook.isInCombat(player)) {
             player.sendMessage(Message.PLAYER_CANT_GEN_IN_COMBAT.getMessage());
             return;
         }

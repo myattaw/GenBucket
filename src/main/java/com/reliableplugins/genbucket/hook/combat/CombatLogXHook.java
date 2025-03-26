@@ -6,7 +6,6 @@ import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.hook.PluginHook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 public class CombatLogXHook implements PluginHook {
@@ -23,11 +22,10 @@ public class CombatLogXHook implements PluginHook {
     }
 
 
-    public boolean canBuildInCombat(Player player) {
+    public boolean isInCombat(Player player) {
+        if (!combatCheck || player.hasPermission("genbucket.combat.bypass")) return false;
+
         ICombatManager combatManager = api.getCombatManager();
-
-        if (!combatCheck || player.hasPermission("genbucket.combat.bypass")) return true;
-
         return combatManager.isInCombat(player);
     }
 
