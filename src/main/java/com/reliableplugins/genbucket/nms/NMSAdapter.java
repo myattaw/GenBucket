@@ -2,9 +2,8 @@ package com.reliableplugins.genbucket.nms;
 
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.inventory.ItemStack;
 
-public interface NMSHandler {
+public interface NMSAdapter {
 
     String key = "GENBUCKET";
 

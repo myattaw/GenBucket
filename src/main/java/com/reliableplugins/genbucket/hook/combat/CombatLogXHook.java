@@ -21,7 +21,6 @@ public class CombatLogXHook implements PluginHook {
         return this;
     }
 
-
     public boolean isInCombat(Player player) {
         if (!combatCheck || player.hasPermission("genbucket.combat.bypass")) return false;
 

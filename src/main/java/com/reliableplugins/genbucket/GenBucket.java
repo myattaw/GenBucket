@@ -11,7 +11,7 @@ import com.reliableplugins.genbucket.listener.PlayerListener;
 import com.reliableplugins.genbucket.manager.GenBucketManager;
 import com.reliableplugins.genbucket.manager.HookManager;
 import com.reliableplugins.genbucket.menu.MainMenu;
-import com.reliableplugins.genbucket.nms.NMSHandler;
+import com.reliableplugins.genbucket.nms.NMSAdapter;
 import com.reliableplugins.genbucket.nms.impl.*;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
 import lombok.Getter;
@@ -36,7 +36,7 @@ public class GenBucket extends JavaPlugin {
     private BaseCommand baseCommand;
     @Getter
     public static GenBucket instance;
-    private NMSHandler nmsHandler;
+    private NMSAdapter nmsAdapter;
     @Getter
     private HookManager hookManager;
     @Getter
@@ -55,7 +55,7 @@ public class GenBucket extends JavaPlugin {
         reloadConfig();
 
         if (getConfig().getBoolean("settings.optimize-block-place")) {
-            this.nmsHandler = setupNMS();
+            this.nmsAdapter = setupNMS();
         }
 
         this.baseCommand = new BaseCommand(this);
@@ -88,31 +88,41 @@ public class GenBucket extends JavaPlugin {
         }
     }
 
-    public NMSHandler setupNMS() {
+    public NMSAdapter setupNMS() {
+        String nmsVersion = null;
 
-        String version = "";
         try {
-            version = getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+            // Try legacy detection
+            String serverPackage = Bukkit.getServer().getClass().getPackage().getName();
+            String[] split = serverPackage.split("\\.");
+            if (split.length >= 4) {
+                nmsVersion = split[3]; // e.g., v1_8_R3
+            } else {
+                // Modern fallback
+                String bukkitVersion = Bukkit.getBukkitVersion().split("-")[0]; // e.g., 1.21.4
+                String[] versionParts = bukkitVersion.split("\\.");
+                if (versionParts.length >= 2) {
+                    String major = versionParts[1];
+                    nmsVersion = "v1_" + major + "_R1"; // Default to R1 for modern versions
+                }
+            }
+
+            if (nmsVersion == null) {
+                return new UnknownVersion();
+            }
+
+            switch (nmsVersion) {
+//                case "v1_8_R3": return new Version_1_8_R3();
+//                case "v1_13_R2": return new Version_1_13_R2();
+//                case "v1_21_R1": return new Version_1_21_R1();
+                default: return new UnknownVersion();
+            }
         } catch (Exception e) {
             return new UnknownVersion();
         }
-        switch (version) {
-//            case "v1_9_R1": return new Version_1_9_R1();
-//            case "v1_9_R2": return new Version_1_9_R2();
-//            case "v1_10_R1": return new Version_1_10_R1();
-//            case "v1_11_R1": return new Version_1_11_R1();
-//            case "v1_12_R1": return new Version_1_12_R1();
-//            case "v1_13_R1": return new Version_1_13_R1();
-//            case "v1_13_R2": return new Version_1_13_R2();
-//            case "v1_14_R1": return new Version_1_14_R1();
-//            case "v1_15_R1": return new Version_1_15_R1();
-//            case "v1_16_R1": return new Version_1_16_R1();
-//            case "v1_20_R1": return new Version_1_16_R3();
-            default: return new UnknownVersion();
-        }
     }
 
-    public NMSHandler getNMSHandler() {
-        return nmsHandler;
+    public NMSAdapter getNMSHandler() {
+        return nmsAdapter;
     }
 }

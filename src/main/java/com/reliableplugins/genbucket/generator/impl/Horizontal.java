@@ -30,6 +30,7 @@ public class Horizontal extends Generator {
         CombatLogXHook combatLogHook = getPlugin().getHookManager().getCombat();
         if (combatLogHook != null && combatLogHook.isInCombat(player)) {
             player.sendMessage(Message.PLAYER_CANT_GEN_IN_COMBAT.getMessage());
+            data.setIndex(getMaxBlocks());
             return;
         }
 

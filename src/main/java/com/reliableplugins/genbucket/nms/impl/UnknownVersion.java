@@ -1,19 +1,19 @@
 package com.reliableplugins.genbucket.nms.impl;
 
-import com.reliableplugins.genbucket.nms.NMSHandler;
+import com.reliableplugins.genbucket.nms.NMSAdapter;
 import net.minecraft.core.BlockPosition;
 import net.minecraft.world.level.block.state.IBlockData;
 import net.minecraft.world.level.chunk.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_21_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_21_R1.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_21_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_21_R3.util.CraftMagicNumbers;
 
 /**
  * @author : Michael
  * @since : 6/30/2021, Wednesday
  **/
-public class UnknownVersion implements NMSHandler {
+public class UnknownVersion implements NMSAdapter {
 
     @Override
     public void setBlock(World world, int x, int y, int z, Material material, byte data) {
