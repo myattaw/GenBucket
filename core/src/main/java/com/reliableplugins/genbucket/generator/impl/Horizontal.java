@@ -45,7 +45,7 @@ public class Horizontal extends Generator {
             return;
         }
 
-        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial().parseMaterial(), getGeneratorType());
+        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getXMaterial().parseMaterial(), getGeneratorType());
         getPlugin().getServer().getPluginManager().callEvent(event);
 
         if (event.isCancelled()) {
@@ -59,9 +59,9 @@ public class Horizontal extends Generator {
 
 
         if (getPlugin().getNMSHandler() != null) {
-            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial(),  getMaterial().getData());
+            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getXMaterial().parseMaterial(),  getXMaterial().getData());
         } else {
-            location.getBlock().setType(getMaterial().parseMaterial());
+            location.getBlock().setType(getXMaterial().parseMaterial());
         }
 
     }
@@ -93,7 +93,7 @@ public class Horizontal extends Generator {
             return;
         }
 
-        GenBucketGenerateEvent event = new GenBucketGenerateEvent(data.getPlayer(), getMaterial().parseMaterial(), data.getIndex(), getGeneratorType());
+        GenBucketGenerateEvent event = new GenBucketGenerateEvent(data.getPlayer(), getXMaterial().parseMaterial(), data.getIndex(), getGeneratorType());
         getPlugin().getServer().getPluginManager().callEvent(event);
 
         if (event.isCancelled()) {
@@ -103,9 +103,9 @@ public class Horizontal extends Generator {
 
 
         if (getPlugin().getNMSHandler() != null) {
-            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial(),  getMaterial().getData());
+            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getXMaterial().parseMaterial(),  getXMaterial().getData());
         } else {
-            block.setType(getMaterial().parseMaterial());
+            block.setType(getXMaterial().parseMaterial());
         }
     }
 

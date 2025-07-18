@@ -47,7 +47,7 @@ public class Vertical extends Generator {
             return;
         }
 
-        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getMaterial().parseMaterial(), getGeneratorType());
+        GenBucketPlaceEvent event = new GenBucketPlaceEvent(player, getXMaterial().parseMaterial(), getGeneratorType());
         getPlugin().getServer().getPluginManager().callEvent(event);
 
         if (event.isCancelled()) {
@@ -60,9 +60,9 @@ public class Vertical extends Generator {
         currentChunk = chunk;
 
         if (getPlugin().getNMSHandler() != null) {
-            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getMaterial().parseMaterial(), getMaterial().getData());
+            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getXMaterial().parseMaterial(), getXMaterial().getData());
         } else {
-            location.getBlock().setType(getMaterial().parseMaterial());
+            location.getBlock().setType(getXMaterial().parseMaterial());
         }
     }
 
@@ -89,15 +89,15 @@ public class Vertical extends Generator {
         }
 
         if (getPlugin().getNMSHandler() != null) {
-            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getMaterial().parseMaterial(), getMaterial().getData());
+            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getXMaterial().parseMaterial(), getXMaterial().getData());
         } else {
-            block.setType(getMaterial().parseMaterial());
+            block.setType(getXMaterial().parseMaterial());
         }
     }
 
     public void setPatch(boolean patch) {
         if (patch) {
-            validMaterials.add(getMaterial().parseMaterial().name());
+            validMaterials.add(getXMaterial().parseMaterial().name());
             this.patch = true;
         }
     }

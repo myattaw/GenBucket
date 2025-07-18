@@ -11,7 +11,6 @@ import com.reliableplugins.genbucket.generator.impl.Vertical;
 import com.reliableplugins.genbucket.util.Message;
 import com.reliableplugins.genbucket.util.Util;
 import com.reliableplugins.genbucket.util.XMaterial;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -47,7 +46,7 @@ public class GenBucketManager {
                     vertical.setBypassLavaWater(plugin.getConfig().getBoolean(configPath + "bypass-lava-water"));
                     vertical.setKey(section);
                     vertical.setCost(plugin.getConfig().getInt(configPath + "bucket-cost"));
-                    vertical.setMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
+                    vertical.setXMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
                     vertical.setItemType(XMaterial.valueOf(config.getString(configPath + "bucket-item")));
                     vertical.setName(config.getString(configPath + "bucket-name"));
                     vertical.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
@@ -64,7 +63,7 @@ public class GenBucketManager {
                     horizontal.setBypassLavaWater(plugin.getConfig().getBoolean(configPath + "bypass-lava-water"));
                     horizontal.setKey(section);
                     horizontal.setCost(plugin.getConfig().getInt(configPath + "bucket-cost"));
-                    horizontal.setMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
+                    horizontal.setXMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
                     horizontal.setItemType(XMaterial.valueOf(config.getString(configPath + "bucket-item")));
                     horizontal.setName(config.getString(configPath + "bucket-name"));
                     horizontal.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));

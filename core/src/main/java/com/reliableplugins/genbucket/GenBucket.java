@@ -12,7 +12,7 @@ import com.reliableplugins.genbucket.manager.GenBucketManager;
 import com.reliableplugins.genbucket.manager.HookManager;
 import com.reliableplugins.genbucket.menu.MainMenu;
 import com.reliableplugins.genbucket.nms.NMSAdapter;
-import com.reliableplugins.genbucket.nms.impl.*;
+import com.reliableplugins.genbucket.nms.impl.UnknownVersion;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -115,7 +115,8 @@ public class GenBucket extends JavaPlugin {
 //                case "v1_8_R3": return new Version_1_8_R3();
 //                case "v1_13_R2": return new Version_1_13_R2();
 //                case "v1_21_R1": return new Version_1_21_R1();
-                default: return new UnknownVersion();
+                default:
+                    return new UnknownVersion();
             }
         } catch (Exception e) {
             return new UnknownVersion();

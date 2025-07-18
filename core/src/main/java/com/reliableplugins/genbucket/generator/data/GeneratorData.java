@@ -1,9 +1,12 @@
 package com.reliableplugins.genbucket.generator.data;
 
 import com.google.gson.annotations.Expose;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
+@Getter
 public class GeneratorData {
 
     @Expose
@@ -12,6 +15,7 @@ public class GeneratorData {
     private BlockFace blockFace;
     private Player player;
 
+    @Setter
     @Expose
     private int index = 0;
     @Expose
@@ -30,35 +34,4 @@ public class GeneratorData {
         this.z = z;
     }
 
-    public String getWorld() {
-        return world;
-    }
-
-    public BlockFace getBlockFace() {
-        return blockFace;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getZ() {
-        return z;
-    }
 }
