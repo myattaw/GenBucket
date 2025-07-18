@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -9,8 +10,9 @@
         <version>1.7-SNAPSHOT</version>
     </parent>
 
-    <artifactId>api</artifactId>
-    <packaging>jar</packaging>
+    <groupId>com.reliableplugins</groupId>
+    <artifactId>nms-v1_8_R3</artifactId>
+    <version>1.7-SNAPSHOT</version>
 
     <repositories>
         <repository>
@@ -21,9 +23,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.reliableplugins</groupId>
+            <artifactId>api</artifactId>
+            <version>1.7-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.21.4-R0.1-SNAPSHOT</version>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -33,5 +40,19 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

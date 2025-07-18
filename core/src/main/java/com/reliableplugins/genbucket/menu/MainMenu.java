@@ -1,10 +1,10 @@
 package com.reliableplugins.genbucket.menu;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.manager.GenBucketManager;
 import com.reliableplugins.genbucket.util.Util;
-import com.reliableplugins.genbucket.util.XMaterial;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;

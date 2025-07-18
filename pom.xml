@@ -12,6 +12,8 @@
         <module>api</module>
         <module>core</module>
         <module>plugin</module>
+        <module>nms-v1_8_R3</module>
+        <module>nms-v1_21_R5</module>
     </modules>
 
     <properties>

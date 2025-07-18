@@ -23,6 +23,16 @@
             <artifactId>core</artifactId>
             <version>1.7-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.reliableplugins</groupId>
+            <artifactId>nms-v1_8_R3</artifactId>
+            <version>1.7-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.reliableplugins</groupId>
+            <artifactId>nms-v1_21_R5</artifactId>
+            <version>1.7-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

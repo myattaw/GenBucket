@@ -1,5 +1,6 @@
 package com.reliableplugins.genbucket.manager;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.reliableplugins.genbucket.GenBucket;
@@ -10,7 +11,6 @@ import com.reliableplugins.genbucket.generator.impl.Horizontal;
 import com.reliableplugins.genbucket.generator.impl.Vertical;
 import com.reliableplugins.genbucket.util.Message;
 import com.reliableplugins.genbucket.util.Util;
-import com.reliableplugins.genbucket.util.XMaterial;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;

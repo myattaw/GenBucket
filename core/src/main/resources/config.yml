@@ -1,5 +1,5 @@
 settings:
-
+  version: "v1_8_R3"
   # Set this to 'false' if you are receiving errors while using GenBuckets!
   optimize-block-place: false
   # Change to lower if you are using newer versions

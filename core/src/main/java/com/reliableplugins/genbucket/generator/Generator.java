@@ -1,9 +1,9 @@
 package com.reliableplugins.genbucket.generator;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.generator.data.GeneratorType;
-import com.reliableplugins.genbucket.util.XMaterial;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Chunk;

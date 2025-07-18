@@ -13,6 +13,8 @@ import com.reliableplugins.genbucket.manager.HookManager;
 import com.reliableplugins.genbucket.menu.MainMenu;
 import com.reliableplugins.genbucket.nms.NMSAdapter;
 import com.reliableplugins.genbucket.nms.impl.UnknownVersion;
+import com.reliableplugins.genbucket.nms.impl.Version_v1_21_R5;
+import com.reliableplugins.genbucket.nms.impl.Version_v1_8_R3;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -89,37 +91,12 @@ public class GenBucket extends JavaPlugin {
     }
 
     public NMSAdapter setupNMS() {
-        String nmsVersion = null;
-
-        try {
-            // Try legacy detection
-            String serverPackage = Bukkit.getServer().getClass().getPackage().getName();
-            String[] split = serverPackage.split("\\.");
-            if (split.length >= 4) {
-                nmsVersion = split[3]; // e.g., v1_8_R3
-            } else {
-                // Modern fallback
-                String bukkitVersion = Bukkit.getBukkitVersion().split("-")[0]; // e.g., 1.21.4
-                String[] versionParts = bukkitVersion.split("\\.");
-                if (versionParts.length >= 2) {
-                    String major = versionParts[1];
-                    nmsVersion = "v1_" + major + "_R1"; // Default to R1 for modern versions
-                }
-            }
-
-            if (nmsVersion == null) {
+        String version = getConfig().getString("settings.version", "v1_8_R3");
+        switch (version) {
+            case "v1_8_R3": return new Version_v1_8_R3();
+            case "v1_21_R5": return new Version_v1_21_R5();
+            default:
                 return new UnknownVersion();
-            }
-
-            switch (nmsVersion) {
-//                case "v1_8_R3": return new Version_1_8_R3();
-//                case "v1_13_R2": return new Version_1_13_R2();
-//                case "v1_21_R1": return new Version_1_21_R1();
-                default:
-                    return new UnknownVersion();
-            }
-        } catch (Exception e) {
-            return new UnknownVersion();
         }
     }
 
