@@ -3,27 +3,23 @@ package com.reliableplugins.genbucket.nms.impl;
 import com.cryptomorin.xseries.XMaterial;
 import com.reliableplugins.genbucket.nms.NMSAdapter;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
-import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
-
-import org.bukkit.craftbukkit.v1_21_R5.CraftWorld;
-import org.bukkit.craftbukkit.v1_21_R5.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_21_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_21_R3.util.CraftMagicNumbers;
 
 import java.util.Optional;
 
-public class Version_v1_21_R5 implements NMSAdapter {
+public class Version_v1_21_R4 implements NMSAdapter {
 
     @Override
     public void setBlock(World world, int x, int y, int z, Material material, byte data) {
@@ -33,7 +29,7 @@ public class Version_v1_21_R5 implements NMSAdapter {
         BlockPos bp = new BlockPos(x, y, z);
         BlockState ibd = CraftMagicNumbers.getBlock(material, data);
         level.setBlock(bp, ibd, 3);
-        chunk.setBlockState(bp, ibd, 0);
+        chunk.setBlockState(bp, ibd, false);
     }
 
     public void setBlock(World world, int x, int y, int z, XMaterial xmaterial) {

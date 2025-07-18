@@ -27,8 +27,7 @@ public class CommandTest extends AbstractCommand {
             return;
         }
 
-
-        Generator generator = getPlugin().getGeneratorMap().get("CobbleVertical");
+        Generator generator = getPlugin().getGeneratorMap().get("cobblevertical");
 
         long start = System.currentTimeMillis();
 
@@ -40,7 +39,6 @@ public class CommandTest extends AbstractCommand {
                 Location location = loc.getWorld().getBlockAt(x, loc.getBlockY() - 5, z).getLocation();
                 GeneratorData generatorData = new GeneratorData(location.getWorld().getName(), blockFace, player, location.getBlockX(), location.getBlockY(), location.getBlockZ());
                 generator.addLocation(location.getChunk(), generatorData);
-//                generator.onPlace(generatorData, player, location);
                 amount++;
             }
         }

@@ -14,6 +14,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.cryptomorin</groupId>  <!-- Note: "morin" (no "c") -->
+            <artifactId>XSeries</artifactId>
+            <version>9.4.0</version>  <!-- Use a confirmed JitPack version -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.reliableplugins</groupId>
             <artifactId>api</artifactId>
             <version>1.7-SNAPSHOT</version>
@@ -50,11 +56,18 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>com.cryptomorin.xseries</pattern>
+                                    <shadedPattern>com.reliableplugins.genbucket.xseries</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+
 
 </project>
