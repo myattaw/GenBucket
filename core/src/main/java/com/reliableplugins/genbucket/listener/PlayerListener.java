@@ -22,10 +22,13 @@ public class PlayerListener implements Listener {
 
     private GenBucket plugin;
 
-
+    private boolean clearDrops;
+    private boolean useClickMenu;
 
     public PlayerListener(GenBucket plugin) {
         this.plugin = plugin;
+        this.clearDrops = plugin.getConfig().getBoolean("settings.clear-drops", true);
+        this.useClickMenu = plugin.getConfig().getBoolean("settings.click-menu", true);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -40,8 +43,7 @@ public class PlayerListener implements Listener {
 
         if (generator != null) {
 
-            if ((action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) &&
-                    plugin.getConfig().getBoolean("settings.click-menu")) {
+            if ((action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) && useClickMenu) {
                 player.openInventory(plugin.getMainMenu().getInventory());
             }
 
@@ -80,7 +82,7 @@ public class PlayerListener implements Listener {
 
         if (itemStack == null || !itemStack.hasItemMeta()) return;
 
-        if (plugin.getConfig().getBoolean("settings.clear-drops") && GenBucketManager.getGeneratorByItemName(itemStack.getItemMeta().getDisplayName()) != null) {
+        if (clearDrops && GenBucketManager.getGeneratorByItemName(itemStack.getItemMeta().getDisplayName()) != null) {
             event.getItemDrop().remove();
         }
     }
@@ -94,4 +96,5 @@ public class PlayerListener implements Listener {
             }
         }
     }
+
 }
