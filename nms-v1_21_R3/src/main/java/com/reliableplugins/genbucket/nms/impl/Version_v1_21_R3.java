@@ -28,7 +28,8 @@ public class Version_v1_21_R3 implements NMSAdapter {
 
         LevelChunk nmsChunk = nmsWorld.getChunkAt(pos);
 
-        nmsChunk.setBlockState(pos, blockState, false);
+        // Set block state as fast as possible, no light or block updates
+        nmsChunk.setBlockState(pos, blockState, false, false);
         nmsWorld.sendBlockUpdated(pos, blockState, blockState, 0);
     }
 
