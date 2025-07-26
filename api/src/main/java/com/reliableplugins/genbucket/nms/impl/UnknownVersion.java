@@ -11,9 +11,6 @@ import org.bukkit.World;
  **/
 public class UnknownVersion implements NMSAdapter {
 
-    @Override
-    public void setBlock(World world, int x, int y, int z, Material material, byte data) {
-    }
 
     @Override
     public void setBlock(World world, int x, int y, int z, XMaterial xMaterial) {

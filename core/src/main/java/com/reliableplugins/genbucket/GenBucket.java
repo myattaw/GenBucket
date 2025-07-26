@@ -13,12 +13,11 @@ import com.reliableplugins.genbucket.manager.HookManager;
 import com.reliableplugins.genbucket.menu.MainMenu;
 import com.reliableplugins.genbucket.nms.NMSAdapter;
 import com.reliableplugins.genbucket.nms.impl.UnknownVersion;
-import com.reliableplugins.genbucket.nms.impl.Version_v1_21_R4;
+import com.reliableplugins.genbucket.nms.impl.Version_v1_21_R3;
 import com.reliableplugins.genbucket.nms.impl.Version_v1_21_R5;
 import com.reliableplugins.genbucket.nms.impl.Version_v1_8_R3;
 import com.reliableplugins.genbucket.runnable.GeneratorTask;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -95,7 +94,7 @@ public class GenBucket extends JavaPlugin {
         String version = getConfig().getString("settings.version", "v1_8_R3");
         switch (version) {
             case "v1_8_R3": return new Version_v1_8_R3();
-            case "v1_21_R4": return new Version_v1_21_R4();
+            case "v1_21_R4": return new Version_v1_21_R3();
             case "v1_21_R5": return new Version_v1_21_R5();
             default:
                 return new UnknownVersion();

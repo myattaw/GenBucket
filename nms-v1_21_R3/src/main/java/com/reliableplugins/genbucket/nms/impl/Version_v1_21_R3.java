@@ -8,10 +8,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_21_R5.CraftWorld;
-import org.bukkit.craftbukkit.v1_21_R5.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_21_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_21_R3.util.CraftMagicNumbers;
 
-public class Version_v1_21_R5 implements NMSAdapter {
+public class Version_v1_21_R3 implements NMSAdapter {
 
     public void setBlock(World world, int x, int y, int z, XMaterial xmaterial) {
         if (world == null || xmaterial == null || y > world.getMaxHeight() || y < world.getMinHeight()) return;
@@ -28,7 +28,7 @@ public class Version_v1_21_R5 implements NMSAdapter {
 
         LevelChunk nmsChunk = nmsWorld.getChunkAt(pos);
 
-        nmsChunk.setBlockState(pos, blockState, 0);
+        nmsChunk.setBlockState(pos, blockState, false);
         nmsWorld.sendBlockUpdated(pos, blockState, blockState, 0);
     }
 

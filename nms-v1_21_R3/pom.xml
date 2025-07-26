@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.reliableplugins</groupId>
-    <artifactId>nms-v1_21_R4</artifactId>
+    <artifactId>nms-v1_21_R3</artifactId>
     <version>1.7-SNAPSHOT</version>
 
     <repositories>
