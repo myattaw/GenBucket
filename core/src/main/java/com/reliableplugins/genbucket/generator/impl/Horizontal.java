@@ -57,14 +57,8 @@ public class Horizontal extends Generator {
         Chunk chunk = loc.getChunk();
         currentChunk = chunk;
 
-
-        if (getPlugin().getNMSHandler() != null) {
-            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getXMaterial());
-//            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getXMaterial().parseMaterial(),  getXMaterial().getData());
-        } else {
-            location.getBlock().setType(getXMaterial().parseMaterial());
-        }
-
+        // Set first block without NMS for simplicity
+        location.getBlock().setType(getXMaterial().parseMaterial());
     }
 
     @Override

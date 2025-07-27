@@ -59,12 +59,8 @@ public class Vertical extends Generator {
         Chunk chunk = loc.getChunk();
         currentChunk = chunk;
 
-        if (getPlugin().getNMSHandler() != null) {
-            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getXMaterial());
-//            getPlugin().getNMSHandler().setBlock(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), getXMaterial().parseMaterial(), getXMaterial().getData());
-        } else {
-            location.getBlock().setType(getXMaterial().parseMaterial());
-        }
+        // Set first block without NMS for simplicity
+        location.getBlock().setType(getXMaterial().parseMaterial());
     }
 
     @Override
@@ -82,7 +78,6 @@ public class Vertical extends Generator {
 
         block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
 
-
         // Make a list of blocks it can pass through
         if (!validMaterials.contains(block.getType().name()) || block.getY() <= block.getWorld().getMinHeight()) {
             data.setIndex(getMaxBlocks());
@@ -91,7 +86,6 @@ public class Vertical extends Generator {
 
         if (getPlugin().getNMSHandler() != null) {
             getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getXMaterial());
-//            getPlugin().getNMSHandler().setBlock(block.getWorld(), block.getX(), block.getY(), block.getZ(), getXMaterial().parseMaterial(), getXMaterial().getData());
         } else {
             block.setType(getXMaterial().parseMaterial());
         }
@@ -112,8 +106,6 @@ public class Vertical extends Generator {
             validMaterials.add("STATIONARY_LAVA");
             this.bypassLavaWater = true;
         }
-
     }
-
 
 }
