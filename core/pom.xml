@@ -25,6 +25,7 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+
         <repository>
             <id>sirblobman-public</id>
             <url>https://nexus.sirblobman.xyz/public/</url>
@@ -52,7 +53,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Factions -->
@@ -180,6 +181,18 @@
                             <!-- Optional: Filters to exclude unwanted files -->
                             <filters>
                                 <filter>
+                                    <artifact>org.projectlombok:lombok</artifact>
+                                    <excludes>
+                                        <exclude>**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.ow2.asm:*</artifact>
+                                    <excludes>
+                                        <exclude>**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
                                         <exclude>META-INF/*.SF</exclude>
@@ -189,6 +202,8 @@
                                 </filter>
                             </filters>
                         </configuration>
+
+
                     </execution>
                 </executions>
             </plugin>

@@ -17,16 +17,36 @@ import java.util.Set;
 public class FactionUUIDCheck extends BuildCheckHook {
 
     private Set<String> blockedFactions = new HashSet<>();
+    private boolean allowWildernessPlacement = false;
+    private boolean sameClaimPlacementOnly = false;
+
 
     public FactionUUIDCheck(GenBucket plugin) {
         blockedFactions.addAll(plugin.getConfig().getStringList("settings.blocked-factions"));
+
+        allowWildernessPlacement = plugin.getConfig().getBoolean(
+                "settings.allow-wilderness-gen", false
+        );
+        sameClaimPlacementOnly = plugin.getConfig().getBoolean(
+                "settings.same-faction-only-gen", false
+        );
+
+
     }
 
     @Override
     public boolean buildFailed(Player player, Location location) {
 
         FLocation fLocation = new FLocation(location);
-        if (blockedFactions.contains(Board.getInstance().getFactionAt(fLocation).getTag())) return true;
+        Faction faction = Board.getInstance().getFactionAt(fLocation);
+        if (!allowWildernessPlacement && faction.isWilderness()) return true;
+
+        if (sameClaimPlacementOnly && !faction.getId().equals(FPlayers.getInstance().getByPlayer(player).getFactionId())) {
+            player.sendMessage(ChatColor.RED + "You can only place GenBuckets in your own faction's claims.");
+            return true;
+        }
+
+        if (blockedFactions.contains(faction.getTag())) return true;
 
         return !FactionsBlockListener.playerCanBuildDestroyBlock(player, location, "build", true);
     }

@@ -10,8 +10,12 @@ settings:
   click-menu: true
   default-faction-name: 'wilderness'
 
-  #No Gen in wilderness
+  # If true, GenBuckets will only be able to be placed in Factions
   allow-wilderness-gen: false
+
+  # If true, GenBuckets will only be able to be placed by players
+  # in the same faction as the GenBucket
+  same-faction-only-gen: true
 
   # The max amount of GenBucket iterations allowed at once
   # This will only pause the generation process and not cancel placement.
