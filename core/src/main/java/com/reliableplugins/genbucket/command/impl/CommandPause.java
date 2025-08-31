@@ -6,6 +6,7 @@ import com.reliableplugins.genbucket.manager.GenBucketManager;
 import com.reliableplugins.genbucket.util.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.inventory.meta.BundleMeta;
 
 /**
  * GenBucket - Developed by Driftay.

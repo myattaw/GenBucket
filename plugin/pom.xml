@@ -12,12 +12,18 @@
     <artifactId>plugin</artifactId>
     <packaging>jar</packaging>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
-            <groupId>com.github.cryptomorin</groupId>  <!-- Note: "morin" (no "c") -->
+            <groupId>com.github.CryptoMorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>9.4.0</version>  <!-- Use a confirmed JitPack version -->
-            <scope>compile</scope>
+            <version>2411d76829</version>
         </dependency>
         <dependency>
             <groupId>com.reliableplugins</groupId>
