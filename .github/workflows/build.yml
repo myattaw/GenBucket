@@ -65,10 +65,8 @@ jobs:
         run: |
           # Install 1.21.4
           mvn install:install-file -Dfile=buildtools/spigot-1.21.4.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.4-R0.1-SNAPSHOT -Dpackaging=jar
-          mvn install:install-file -Dfile=buildtools/spigot-1.21.4-remapped-mojang.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.4-R0.1-SNAPSHOT -Dpackaging=jar -Dclassifier=remapped-mojang
           # Install 1.21.6
           mvn install:install-file -Dfile=buildtools/spigot-1.21.6.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.6-R0.1-SNAPSHOT -Dpackaging=jar
-          mvn install:install-file -Dfile=buildtools/spigot-1.21.6-remapped-mojang.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.6-R0.1-SNAPSHOT -Dpackaging=jar -Dclassifier=remapped-mojang
           # Install 1.8.8 (no remapped jar)
           mvn install:install-file -Dfile=buildtools/spigot-1.8.8.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.8.8-R0.1-SNAPSHOT -Dpackaging=jar
 
