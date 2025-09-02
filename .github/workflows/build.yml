@@ -2,11 +2,9 @@ name: Build Spigot Plugin
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
   build:
@@ -16,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Java 21 (for Maven build)
+      # Setup JDK 21 (used for Maven build + new Spigot versions)
       - name: Set up JDK 21
         id: setup-java-21
         uses: actions/setup-java@v4
@@ -24,7 +22,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      # Set up Java 8 (for building legacy Spigot)
+      # Setup JDK 8 (used for Spigot 1.8.8 only)
       - name: Set up JDK 8
         id: setup-java-8
         uses: actions/setup-java@v4
@@ -38,8 +36,8 @@ jobs:
           cd buildtools
           wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
 
-      # Build Spigot 1.21.4 with Java 21
-      - name: Build Spigot 1.21.4 jars
+      # Build Spigot 1.21.4
+      - name: Build Spigot 1.21.4
         run: |
           cd buildtools
           java -jar BuildTools.jar --rev 1.21.4
@@ -47,8 +45,8 @@ jobs:
           JAVA_HOME: ${{ steps.setup-java-21.outputs.path }}
           PATH: ${{ steps.setup-java-21.outputs.path }}/bin:${{ env.PATH }}
 
-      # Build Spigot 1.21.6 with Java 21
-      - name: Build Spigot 1.21.6 jars
+      # Build Spigot 1.21.6
+      - name: Build Spigot 1.21.6
         run: |
           cd buildtools
           java -jar BuildTools.jar --rev 1.21.6
@@ -56,8 +54,8 @@ jobs:
           JAVA_HOME: ${{ steps.setup-java-21.outputs.path }}
           PATH: ${{ steps.setup-java-21.outputs.path }}/bin:${{ env.PATH }}
 
-      # Build Spigot 1.8.8 with Java 8
-      - name: Build Spigot 1.8.8 jar
+      # Build Spigot 1.8.8
+      - name: Build Spigot 1.8.8
         run: |
           cd buildtools
           java -jar BuildTools.jar --rev 1.8.8
@@ -65,14 +63,16 @@ jobs:
           JAVA_HOME: ${{ steps.setup-java-8.outputs.path }}
           PATH: ${{ steps.setup-java-8.outputs.path }}/bin:${{ env.PATH }}
 
-      - name: Install Spigot jars to local Maven repo
+      # Install jars into local Maven repo
+      - name: Install Spigot jars
         run: |
           mvn install:install-file -Dfile=buildtools/spigot-1.21.4.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.4-R0.1-SNAPSHOT -Dpackaging=jar
           mvn install:install-file -Dfile=buildtools/spigot-1.21.6.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.6-R0.1-SNAPSHOT -Dpackaging=jar
-          mvn install:install-file -Dfile=buildtools/spigot-1.8.8.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.8.8-R0.1-SNAPSHOT -Dpackaging=jar
+          mvn install:install-file -Dfile=buildtools/spigot-1.8.8-R0.1-SNAPSHOT.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.8.8-R0.1-SNAPSHOT -Dpackaging=jar
 
+      # Build plugin project with Maven (always Java 21)
       - name: Build with Maven
-        run: mvn clean package
+        run: mvn -v && mvn clean package
         env:
           JAVA_HOME: ${{ steps.setup-java-21.outputs.path }}
           PATH: ${{ steps.setup-java-21.outputs.path }}/bin:${{ env.PATH }}
