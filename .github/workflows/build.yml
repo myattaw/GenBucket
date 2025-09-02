@@ -16,16 +16,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
           distribution: 'temurin'
 
       - name: Download BuildTools
@@ -52,10 +52,10 @@ jobs:
           cd buildtools
           java -jar BuildTools.jar --rev 1.21.6
 
-      - name: Build Spigot 1.8.8 jars (Java 17)
+      - name: Build Spigot 1.8.8 jar (Java 8)
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '8'
           distribution: 'temurin'
       - run: |
           cd buildtools
@@ -69,7 +69,7 @@ jobs:
           # Install 1.21.6
           mvn install:install-file -Dfile=buildtools/spigot-1.21.6.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.6-R0.1-SNAPSHOT -Dpackaging=jar
           mvn install:install-file -Dfile=buildtools/spigot-1.21.6-remapped-mojang.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.6-R0.1-SNAPSHOT -Dpackaging=jar -Dclassifier=remapped-mojang
-          # Install 1.8.8
+          # Install 1.8.8 (no remapped jar)
           mvn install:install-file -Dfile=buildtools/spigot-1.8.8.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.8.8-R0.1-SNAPSHOT -Dpackaging=jar
 
       - name: Build with Maven
