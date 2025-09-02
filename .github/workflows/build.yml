@@ -59,6 +59,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: plugin-jars
-          path: |
-            **/target/*.jar
+          name: GenBucket
+          path: plugin/target/GenBucket-*.jar
