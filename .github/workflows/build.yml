@@ -22,6 +22,30 @@ jobs:
           java-version: '17'  # Adjust to your plugin's Java version
           distribution: 'temurin'
 
+      - name: Download BuildTools
+        run: |
+          mkdir buildtools
+          cd buildtools
+          wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+
+      - name: Build Spigot jars
+        run: |
+          cd buildtools
+          java -jar BuildTools.jar --rev 1.21.4
+          java -jar BuildTools.jar --rev 1.21.6
+          java -jar BuildTools.jar --rev 1.8.8
+
+      - name: Install Spigot jars to local Maven repo
+        run: |
+          # Install 1.21.4
+          mvn install:install-file -Dfile=buildtools/spigot-1.21.4.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.4-R0.1-SNAPSHOT -Dpackaging=jar
+          mvn install:install-file -Dfile=buildtools/spigot-1.21.4-remapped-mojang.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.4-R0.1-SNAPSHOT -Dpackaging=jar -Dclassifier=remapped-mojang
+          # Install 1.21.6
+          mvn install:install-file -Dfile=buildtools/spigot-1.21.6.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.6-R0.1-SNAPSHOT -Dpackaging=jar
+          mvn install:install-file -Dfile=buildtools/spigot-1.21.6-remapped-mojang.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.21.6-R0.1-SNAPSHOT -Dpackaging=jar -Dclassifier=remapped-mojang
+          # Install 1.8.8
+          mvn install:install-file -Dfile=buildtools/spigot-1.8.8.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.8.8-R0.1-SNAPSHOT -Dpackaging=jar
+
       - name: Build with Maven
         run: mvn clean package
 
