@@ -71,6 +71,8 @@ jobs:
           mvn install:install-file -Dfile=buildtools/spigot-1.8.8.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.8.8-R0.1-SNAPSHOT -Dpackaging=jar
 
       - name: Build with Maven
+        env:
+          JAVA_HOME: ${{ steps.setup-java-21.outputs.path }}
         run: mvn clean package
 
       - name: Upload artifact
