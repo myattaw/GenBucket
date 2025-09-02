@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 
-public class GenBucket extends JavaPlugin {
+public class GenBucket extends JavaPlugin implements GenBucketAPI {
 
     public final int verticalGenSwitchY = getConfig().getInt("settings.vertical-switch");
     private final int tickSpeed = getConfig().getInt("settings.tick-speed");
@@ -43,7 +43,7 @@ public class GenBucket extends JavaPlugin {
     private HookManager hookManager;
     @Getter
     private GenBucketManager genBucketManager;
-    private Gson gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
     @Getter
     private Map<String, Generator> generatorMap = new HashMap<>();
     @Getter
