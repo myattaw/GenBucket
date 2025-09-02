@@ -40,7 +40,7 @@ jobs:
       - name: Build Spigot 1.21.4
         run: |
           cd buildtools
-          java -jar BuildTools.jar --rev 1.21.4
+          bash -c "java -jar BuildTools.jar --rev 1.21.4"
         env:
           JAVA_HOME: ${{ steps.setup-java-21.outputs.path }}
           PATH: ${{ steps.setup-java-21.outputs.path }}/bin:${{ env.PATH }}
@@ -49,7 +49,7 @@ jobs:
       - name: Build Spigot 1.21.6
         run: |
           cd buildtools
-          java -jar BuildTools.jar --rev 1.21.6
+          bash -c "java -jar BuildTools.jar --rev 1.21.6"
         env:
           JAVA_HOME: ${{ steps.setup-java-21.outputs.path }}
           PATH: ${{ steps.setup-java-21.outputs.path }}/bin:${{ env.PATH }}
