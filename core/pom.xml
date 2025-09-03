@@ -68,6 +68,7 @@
             <groupId>com.github.SaberLLC</groupId>
             <artifactId>Saber-Factions</artifactId>
             <version>4.1.4-STABLE</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Spigot Jars -->
