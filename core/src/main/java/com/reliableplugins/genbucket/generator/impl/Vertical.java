@@ -5,6 +5,7 @@ import com.reliableplugins.genbucket.api.GenBucketPlaceEvent;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.hook.combat.CombatLogXHook;
+import com.reliableplugins.genbucket.util.CompatUtils;
 import com.reliableplugins.genbucket.util.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -81,7 +82,7 @@ public class Vertical extends Generator {
         block = world.getBlockAt(data.getX(), data.getY() - data.getIndex(), data.getZ());
 
         // Make a list of blocks it can pass through
-        if (!validMaterials.contains(block.getType().name()) || block.getY() <= block.getWorld().getMinHeight()) {
+        if (!validMaterials.contains(block.getType().name()) || block.getY() <= CompatUtils.getMinHeight(block.getWorld())) {
             data.setIndex(getMaxBlocks());
             return;
         }

@@ -1,5 +1,6 @@
 package com.reliableplugins.genbucket.util;
 
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -11,6 +12,8 @@ public class CompatUtils {
     private static boolean legacy = false;
     private static Method legacyGetMethod = null;
     private static Method legacySetMethod = null;
+    private static boolean hasWorldMinHeight = false;
+
 
     static {
         try {
@@ -28,6 +31,13 @@ public class CompatUtils {
                 ex.printStackTrace();
             }
         }
+
+        try {
+            // Modern World method (1.17+)
+            World.class.getMethod("getMinHeight");
+            hasWorldMinHeight = true;
+        } catch (NoSuchMethodException ignored) {}
+
     }
 
     public static ItemStack getItemInHand(Player player) {
@@ -56,4 +66,13 @@ public class CompatUtils {
             }
         }
     }
+
+    public static int getMinHeight(World world) {
+        if (hasWorldMinHeight) {
+            return world.getMinHeight();
+        } else {
+            return 0;
+        }
+    }
+
 }
