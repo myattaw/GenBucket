@@ -4,8 +4,10 @@ import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.manager.GenBucketManager;
+import com.reliableplugins.genbucket.util.CompatUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,11 +26,13 @@ public class PlayerListener implements Listener {
 
     private boolean clearDrops;
     private boolean useClickMenu;
+    private boolean replaceBucket;
 
     public PlayerListener(GenBucket plugin) {
         this.plugin = plugin;
         this.clearDrops = plugin.getConfig().getBoolean("settings.clear-drops", true);
         this.useClickMenu = plugin.getConfig().getBoolean("settings.click-menu", true);
+        this.replaceBucket = plugin.getConfig().getBoolean("settings.replace-bucket", false);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -63,6 +67,20 @@ public class PlayerListener implements Listener {
                 generator.addLocation(location.getChunk(), generatorData);
                 generator.onPlace(generatorData, player, location);
                 event.setCancelled(true);
+
+                ItemStack itemInHand = CompatUtils.getItemInHand(player);
+
+                if (replaceBucket && itemInHand != null) {
+                    if (itemInHand.getAmount() > 1) {
+                        itemInHand.setAmount(itemInHand.getAmount() - 1);
+                        CompatUtils.setItemInHand(player, itemInHand);
+                    } else {
+                        if (itemInHand.getType() == Material.WATER_BUCKET || itemInHand.getType() == Material.LAVA_BUCKET) {
+                            itemInHand = new ItemStack(Material.BUCKET);
+                            CompatUtils.setItemInHand(player, itemInHand);
+                        }
+                    }
+                }
             }
         }
     }
@@ -89,7 +107,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
-        ItemStack itemStack = event.getPlayer().getItemInHand();
+        ItemStack itemStack = CompatUtils.getItemInHand(event.getPlayer());
         if (itemStack != null && itemStack.hasItemMeta()) {
             if (GenBucketManager.getGeneratorByItemName(itemStack.getItemMeta().getDisplayName()) != null) {
                 event.setCancelled(true);

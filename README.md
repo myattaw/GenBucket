@@ -20,20 +20,19 @@ All plugin settings are located in `plugins/GenBucket/config.yml`.
 
 ### 🔧 General Settings
 
-| Setting | Description |
-|--------|-------------|
+| Setting | Description                                               |
+|--------|-----------------------------------------------------------|
 | `optimize-block-place` | Enables optimized block placing. Disable if errors occur. |
-| `minimum-height` | Lowest Y-level allowed for gen placements. |
-| `disable-in-combat` | Prevents gen placement during combat. |
-| `replace-bucket` | Replace bucket in inventory after use. |
-| `click-menu` | Enables GUI-based bucket selection (`/gb`). |
-| `default-faction-name` | Name used for unclaimed land (usually “wilderness”). |
-| `allow-wilderness-gen` | If false, disables gen usage in unclaimed areas. |
-| `max-buckets` | Max simultaneous iterations before gen pauses. |
-| `clear-drops` | Automatically deletes dropped GenBucket items. |
-| `tick-speed` | Tick delay (5 ticks = 0.25s) between generation steps. |
+| `disable-in-combat` | Prevents gen placement during combat.                     |
+| `replace-bucket` | Replaces and consumes bucket in inventory after each use. |
+| `click-menu` | Enables GUI-based bucket selection (`/gb`).               |
+| `default-faction-name` | Name used for unclaimed land (usually “wilderness”).      |
+| `allow-wilderness-gen` | If false, disables gen usage in unclaimed areas.          |
+| `max-buckets` | Max simultaneous iterations before gen pauses.            |
+| `clear-drops` | Automatically deletes dropped GenBucket items.            |
+| `tick-speed` | Tick delay (5 ticks = 0.25s) between generation steps.    |
 | `vertical-switch` | Y-level to determine whether vertical gens go up or down. |
-| `use-replace-command` | Allows non-OPs to use `/gb` menu. |
+| `use-replace-command` | Allows non-OPs to use `/gb` menu.                         |
 
 ### ⛔ Faction Restrictions
 

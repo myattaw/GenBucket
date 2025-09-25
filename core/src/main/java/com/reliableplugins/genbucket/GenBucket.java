@@ -30,9 +30,6 @@ public class GenBucket extends JavaPlugin implements GenBucketAPI {
 
     public final int verticalGenSwitchY = getConfig().getInt("settings.vertical-switch");
     private final int tickSpeed = getConfig().getInt("settings.tick-speed");
-    @Getter
-    private final int minimumHeight = getConfig().getInt("settings.minimum-height");
-
     public final List<String> worldWhitelist = getConfig().getStringList("settings.test-command.whitelisted-worlds");
     @Getter
     private BaseCommand baseCommand;
