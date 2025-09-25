@@ -23,6 +23,7 @@ public abstract class Generator {
 
     private String key;
     private String name;
+    private boolean glow;
     private int slot;
     private int maxBlocks;
     private int cost;

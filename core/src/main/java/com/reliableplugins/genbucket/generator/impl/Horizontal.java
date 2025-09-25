@@ -7,7 +7,10 @@ import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.hook.combat.CombatLogXHook;
 import com.reliableplugins.genbucket.util.Message;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -15,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Horizontal extends Generator {
+
     private Set<String> validMaterials = new HashSet<>();
     private boolean bypassLavaWater = false;
 

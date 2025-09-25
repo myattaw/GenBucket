@@ -6,8 +6,10 @@ import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.generator.data.GeneratorData;
 import com.reliableplugins.genbucket.hook.combat.CombatLogXHook;
 import com.reliableplugins.genbucket.util.Message;
-import org.bukkit.*;
-
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -98,8 +100,8 @@ public class Vertical extends Generator {
         }
     }
 
-    public void setBypassLavaWater(boolean bypass){
-        if(bypass){
+    public void setBypassLavaWater(boolean bypass) {
+        if (bypass) {
             validMaterials.add("WATER");
             validMaterials.add("LAVA");
             validMaterials.add("STATIONARY_WATER");

@@ -4,6 +4,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.generator.Generator;
 import com.reliableplugins.genbucket.manager.GenBucketManager;
+import com.reliableplugins.genbucket.util.CompatUtils;
 import com.reliableplugins.genbucket.util.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -33,8 +34,16 @@ public class MainMenu extends MenuBuilder {
         for (Generator generator : plugin.getGeneratorMap().values()) {
             itemSlots.put(generator.getSlot(), generator);
 
+            ItemStack generatorItem = Util.setNameAndLore(
+                    generator.getItemType().parseItem(),
+                    generator.getName(), generator.getLore()
+            );
 
-            getInventory().setItem(generator.getSlot(), Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore()));
+            if (generator.isGlow() && generatorItem != null) {
+                Util.addGlow(generatorItem);
+            }
+
+            getInventory().setItem(generator.getSlot(), generatorItem);
         }
 
         for (int i = 0; i < getInventory().getSize(); i++) {
@@ -56,12 +65,12 @@ public class MainMenu extends MenuBuilder {
             Player player = (Player) event.getWhoClicked();
             Generator generator = itemSlots.get(event.getSlot());
 
-            ItemStack itemInHand = player.getInventory().getItemInMainHand();
+            ItemStack itemInHand = CompatUtils.getItemInHand(player);
 
             ItemStack itemStack = Util.setNameAndLore(generator.getItemType().parseItem(), generator.getName(), generator.getLore());
 
-            if (itemInHand.hasItemMeta() && GenBucketManager.getGeneratorByItemName(itemInHand.getItemMeta().getDisplayName()) != null) {
-                player.getInventory().setItemInMainHand(item);
+            if (itemInHand != null && itemInHand.hasItemMeta() && GenBucketManager.getGeneratorByItemName(itemInHand.getItemMeta().getDisplayName()) != null) {
+                CompatUtils.setItemInHand(player, item);
             } else {
                 player.getInventory().addItem(itemStack);
             }
@@ -69,8 +78,10 @@ public class MainMenu extends MenuBuilder {
     }
 
     @Override
-    public void onInventoryClose(InventoryCloseEvent event) {}
+    public void onInventoryClose(InventoryCloseEvent event) {
+    }
 
     @Override
-    public void onInventoryOpen(InventoryOpenEvent event) {}
+    public void onInventoryOpen(InventoryOpenEvent event) {
+    }
 }

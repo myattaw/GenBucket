@@ -63,4 +63,3 @@ jobs:
           path: plugin/target/GenBucket-*.jar
           if-no-files-found: error
           compression-level: 0
-          archive: false

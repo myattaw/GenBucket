@@ -49,6 +49,7 @@ public class GenBucketManager {
                     vertical.setXMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
                     vertical.setItemType(XMaterial.valueOf(config.getString(configPath + "bucket-item")));
                     vertical.setName(config.getString(configPath + "bucket-name"));
+                    vertical.setGlow(config.getBoolean(configPath + "glow", false));
                     vertical.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     vertical.setMaxBlocks(500);
                     vertical.setSlot(config.getInt(configPath + "menu-slot"));
@@ -66,6 +67,7 @@ public class GenBucketManager {
                     horizontal.setXMaterial(XMaterial.valueOf(config.getString(configPath + "material")));
                     horizontal.setItemType(XMaterial.valueOf(config.getString(configPath + "bucket-item")));
                     horizontal.setName(config.getString(configPath + "bucket-name"));
+                    horizontal.setGlow(config.getBoolean(configPath + "glow", false));
                     horizontal.setGeneratorType(GeneratorType.valueOf(config.getString(configPath + "bucket-type").toUpperCase()));
                     horizontal.setMaxBlocks(config.getInt(configPath + "bucket-size"));
                     horizontal.setSlot(config.getInt(configPath + "menu-slot"));

@@ -1,6 +1,8 @@
 package com.reliableplugins.genbucket.util;
 
 import org.bukkit.ChatColor;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -50,6 +52,13 @@ public class Util {
         setName(itemStack, name);
         setLore(itemStack, lore);
         return itemStack;
+    }
+
+    public static void addGlow(ItemStack generatorItem) {
+        ItemMeta itemMeta = generatorItem.getItemMeta();
+        itemMeta.addEnchant(Enchantment.LURE, 1, true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        generatorItem.setItemMeta(itemMeta);
     }
 
 }
