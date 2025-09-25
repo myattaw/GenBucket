@@ -22,7 +22,7 @@ public class CommandTest extends AbstractCommand {
 
         Location loc = player.getLocation();
 
-        if(getPlugin().worldWhitelist.contains(loc.getWorld().getName())){
+        if (getPlugin().worldWhitelist.contains(loc.getWorld().getName())){
             player.sendMessage(Message.WORLD_NOT_WHITELISTED.getMessage());
             return;
         }
