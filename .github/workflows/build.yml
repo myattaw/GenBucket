@@ -32,11 +32,9 @@ jobs:
         run: |
           mkdir -p BuildTools
           cd BuildTools
-          wget -q https://hub.spigotmc.org/jenkins/job/BuildTools/123/artifact/target/BuildTools.jar
-          echo "<settings><profiles><profile><id>spigot</id><repositories><repository><id>spigot-repo</id><url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url></repository><repository><id>elmakers-repo</id><url>https://maven.elmakers.com/repository/</url></repository></repositories></profile></profiles><activeProfiles><activeProfile>spigot</activeProfile></activeProfiles></settings>" > ~/.m2/settings.xml
-          [ -f ~/.m2/repository/org/spigotmc/spigot/1.8.8-R0.1-SNAPSHOT/spigot-1.8.8-R0.1-SNAPSHOT.jar ] || java -jar BuildTools.jar --rev 1.8.8 -X
-        env:
-          MAVEN_OPTS: "-Xmx2G"
+          wget -q https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+          echo "<settings><profiles><profile><id>spigot</id><repositories><repository><id>elmakers-repo</id><url>https://maven.elmakers.com/repository/</url></repository></repositories></profile></profiles><activeProfiles><activeProfile>spigot</activeProfile></activeProfiles></settings>" > ~/.m2/settings.xml
+          [ -f ~/.m2/repository/org/spigotmc/spigot/1.8.8-R0.1-SNAPSHOT/spigot-1.8.8-R0.1-SNAPSHOT.jar ] || java -jar BuildTools.jar --rev 1.8.8
 
       # Java 21 for modern Spigot
       - name: Set up Java 21
@@ -49,30 +47,18 @@ jobs:
       - name: Build Spigot 1.21.4 and 1.21.6 with JDK 21 (remapped)
         run: |
           cd BuildTools
-          [ -f ~/.m2/repository/org/spigotmc/spigot/1.21.4-R0.1-SNAPSHOT/spigot-1.21.4-R0.1-SNAPSHOT-remapped-mojang.jar ] || java -jar BuildTools.jar --rev 1.21.4 --remapped -X
-          [ -f ~/.m2/repository/org/spigotmc/spigot/1.21.6-R0.1-SNAPSHOT/spigot-1.21.6-R0.1-SNAPSHOT-remapped-mojang.jar ] || java -jar BuildTools.jar --rev 1.21.6 --remapped -X
-        env:
-          MAVEN_OPTS: "-Xmx2G"
+          [ -f ~/.m2/repository/org/spigotmc/spigot/1.21.4-R0.1-SNAPSHOT/spigot-1.21.4-R0.1-SNAPSHOT-remapped-mojang.jar ] || java -jar BuildTools.jar --rev 1.21.4 --remapped
+          [ -f ~/.m2/repository/org/spigotmc/spigot/1.21.6-R0.1-SNAPSHOT/spigot-1.21.6-R0.1-SNAPSHOT-remapped-mojang.jar ] || java -jar BuildTools.jar --rev 1.21.6 --remapped
 
       # Build plugin project with Maven (always Java 21)
       - name: Build with Maven
-        run: mvn -D"http.keepAlive=false" -D"maven.wagon.http.pool=false" -D"maven.wagon.httpconnectionManager.ttlSeconds=120" "-Dhttps.protocols=TLSv1.2" -DskipTests=true "-Dmaven.javadoc.skip=true" -B clean package
+        run: mvn -B clean package
         env:
           JAVA_HOME: ${{ steps.setup-java-21.outputs.path }}
           PATH: ${{ steps.setup-java-21.outputs.path }}/bin:${{ env.PATH }}
-
-      - name: Upload BuildTools Log
-        if: failure()
-        uses: actions/upload-artifact@v4.4.3
-        with:
-          name: BuildTools-Log
-          path: BuildTools/BuildTools.log.txt
-          if-no-files-found: warn
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4.4.3
         with:
           name: GenBucket
           path: plugin/target/GenBucket-*.jar
-          if-no-files-found: error
-          compression-level: 0
