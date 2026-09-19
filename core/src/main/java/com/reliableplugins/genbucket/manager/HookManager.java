@@ -17,7 +17,7 @@ public class HookManager {
 
     public HookManager(GenBucket plugin) {
         this.plugin = plugin;
-        hookPlugin(new BuildCheckHook());
+        pluginMap.put("buildcheck", new BuildCheckHook().setup(plugin));
         hookPlugin(new VaultHook());
         hookPlugin(new CombatLogXHook());
     }

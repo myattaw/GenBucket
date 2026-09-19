@@ -15,9 +15,14 @@ import java.util.logging.Level;
 public class BuildCheckHook implements PluginHook {
 
     private List<BuildCheckHook> plugins = new ArrayList<>();
+    private GenBucket plugin;
+    private boolean factionsAvailable;
 
     @Override
     public BuildCheckHook setup(GenBucket plugin) {
+        this.plugin = plugin;
+        plugins.clear();
+        factionsAvailable = false;
 
         if (Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
             plugins.add(new WorldGuardCheck(plugin));
@@ -25,17 +30,11 @@ public class BuildCheckHook implements PluginHook {
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) {
 
-            List<String> authors = plugin.getServer().getPluginManager().getPlugin("Factions").getDescription().getAuthors();
-            if (authors.contains("drtshock")) {
+            try {
                 plugins.add(new FactionUUIDCheck(plugin));
-            } else {
-                if (!Bukkit.getPluginManager().isPluginEnabled("MassiveCore")) {
-                    plugin.getLogger().log(Level.SEVERE, "=============================================");
-                    plugin.getLogger().log(Level.SEVERE, "Could not find Factions, please tell the developer to add drkshock to plugin.yml!");
-                    plugin.getLogger().log(Level.SEVERE, "This plugin will not work properly without original author credits!");
-                    plugin.getLogger().log(Level.SEVERE, "=============================================");
-                }
-//                plugins.add(new FactionMCCheck());
+                factionsAvailable = true;
+            } catch (LinkageError | RuntimeException error) {
+                plugin.getLogger().log(Level.SEVERE, "Unable to initialize the Factions integration. Claim-restricted GenBuckets will be blocked.", error);
             }
 
         }
@@ -45,6 +44,9 @@ public class BuildCheckHook implements PluginHook {
 
     public boolean buildFailed(Player player, Location location) {
 
+        if (!factionsAvailable && (!plugin.getConfig().getBoolean("settings.allow-wilderness-gen", false)
+                || plugin.getConfig().getBoolean("settings.same-faction-only-gen", true))) return true;
+
         WorldBorder worldBorder = location.getWorld().getWorldBorder();
         double size = worldBorder.getSize() / 2.0;
         double x = location.getX() - worldBorder.getCenter().getX();
@@ -52,7 +54,10 @@ public class BuildCheckHook implements PluginHook {
         if (x >= size || -x > size || z >= size || -z > size) return true;
 
         for (BuildCheckHook check : plugins) {
-            if (check.buildFailed(player, location)) {
+            try {
+                if (check.buildFailed(player, location)) return true;
+            } catch (LinkageError | RuntimeException error) {
+                plugin.getLogger().log(Level.SEVERE, "Unable to verify GenBucket build permission; placement blocked.", error);
                 return true;
             }
         }

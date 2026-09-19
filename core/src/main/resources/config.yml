@@ -7,11 +7,12 @@ settings:
   click-menu: true
   default-faction-name: 'wilderness'
 
-  # If true, GenBuckets will only be able to be placed in Factions
+  # If false, GenBuckets cannot be placed in wilderness.
   allow-wilderness-gen: false
 
-  # If true, GenBuckets will only be able to be placed by players
-  # in the same faction as the GenBucket
+  # If true, GenBuckets can only be placed in the player's own faction claims.
+  # Wilderness is always blocked in this mode, including for factionless players.
+  # Claim restrictions block placement if a compatible Factions hook is unavailable.
   same-faction-only-gen: true
 
   # The max amount of GenBucket iterations allowed at once
