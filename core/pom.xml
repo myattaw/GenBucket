@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.reliableplugins</groupId>
         <artifactId>GenBucket</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>core</artifactId>
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -69,6 +69,11 @@
             <artifactId>Saber-Factions</artifactId>
             <version>4.1.4-STABLE</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.cryptomorin</groupId>
+            <artifactId>XSeries</artifactId>
         </dependency>
 
         <!-- Spigot Jars -->
@@ -127,91 +132,51 @@
         <dependency>
             <groupId>com.reliableplugins</groupId>
             <artifactId>api</artifactId>
-            <version>1.7-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.reliableplugins</groupId>
             <artifactId>nms-v1_8_R3</artifactId>
-            <version>1.7-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.reliableplugins</groupId>
             <artifactId>nms-v1_21_R3</artifactId>
-            <version>1.7-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.reliableplugins</groupId>
             <artifactId>nms-v1_21_R5</artifactId>
-            <version>1.7-SNAPSHOT</version>
-        </dependency>
-
-        <!-- XSeries (XMaterial) -->
-        <dependency>
-            <groupId>com.github.cryptomorin</groupId>
-            <artifactId>XSeries</artifactId>
-            <version>9.4.0</version>
-            <scope>provided</scope> <!-- Changed to compile to include in shading -->
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes><include>plugin.yml</include></includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes><exclude>plugin.yml</exclude></excludes>
+            </resource>
+        </resources>
         <plugins>
-            <!-- Maven Shade Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.6.0</version> <!-- Latest stable version as of July 2025 -->
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>true</createDependencyReducedPom>
-                            <!-- Relocate XSeries to avoid conflicts -->
-                            <relocations>
-                                <relocation>
-                                    <pattern>com.cryptomorin.xseries</pattern>
-                                    <shadedPattern>com.reliableplugins.genbucket.xseries</shadedPattern>
-                                </relocation>
-                            </relocations>
-                            <!-- Minimize JAR by excluding unused classes -->
-                            <minimizeJar>true</minimizeJar>
-                            <!-- Optional: Exclude unnecessary dependencies -->
-                            <artifactSet>
-                                <includes>
-                                    <include>com.github.cryptomorin:XSeries</include>
-                                </includes>
-                            </artifactSet>
-                            <!-- Optional: Filters to exclude unwanted files -->
-                            <filters>
-                                <filter>
-                                    <artifact>org.projectlombok:lombok</artifact>
-                                    <excludes>
-                                        <exclude>**</exclude>
-                                    </excludes>
-                                </filter>
-                                <filter>
-                                    <artifact>org.ow2.asm:*</artifact>
-                                    <excludes>
-                                        <exclude>**</exclude>
-                                    </excludes>
-                                </filter>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/*.SF</exclude>
-                                        <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                        </configuration>
-
-
-                    </execution>
-                </executions>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -7,12 +7,11 @@
     <parent>
         <groupId>com.reliableplugins</groupId>
         <artifactId>GenBucket</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <groupId>com.reliableplugins</groupId>
     <artifactId>nms-v1_8_R3</artifactId>
-    <version>1.7-SNAPSHOT</version>
 
     <repositories>
         <repository>
@@ -29,7 +28,7 @@
         <dependency>
             <groupId>com.reliableplugins</groupId>
             <artifactId>api</artifactId>
-            <version>1.7-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -38,9 +37,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.cryptomorin</groupId>  <!-- Note: "morin" (no "c") -->
+            <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>9.4.0</version>  <!-- Use a confirmed JitPack version -->
             <scope>provided</scope>
         </dependency>
     </dependencies>

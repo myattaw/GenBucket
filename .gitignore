@@ -6,3 +6,4 @@ target
 .project
 dependencies
 libs
+.flattened-pom.xml

@@ -124,7 +124,18 @@ To compile the plugin:
 mvn clean install
 ```
 
-Deployable JAR will be in `plugin/target/GenBucket.jar`.
+Use JDK 21 or newer and Maven 3.5+ (tested with Maven 3.9).
+The Spigot server artifacts and remapping files for 1.8.8, 1.21.4, and 1.21.6
+must be installed locally using Spigot BuildTools.
+
+Set the plugin version once in the root `pom.xml` under `<revision>`.
+All modules and the packaged `plugin.yml` use that version. Override it for a
+single build with `mvn "-Drevision=1.9-SNAPSHOT" clean install`.
+
+Set XSeries once under `<xseries.version>` in the root `pom.xml`.
+Its Maven version is `13.7.1`, without the Git tag prefix `v`.
+
+Deployable JAR will be in `plugin/target/GenBucket-<revision>.jar`.
 
 ---
 
