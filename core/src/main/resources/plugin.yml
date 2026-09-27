@@ -5,6 +5,7 @@ authors: [Rages, Driftay]
 api-version: 1.13
 softdepend:
   - Factions
+  - FactionsUUID
   - WorldGuard
   - MassiveCore
   - CombatLogX

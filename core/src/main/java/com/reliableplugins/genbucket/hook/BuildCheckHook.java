@@ -2,6 +2,7 @@ package com.reliableplugins.genbucket.hook;
 
 import com.reliableplugins.genbucket.GenBucket;
 import com.reliableplugins.genbucket.hook.buildcheck.FactionUUIDCheck;
+import com.reliableplugins.genbucket.hook.buildcheck.ModernFactionsUUIDCheck;
 import com.reliableplugins.genbucket.hook.buildcheck.WorldGuardCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -28,10 +29,13 @@ public class BuildCheckHook implements PluginHook {
             plugins.add(new WorldGuardCheck(plugin));
         }
 
-        if (Bukkit.getPluginManager().isPluginEnabled("Factions")) {
+        if (Bukkit.getPluginManager().isPluginEnabled("FactionsUUID")
+                || Bukkit.getPluginManager().isPluginEnabled("Factions")) {
 
             try {
-                plugins.add(new FactionUUIDCheck(plugin));
+                plugins.add(Bukkit.getPluginManager().isPluginEnabled("FactionsUUID")
+                        ? new ModernFactionsUUIDCheck(plugin)
+                        : new FactionUUIDCheck(plugin));
                 factionsAvailable = true;
             } catch (LinkageError | RuntimeException error) {
                 plugin.getLogger().log(Level.SEVERE, "Unable to initialize the Factions integration. Claim-restricted GenBuckets will be blocked.", error);
@@ -67,7 +71,7 @@ public class BuildCheckHook implements PluginHook {
 
     @Override
     public String[] getPlugins() {
-        return new String[]{"WorldGuard", "Factions"};
+        return new String[]{"WorldGuard", "Factions", "FactionsUUID"};
     }
 
     @Override
